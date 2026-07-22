@@ -27,7 +27,6 @@ Its role is to preserve knowledge.
 The objective is to allow:
 
 - Vincent
-- Copilot
 - future project contributors
 
 to rebuild the project context quickly without rereading months of conversations.
