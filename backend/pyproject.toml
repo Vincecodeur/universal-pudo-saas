@@ -14,7 +14,9 @@ dependencies = [
     "sqlalchemy>=2.0.0",
     "alembic>=1.16.0",
     "psycopg[binary]>=3.2.0",
-    "universal-pudo-engine @ git+https://github.com/Vincecodeur/universal-pudo-engine.git@v1.0.0"
+    "universal-pudo-engine @ git+https://github.com/Vincecodeur/universal-pudo-engine.git@v1.0.0",
+    "passlib[bcrypt]>=1.7.4",
+    "python-jose[cryptography]>=3.5.0"
 ]
 
 [project.optional-dependencies]
