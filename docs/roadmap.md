@@ -1,50 +1,52 @@
 # Universal PUDO SaaS - Roadmap
 
-Version: 0.2.0
+Version: 0.5.0
 
-Status: Phase 1 Documentation Review
+Status: Organisation Foundation Ready
 
-Last Updated: 2026-07-22
+Last Updated: 2026-07-23
 
 ---
 
 # ROADMAP PHILOSOPHY
 
-This roadmap is not a task list.
-
-It is an execution roadmap used to guide architectural and product development decisions.
-
-The objective is to build a production-grade SaaS platform on top of Universal PUDO Engine while preserving:
-
-- Core independence
-- SaaS scalability
-- Self-host compatibility
-- Security
-- Maintainability
+This roadmap is an execution roadmap.
 
 Every phase must produce:
 
-- clear deliverables
-- documented decisions
-- validated architecture
-- updated documentation
+- deliverables
+- validation
+- documentation
+- commit
+- push
+
+before the next phase begins.
+
+The objective is to maintain synchronization between:
+
+- source code
+- tests
+- ADRs
+- documentation
+
+at all times.
 
 ---
 
 # PROJECT COMPLETION CRITERIA
 
-The project is considered successful when an organisation can:
+Universal PUDO SaaS V1 is successful when an organisation can:
 
-- create an account
 - authenticate
 - manage users
-- connect carrier accounts
+- manage memberships
+- manage carrier accounts
 - search pickup points
 - visualize pickup points
-- export search results
+- export pickup point data
 - administer the platform
 
-using Universal PUDO Engine as the carrier integration layer.
+while Universal PUDO Engine remains responsible for carrier intelligence and carrier integrations.
 
 ---
 
@@ -56,37 +58,14 @@ Status:
 
 Completed
 
-Goal:
+Deliverables:
 
-Create and validate project foundations before implementation.
-
----
-
-## Deliverables
-
-project-memory.md
-
-product-vision.md
-
-architecture.md
-
-roadmap.md
-
-project-status.md
-
-README.md
-
-CHANGELOG.md
-
----
-
-## Definition Of Done
-
-- all documents created
-- all documents reviewed
-- review findings integrated
-- project vision validated
-- architecture validated
+- README.md
+- product-vision.md
+- architecture.md
+- roadmap.md
+- project-memory.md
+- project-status.md
 
 ---
 
@@ -98,37 +77,12 @@ Status:
 
 Completed
 
-Goal:
+Deliverables:
 
-Create repository foundations.
-
-No business implementation.
-
----
-
-## Deliverables
-
-Git initialization
-
-README
-
-.gitignore
-
-Backend initialization
-
-Frontend initialization
-
-Base project configuration
-
----
-
-## Success Criteria
-
-Frontend starts successfully.
-
-Backend starts successfully.
-
-No business functionality exists yet.
+- Git repository
+- GitHub repository
+- Initial commit
+- Branch strategy
 
 ---
 
@@ -136,31 +90,15 @@ No business functionality exists yet.
 
 Architecture Foundation
 
-Goal:
+Status:
 
-Implement the architectural skeleton.
+Completed
 
----
+Deliverables:
 
-## Deliverables
-
-Backend structure
-
-Frontend structure
-
-Service layer structure
-
-Core adapter foundation
-
-Configuration strategy
-
----
-
-## Success Criteria
-
-Architecture visible in code.
-
-No business logic implemented.
+- Architecture Definition
+- Core/SaaS Separation
+- Technology Stack Validation
 
 ---
 
@@ -168,41 +106,23 @@ No business logic implemented.
 
 ADR Foundation
 
-Goal:
-
-Formalize major architectural decisions before business development.
-
 Status:
 
 Completed
 
----
+Deliverables:
 
-## Expected ADRs
+ADR-0001 Repository Structure Strategy
 
-ADR-0001
-Core Dependency Strategy
+ADR-0002 Authentication Strategy
 
-ADR-0002
-Authentication Strategy
+ADR-0003 Credential Storage Strategy
 
-ADR-0003
-Credential Storage Strategy
+ADR-0004 Multi-Tenant Strategy
 
-ADR-0004
-Module Boundary Strategy
+ADR-0005 Module Boundary Strategy
 
-ADR-0005
-Public API Strategy
-
-ADR-0006
-Multi-Tenant Strategy
-
----
-
-## Success Criteria
-
-All foundational ADRs approved.
+ADR-0006 Self-Hosted Compatibility Strategy
 
 ---
 
@@ -214,37 +134,9 @@ Status:
 
 Completed
 
-Goal:
+Deliverables:
 
-Design the business model.
-
-No implementation.
-
----
-
-## Deliverables
-
-Organisation Model
-
-User Model
-
-Role Model
-
-Carrier Account Model
-
-Search Model
-
-Export Model
-
-Administration Model
-
----
-
-## Success Criteria
-
-Business entities validated.
-
-Responsibilities clearly defined.
+docs/domain-model.md
 
 ---
 
@@ -252,31 +144,21 @@ Responsibilities clearly defined.
 
 Database Model Design
 
-Goal:
+Status:
 
-Design persistence before coding features.
+Completed
 
----
+Deliverables:
 
-## Deliverables
+docs/database-model.md
 
-Entity Relationships
-
-Database Schema
-
-Migration Strategy
-
-Index Strategy
-
-Multi-Tenant Model
+docs/persistence-decisions.md
 
 ---
 
-## Success Criteria
+# PHASE 7
 
-Database structure validated.
-
-No major open modeling questions remain.
+Implementation Foundation
 
 Status:
 
@@ -284,643 +166,526 @@ Completed
 
 ---
 
-# PHASE 7
+## Phase 7.1
 
-Authentication
+Backend Foundation
 
-Goal:
+Status:
 
-Secure platform access.
+Completed
 
----
+Deliverables:
 
-## Features
+- FastAPI Application
+- Health Endpoint
+- Configuration Foundation
+- Universal PUDO Engine Dependency
 
-Register
+Validation:
 
-Login
+1 passed
 
-Logout
-
-Password Reset
-
-Session Management
-
----
-
-## Future Compatibility
-
-OIDC
-
-Azure AD
-
-Google
-
-SSO
+0 failed
 
 ---
 
-## Success Criteria
+## Phase 7.2
 
-Users can authenticate.
+Database Configuration Foundation
 
-Protected routes operational.
+Status:
+
+Completed
+
+Deliverables:
+
+- SQLAlchemy Base
+- BaseEntity
+- Database Session
+- Runtime Settings
+- .env.example
+
+Validation:
+
+3 passed
+
+0 failed
+
+---
+
+## Phase 7.3
+
+Alembic Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+- alembic.ini
+- alembic/env.py
+- Alembic Integration
+- PostgreSQL Connectivity
+- Dedicated SaaS Database
+
+Validation:
+
+✅ alembic init
+
+✅ alembic current
+
+✅ SQLAlchemy metadata integration
+
+✅ PostgreSQL connectivity
+
+✅ Dedicated SaaS database
 
 ---
 
 # PHASE 8
 
-Organisation Management
+Organisation Foundation
 
-Goal:
+Status:
 
-Introduce tenancy.
+Next
 
----
+Priority:
 
-## Features
+High
 
-Organisation Creation
+Objectives:
 
-Organisation Management
+- Create Organisation ORM Model
+- Create Organisation Repository Foundation
+- Create Organisation Table
+- Create Organisation Constraints
+- Create Organisation Persistence Tests
 
-Membership Management
+Deliverables:
 
-Invitations
+organisation.py
 
----
+First Business Entity
 
-## Success Criteria
+First Business Table
 
-All users belong to organisations.
+Validation:
+
+alembic revision --autogenerate
+
+alembic upgrade head
+
+Organisation persistence validation
 
 ---
 
 # PHASE 9
 
-Roles And Permissions
+Membership Foundation
 
-Goal:
+Status:
 
-Implement platform security model.
+Planned
 
----
+Objectives:
 
-## Roles
-
-Super Admin
-
-Organisation Admin
-
-Organisation User
-
----
-
-## Success Criteria
-
-Role restrictions enforced.
-
-Tenant isolation verified.
+- Membership Entity
+- Organisation Memberships
+- Role Assignment Foundation
 
 ---
 
 # PHASE 10
 
-Carrier Account Management
+Users Foundation
 
-Goal:
+Status:
 
-Connect carrier credentials.
+Planned
 
----
+Objectives:
 
-## Supported V1
-
-Colissimo
-
-Mondial Relay
-
-Chronopost
-
----
-
-## Features
-
-Add Account
-
-Edit Account
-
-Disable Account
-
-Credential Validation
-
-Connectivity Tests
-
----
-
-## V1 Limitation
-
-One carrier account per carrier per organisation.
-
----
-
-## Success Criteria
-
-Carrier credentials usable.
-
-Secure storage implemented.
+- User Entity
+- User Profiles
+- User Persistence
 
 ---
 
 # PHASE 11
 
-Universal PUDO Engine Integration
+Authentication Foundation
 
-Goal:
+Status:
 
-Connect SaaS and Core.
+Planned
 
----
+Objectives:
 
-## Repository
-
-Universal PUDO Engine
-
-Current known version:
-
-v1.0.0
-
----
-
-## Deliverables
-
-Dependency Integration
-
-Core Adapter Layer
-
-Search Adapter
-
-Error Handling
-
-Version Management
-
----
-
-## Success Criteria
-
-SaaS consumes Core.
-
-No duplicated carrier logic.
+- Password Hashing
+- JWT
+- Login
+- Logout
+- Session Management
 
 ---
 
 # PHASE 12
 
-Search Platform
+Roles And Permissions
 
-Goal:
+Status:
 
-Expose pickup point capabilities.
+Planned
 
----
+Objectives:
 
-## Features
-
-Postal Code Search
-
-City Search
-
-Coordinate Search
-
-Carrier Filter
-
-Multi-Carrier Search
-
----
-
-## Success Criteria
-
-Searches execute successfully.
-
-Results normalized by Core.
+- RBAC
+- Organisation Roles
+- Permission Matrix
 
 ---
 
 # PHASE 13
 
-Map Experience
+Carrier Account Management
 
-Goal:
+Status:
 
-Visual pickup point exploration.
+Planned
 
----
+Objectives:
 
-## Technology
-
-Leaflet
-
-OpenStreetMap
-
----
-
-## Features
-
-Markers
-
-Carrier Identification
-
-Pickup Point Details
-
-Navigation Support
-
----
-
-## Success Criteria
-
-Map experience operational.
+- CarrierAccount Entity
+- Credential Storage
+- Validation Layer
+- Encryption Strategy
 
 ---
 
 # PHASE 14
 
-Export Platform
+Universal PUDO Engine Integration
 
-Goal:
+Status:
 
-Operational reuse of search results.
+Planned
 
----
+Objectives:
 
-## Candidate Formats
-
-CSV
-
-Excel
-
-JSON
-
----
-
-## Success Criteria
-
-Users can download reusable exports.
+- Core Adapter Layer
+- Search Service Integration
+- Multi-Carrier Execution
 
 ---
 
 # PHASE 15
 
-Public API Foundation
+Search Platform
 
-Goal:
+Status:
 
-Prepare API-first evolution.
+Planned
 
----
+Objectives:
 
-## Deliverables
-
-API Strategy
-
-API Security
-
-API Versioning
-
-Usage Model
-
-API Documentation
-
----
-
-## Success Criteria
-
-Platform ready for future external consumption.
+- Search Execution
+- Search History
+- Search Persistence
 
 ---
 
 # PHASE 16
 
-Administration Portal
+Map Experience
 
-Goal:
+Status:
 
-Provide platform governance.
+Planned
 
----
+Technology:
 
-## Features
+- Leaflet
+- OpenStreetMap
 
-Organisation Management
+Objectives:
 
-User Management
-
-Search Monitoring
-
-Carrier Monitoring
-
-Diagnostics
-
----
-
-## Success Criteria
-
-Super Admin functionality operational.
+- Search Visualization
+- Pickup Point Discovery
 
 ---
 
 # PHASE 17
 
-Observability And Audit
+Export Platform
 
-Goal:
+Status:
 
-Prepare operational usage.
+Planned
 
----
+Objectives:
 
-## Features
-
-Audit Events
-
-Error Tracking
-
-Search Monitoring
-
-Operational Diagnostics
-
----
-
-## Success Criteria
-
-Platform behaviour observable.
+- CSV Export
+- Excel Export
+- JSON Export
+- Export History
 
 ---
 
 # PHASE 18
 
-Testing And Quality
+Administration Portal
 
-Goal:
+Status:
 
-Establish long-term quality framework.
+Planned
 
----
+Objectives:
 
-## Deliverables
-
-Unit Testing
-
-Integration Testing
-
-API Testing
-
-Security Verification
-
-Test Coverage Metrics
-
----
-
-## Success Criteria
-
-Quality framework established.
+- Platform Monitoring
+- Organisation Management
+- Support Tools
 
 ---
 
 # PHASE 19
 
-Security Hardening
+Public API Foundation
 
-Goal:
+Status:
 
-Strengthen platform security.
+Planned
 
----
+Future ADR:
 
-## Candidate Features
+ADR-0007 Public API Strategy
 
-MFA
+Objectives:
 
-Audit Logs
-
-Advanced Session Controls
-
-Secret Rotation
-
-Credential Security Review
-
----
-
-## Success Criteria
-
-Security review completed.
+- API Authentication
+- API Access Control
+- API Search Access
 
 ---
 
 # PHASE 20
 
-Core Upgrade Strategy
+Observability And Audit
 
-Goal:
+Status:
 
-Prepare future Core evolution.
+Planned
 
----
+Objectives:
 
-## Topics
-
-Version Tracking
-
-Dependency Upgrades
-
-Compatibility Validation
-
-Upgrade Procedure
-
-Rollback Strategy
-
----
-
-## Success Criteria
-
-Core evolution process documented.
+- Audit Logs
+- Monitoring
+- Diagnostics
 
 ---
 
 # PHASE 21
 
-Release Preparation
+Security Hardening
 
-Goal:
+Status:
 
-Prepare V1 release.
+Planned
 
----
+Objectives:
 
-## Activities
-
-Architecture Review
-
-Security Review
-
-Performance Review
-
-Documentation Review
-
-Dependency Review
-
----
-
-## Success Criteria
-
-Release Candidate validated.
+- Credential Encryption
+- MFA Preparation
+- Security Review
 
 ---
 
 # PHASE 22
 
-Universal PUDO SaaS v1.0.0
-
-Goal:
-
-First production release.
-
----
-
-## Deliverables
-
-Git Tag
-
-Release Notes
-
-Documentation
-
-Deployment Package
-
----
-
-## Success Criteria
-
-Universal PUDO SaaS v1.0.0 released.
-
----
-
-# POST V1 BACKLOG
-
-Items intentionally postponed.
-
----
-
-## Billing
+Frontend Foundation
 
 Status:
 
-Backlog
+Planned
 
-Reason:
+Technology:
 
-Business model not yet decided.
+- Next.js
+- React
+- TypeScript
+
+Objectives:
+
+- Authentication UI
+- Organisation UI
+- Search UI
 
 ---
 
-## Multiple Carrier Accounts
+# PHASE 23
+
+Core Upgrade Strategy
 
 Status:
 
-Backlog
+Planned
 
-Example:
+Objectives:
 
-Multiple Colissimo accounts per organisation.
+- Core Versioning
+- Upgrade Procedures
+- Compatibility Management
 
 ---
 
-## SSO
+# PHASE 24
+
+Release Preparation
 
 Status:
 
-Backlog
+Planned
+
+Objectives:
+
+- Documentation Freeze
+- QA Validation
+- Release Checklist
 
 ---
 
-## Self Hosted Deployment
+# PHASE 25
+
+Universal PUDO SaaS V1.0.0
 
 Status:
 
-Backlog
+Future
 
-Architecture prepared.
+Release Criteria:
 
-Implementation postponed.
+Organisation Management
 
----
+✅
 
-## Analytics
+User Management
 
-Status:
+✅
 
-Backlog
+Authentication
 
----
+✅
 
-## Recommendation Engine
+Carrier Accounts
 
-Status:
+✅
 
-Backlog
+Searches
 
----
+✅
 
-## Webhooks
+Maps
 
-Status:
+✅
 
-Backlog
+Exports
 
----
+✅
 
-# PHASE REVIEW RULE
+Administration
 
-At the end of every phase:
-
-1. validate deliverables
-2. validate architecture
-3. update project-status.md
-4. update project-memory.md
-5. update ADRs
-6. identify lessons learned
-7. validate next phase
+✅
 
 ---
 
-# DEFINITION OF DONE
+# CURRENT STATE
 
-A phase is complete only when:
+Completed:
 
-- implementation completed
-- documentation updated
-- tests pass
-- ADRs updated when required
-- next phase validated
+✅ Documentation Foundation
+
+✅ Repository Foundation
+
+✅ Architecture Foundation
+
+✅ ADR Foundation
+
+✅ Domain Model Design
+
+✅ Database Model Design
+
+✅ Persistence Decisions
+
+✅ Backend Foundation
+
+✅ Database Configuration Foundation
+
+✅ Alembic Foundation
+
+Current Focus:
+
+Organisation Foundation
 
 ---
 
-# CURRENT PHASE
+# CURRENT TECHNICAL BASELINE
 
-Phase:
+Validated:
 
-7
+✅ FastAPI
 
-Name:
+✅ SQLAlchemy
 
-Implementation Foundation
+✅ Alembic
 
-Status:
+✅ PostgreSQL 17
 
-Ready To Start
+✅ Universal PUDO Engine
 
-Next Milestone:
+✅ BaseEntity
 
-Backend Foundation
+✅ Database Session
+
+✅ Dedicated SaaS Database
+
+✅ 3 Automated Tests
+
+Current Databases:
+
+universal_pudo
+
+Purpose:
+
+Universal PUDO Engine
+
+---
+
+universal_pudo_saas
+
+Purpose:
+
+Universal PUDO SaaS
+
+---
+
+# PHASE COMPLETION RULE
+
+A phase is completed only when:
+
+1. Development Finished
+
+2. Auto-Critique Completed
+
+3. Validation Completed
+
+4. Documentation Updated
+
+5. Commit Created
+
+6. Push Completed
+
+7. Next Phase Opened
 
 ---
 
@@ -928,17 +693,52 @@ Backend Foundation
 
 2026-07-22
 
-V1 created.
+Roadmap V1 created.
+
+---
 
 2026-07-22
 
-V2 review consolidation applied.
+ADR Foundation added.
 
-Added:
+---
 
-- ADR Phase
-- Domain Model Phase
-- Database Model Phase
-- Public API Phase
-- Testing Strategy
-- Core Upgrade Strategy
+2026-07-22
+
+Domain Model and Database Model phases added.
+
+---
+
+2026-07-22
+
+Backend Foundation completed.
+
+---
+
+2026-07-22
+
+Database Configuration Foundation completed.
+
+---
+
+2026-07-23
+
+Alembic Foundation completed.
+
+---
+
+2026-07-23
+
+Dedicated SaaS PostgreSQL database created.
+
+---
+
+2026-07-23
+
+Roadmap aligned with real implementation progress.
+
+---
+
+2026-07-23
+
+Organisation Foundation defined as next milestone.

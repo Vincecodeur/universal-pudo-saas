@@ -1,30 +1,18 @@
 # Universal PUDO SaaS - Project Status
 
-Version: 0.2.0
+Version: 0.5.0
 
-Status: Phase 7 Preparation
+Status: Alembic Foundation Completed
 
-Last Updated: 2026-07-22
+Last Updated: 2026-07-23
 
 ---
 
 # PURPOSE
 
-This document tracks the real state of the project.
+This document tracks the real implementation status of Universal PUDO SaaS.
 
-It answers:
-
-- Where are we?
-- What has been completed?
-- What remains to be done?
-- Which decisions are active?
-- What is the next milestone?
-
-This document reflects reality.
-
-When implementation begins:
-
-Source code and automated tests remain the primary source of truth.
+Source code, validated tests, Git history and approved documentation remain the project source of truth.
 
 ---
 
@@ -34,17 +22,17 @@ Project Name:
 
 Universal PUDO SaaS
 
+Repository:
+
+universal-pudo-saas
+
+Lifecycle Stage:
+
+Persistence Foundation
+
 Repository Role:
 
-Application Layer
-
-Current Lifecycle Stage:
-
-Planning
-
-Documentation
-
-Repository Foundation
+Application Layer built on top of Universal PUDO Engine.
 
 ---
 
@@ -54,11 +42,11 @@ Repository Foundation
 
 Current Version:
 
-0.1.0-draft
+0.5.0-draft
 
-Repository Status:
+Status:
 
-Documentation Phase
+Persistence Foundation In Progress
 
 Release Status:
 
@@ -68,21 +56,23 @@ Not Released
 
 ## Universal PUDO Engine
 
-Repository:
-
-https://github.com/Vincecodeur/universal-pudo-engine
-
-Current Known Version:
+Version:
 
 v1.0.0
+
+Status:
+
+Installed
+
+Validated
 
 Role:
 
 Carrier Intelligence Core
 
-Status:
+Repository:
 
-Released
+https://github.com/Vincecodeur/universal-pudo-engine
 
 ---
 
@@ -96,57 +86,17 @@ Name:
 
 Implementation Foundation
 
-Status:
+Current Sub-Phase:
 
-Ready To Start
-
----
-
-# PHASE GATE
-
-Phase 1 is considered complete only when:
-
-✅ project-memory.md reviewed
-
-✅ product-vision.md reviewed
-
-✅ architecture.md reviewed
-
-✅ roadmap.md reviewed
-
-✅ project-status.md reviewed
-
-✅ review findings consolidated
-
-✅ V2 documents generated
-
-✅ documentation approved
-
----
-
-# OVERALL PROJECT STATUS
-
-## Documentation
+Alembic Foundation
 
 Status:
 
-10%
+Completed
 
-Current Documents:
+---
 
-✅ project-memory.md
-
-✅ product-vision.md
-
-✅ architecture.md
-
-✅ roadmap.md
-
-✅ project-status.md
-
-Remaining:
-
-Completed:
+# COMPLETED MILESTONES
 
 ✅ Documentation Foundation
 
@@ -154,43 +104,29 @@ Completed:
 
 ✅ ADR Foundation
 
-✅ Domain Model
+✅ Domain Model Design
 
-✅ Database Model
+✅ Database Model Design
 
 ✅ Persistence Decisions
 
+✅ Backend Foundation
+
+✅ Database Configuration Foundation
+
+✅ Alembic Foundation
+
 ---
 
-## Repository
+# ADR FOUNDATION
 
 Status:
 
 100%
 
-Completed:
+Completed
 
-✅ Git initialized
-
-✅ GitHub repository created
-
-✅ Initial commit completed
-
-✅ Remote origin configured
-
-✅ Initial push completed
-
-Repository:
-
-universal-pudo-saas
-
-## ADR Foundation
-
-Status:
-
-100%
-
-Completed.
+Approved ADRs:
 
 ADR-0001 Repository Structure Strategy
 
@@ -204,175 +140,299 @@ ADR-0005 Module Boundary Strategy
 
 ADR-0006 Self-Hosted Compatibility Strategy
 
-## Domain Model
+---
+
+# DOMAIN DESIGN
 
 Status:
 
 100%
 
-Completed.
+Completed
+
+Documents:
 
 docs/domain-model.md
 
-## Persistence Decisions
-
-Status:Planned ADRs:
-
-100%
-
-Completed.
+docs/database-model.md
 
 docs/persistence-decisions.md
 
-## Frontend
+---
+
+# BACKEND FOUNDATION
 
 Status:
 
-0%
+100%
 
-Not started.
+Completed
+
+Validated:
+
+✅ FastAPI
+
+✅ Uvicorn
+
+✅ Pytest
+
+✅ Application Factory
+
+✅ Health Endpoint
+
+✅ Universal PUDO Engine Dependency
 
 ---
 
-## Backend
+# DATABASE CONFIGURATION FOUNDATION
 
 Status:
 
-0%
+100%
 
-Not started.
+Completed
+
+Validated:
+
+✅ SQLAlchemy Base
+
+✅ BaseEntity
+
+✅ UUID Strategy
+
+✅ Timestamp Strategy
+
+✅ Soft Delete Strategy
+
+✅ Database Session
+
+✅ Externalized Configuration
+
+✅ .env.example
+
+✅ Runtime DATABASE_URL
 
 ---
 
-## Database
+# ALEMBIC FOUNDATION
 
 Status:
 
-0%
+100%
 
-Not started.
+Completed
+
+Validated:
+
+✅ Alembic Installed
+
+✅ alembic.ini Created
+
+✅ env.py Integrated
+
+✅ SQLAlchemy Metadata Connected
+
+✅ Settings Integration
+
+✅ PostgreSQL Connection Validation
+
+✅ Dedicated SaaS Database
+
+✅ alembic current Executed Successfully
+
+Created:
+
+backend/alembic/
+
+backend/alembic.ini
+
+backend/alembic/env.py
+
+backend/alembic/versions/
 
 ---
 
-## Authentication
+# POSTGRESQL VALIDATION
+
+Server:
+
+PostgreSQL 17
 
 Status:
 
-0%
-
-Not started.
+Operational
 
 ---
 
-## Organisation Management
+Dedicated Databases:
+
+universal_pudo
+
+Owner:
+
+Universal PUDO Engine
 
 Status:
 
-0%
-
-Not started.
+Existing
 
 ---
 
-## Roles And Permissions
+universal_pudo_saas
+
+Owner:
+
+Universal PUDO SaaS
 
 Status:
 
-0%
+Created
 
-Not started.
-
----
-
-## Carrier Accounts
-
-Status:
-
-0%
-
-Not started.
+Validated
 
 ---
 
-## Search Platform
-
-Status:
-
-0%
-
-Not started.
-
----
-
-## Map Platform
-
-Status:
-
-0%
-
-Not started.
-
----
-
-## Export Platform
-
-Status:
-
-0%
-
-Not started.
-
----
-
-## Administration Portal
-
-Status:
-
-0%
-
-Not started.
-
----
-
-## Security Framework
-
-Status:
-
-0%
-
-Not started.
-
----
-
-# ACTIVE DECISION REGISTER
-
-## Decision 001
-
-Area:
-
-Core Strategy
-
-Decision:
-
-Universal PUDO Engine remains a dedicated repository.
+Database Separation Decision
 
 Status:
 
 Accepted
 
-Future ADR:
+Rationale:
+
+Universal PUDO Engine and Universal PUDO SaaS must remain independently deployable and independently evolvable.
+
+---
+
+# CURRENT TEST STATUS
+
+Tests:
+
+3
+
+Passing:
+
+3
+
+Failing:
+
+0
+
+Result:
+
+3 passed
+
+0 failed
+
+---
+
+# VALIDATED TESTS
+
+tests/test_main.py
+
+Purpose:
+
+Health Endpoint Validation
+
+Status:
+
+Passed
+
+---
+
+tests/test_entities.py
+
+Purpose:
+
+BaseEntity Validation
+
+Status:
+
+Passed
+
+---
+
+tests/test_settings.py
+
+Purpose:
+
+Configuration Validation
+
+Status:
+
+Passed
+
+---
+
+# ACTIVE DECISION REGISTER
+
+## D001
+
+Repository Structure
+
+Monorepo
 
 ADR-0001
 
 ---
 
-## Decision 002
+## D002
 
-Area:
+Authentication
 
-Frontend
+Email + Password
 
-Decision:
+JWT
+
+ADR-0002
+
+---
+
+## D003
+
+Credential Ownership
+
+Credentials Managed By SaaS
+
+ADR-0003
+
+---
+
+## D004
+
+Multi-Tenant
+
+Tenant = Organisation
+
+ADR-0004
+
+---
+
+## D005
+
+Module Boundaries
+
+Business Modules
+
+ADR-0005
+
+---
+
+## D006
+
+Hosting Model
+
+SaaS-first
+
+Self-host-ready
+
+ADR-0006
+
+---
+
+## D007
+
+Frontend Stack
 
 Next.js
 
@@ -380,35 +440,21 @@ React
 
 TypeScript
 
-Status:
-
-Accepted
-
 ---
 
-## Decision 003
+## D008
 
-Area:
-
-Backend
-
-Decision:
+Backend Stack
 
 FastAPI
 
-Status:
-
-Accepted
+Python 3.14
 
 ---
 
-## Decision 004
+## D009
 
-Area:
-
-Database
-
-Decision:
+Persistence Stack
 
 PostgreSQL
 
@@ -416,107 +462,15 @@ SQLAlchemy
 
 Alembic
 
-Status:
-
-Accepted
-
 ---
 
-## Decision 005
-
-Area:
+## D010
 
 Maps
-
-Decision:
 
 Leaflet
 
 OpenStreetMap
-
-Status:
-
-Accepted
-
----
-
-## Decision 006
-
-Area:
-
-Deployment
-
-Decision:
-
-SaaS-first
-
-Self-host-ready
-
-Status:
-
-Accepted
-
-Future ADR:
-
-ADR-0007
-
----
-
-## Decision 007
-
-Area:
-
-Organisation Model
-
-Decision:
-
-Organisation required.
-
-Status:
-
-Accepted
-
-Future ADR:
-
-ADR-0006
-
----
-
-## Decision 008
-
-Area:
-
-Administration
-
-Decision:
-
-Super Admin SaaS available from V1.
-
-Status:
-
-Accepted
-
----
-
-## Decision 009
-
-Area:
-
-Carrier Accounts
-
-Decision:
-
-One carrier account per carrier per organisation.
-
-Status:
-
-Accepted
-
-Future Evolution:
-
-Multiple carrier accounts.
-
-Backlog.
 
 ---
 
@@ -524,97 +478,155 @@ Backlog.
 
 Frontend
 
-```text
+Status:
+
+Not Started
+
+Technology:
+
 Next.js
+
 React
+
 TypeScript
-```
+
+---
 
 Backend
 
-```text
+Status:
+
+Foundation Complete
+
+Technology:
+
 FastAPI
-```
 
-Database
+Python 3.14
 
-```text
+---
+
+Persistence
+
+Status:
+
+Foundation Complete
+
+Technology:
+
 PostgreSQL
+
 SQLAlchemy
+
 Alembic
-```
 
-Maps
+---
 
-```text
-Leaflet
-OpenStreetMap
-```
+Core
 
-Core Dependency
+Status:
 
-```text
-Universal PUDO Engine
-v1.0.0
-```
+Integrated
+
+Dependency:
+
+Universal PUDO Engine v1.0.0
+
+---
+
+# CURRENT PROJECT STRUCTURE
+
+UNIVERSAL-PUDO-SAAS/
+
+├── backend/
+
+│ ├── alembic/
+
+│ │ ├── env.py
+
+│ │ ├── README
+
+│ │ ├── script.py.mako
+
+│ │ └── versions/
+
+│ │
+
+│ ├── alembic.ini
+
+│ ├── .env.example
+
+│ ├── pyproject.toml
+
+│ ├── README.md
+
+│ │
+
+│ ├── src/
+
+│ │ └── universal_pudo_saas/
+
+│ │ ├── core/
+
+│ │ │ └── settings.py
+
+│ │ │
+
+│ │ ├── database/
+
+│ │ │ ├── base.py
+
+│ │ │ ├── metadata.py
+
+│ │ │ └── session.py
+
+│ │ │
+
+│ │ ├── shared/
+
+│ │ │ └── entities.py
+
+│ │ │
+
+│ │ └── main.py
+
+│ │
+
+│ └── tests/
+
+│ ├── test_main.py
+
+│ ├── test_entities.py
+
+│ └── test_settings.py
+
+│
+
+└── docs/
 
 ---
 
 # PROJECT METRICS
 
-Current Metrics
+Documentation Documents:
 
----
+10+
 
-## Documentation
+ADR Documents:
 
-Documents:
-
-5
-
-Reviewed Documents:
-
-5
-
-Pending Reviews:
-
-0
-
----
-
-## Code
-
-Backend Files:
-
-0
-
-Frontend Files:
-
-0
+6
 
 Repository Commits:
 
-1
+4
 
-GitHub Repository:
+Passing Tests:
 
-Created
+3
 
-Primary Branch:
-
-main
-
-Database Migrations:
+Failing Tests:
 
 0
-
-Tests:
-
-0
-
----
-
-## ADR
 
 Approved ADRs:
 
@@ -624,89 +636,47 @@ Planned ADRs:
 
 1
 
----
+Databases:
 
-# IDENTIFIED RISKS
-
-## Risk 001
-
-Documentation Drift
-
-Description:
-
-Documentation diverges from implementation.
-
-Mitigation:
-
-End-of-phase reviews.
-
-Source code remains the primary truth source.
+2
 
 ---
 
-## Risk 002
+# TECHNICAL DEBT
 
-Core / SaaS Responsibility Drift
+## TD-001
+
+StarletteDeprecationWarning
+
+Impact:
+
+Non-blocking
+
+Status:
+
+Monitor
 
 Description:
 
-Business logic accidentally moves into the SaaS.
-
-Mitigation:
-
-Strict architectural boundaries.
-
-Documented ownership.
+FastAPI TestClient currently emits a warning through Starlette/httpx integration.
 
 ---
 
-## Risk 003
+## TD-002
 
-Credential Security
+No Business Entity Implemented Yet
 
-Description:
+Impact:
 
-Improper credential handling.
+Expected
 
-Mitigation:
+Status:
 
-Credential storage strategy.
-
-Security-first implementation.
-
-Future ADR.
-
----
-
-## Risk 004
-
-Premature Billing Complexity
+Planned
 
 Description:
 
-Billing requirements influence architecture prematurely.
-
-Mitigation:
-
-Billing remains backlog.
-
-No implementation before dedicated decision.
-
----
-
-## Risk 005
-
-Core Upgrade Complexity
-
-Description:
-
-Future Core versions introduce breaking changes.
-
-Mitigation:
-
-Documented dependency strategy.
-
-Dedicated roadmap phase.
+Persistence Foundation completed before business entities.
 
 ---
 
@@ -722,28 +692,13 @@ Planned
 
 ---
 
-# CURRENT PROJECT STRUCTURE
+# CURRENT REALITY
 
-```text
-UNIVERSAL-PUDO-SAAS/
-│
-└── docs/
-    ├── project-memory.md
-    ├── product-vision.md
-    ├── architecture.md
-    ├── roadmap.md
-    └── project-status.md
-```
+Documentation Foundation completed.
 
-Current Reality:
+Repository Foundation completed.
 
-Git repository initialized.
-
-GitHub repository created.
-
-Initial documentation committed.
-
-6 ADRs approved.
+ADR Foundation completed.
 
 Domain Model completed.
 
@@ -751,27 +706,42 @@ Database Model completed.
 
 Persistence Decisions completed.
 
-No backend implementation.
+Backend Foundation completed.
 
-No frontend implementation.
+Database Configuration Foundation completed.
 
-No tests.
+Alembic Foundation completed.
+
+Dedicated PostgreSQL database created for SaaS.
+
+Alembic successfully connected to PostgreSQL.
+
+No business entities implemented.
+
+No authentication implemented.
+
+No user management implemented.
+
+No organisation management implemented.
+
+No migrations created yet.
+
+No production API endpoints besides health endpoint.
+
+---
 
 # NEXT MILESTONE
 
-Phase:
+Organisation Foundation
 
-7
+Objectives:
 
-Implementation Foundation
-
-Required Actions:
-
-- backend foundation
-- python project structure
-- pyproject.toml
-- SQLAlchemy setup
-- Alembic setup
+- Create Organisation ORM Model
+- Create First Business Table
+- Create First Alembic Migration
+- Execute alembic revision --autogenerate
+- Execute alembic upgrade head
+- Validate Persistence Workflow End-to-End
 
 ---
 
@@ -779,17 +749,44 @@ Required Actions:
 
 2026-07-22
 
-V1 created.
+Documentation Foundation completed.
 
 2026-07-22
 
-V2 review consolidation applied.
+ADR Foundation completed.
 
-Added:
+2026-07-22
 
-- Version Registry
-- Decision Register
-- Metrics
-- Future ADR Register
-- Formal Phase Gates
-- Expanded Risk Register
+Domain Model completed.
+
+2026-07-22
+
+Database Model completed.
+
+2026-07-22
+
+Persistence Decisions completed.
+
+2026-07-22
+
+Backend Foundation completed.
+
+2026-07-22
+
+Database Configuration Foundation completed.
+
+2026-07-23
+
+Alembic Foundation completed.
+
+2026-07-23
+
+Dedicated SaaS PostgreSQL database created.
+
+2026-07-23
+
+Alembic successfully connected to PostgreSQL.
+
+2026-07-23
+
+Organisation Foundation identified as next milestone.

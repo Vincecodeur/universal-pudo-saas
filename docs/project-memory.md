@@ -1,204 +1,964 @@
 # Universal PUDO SaaS - Project Memory
 
-Version: 0.2.0
+Version: 0.6.0
 
-Status: Phase 1 Documentation Review
+Status: Active
 
-Last Updated: 2026-07-22
+Last Updated: 2026-07-23
 
 ---
 
-# PURPOSE OF THIS DOCUMENT
+# PURPOSE
 
-This document is the central memory of the project.
+This document preserves the long-term memory of the project.
 
-Its role is not to replace:
+It contains:
+
+- strategic decisions
+- architectural direction
+- validated assumptions
+- completed milestones
+- lessons learned
+- current state
+- next milestones
+
+This document complements:
 
 - source code
-- tests
 - ADRs
-- architecture.md
-- product-vision.md
-- roadmap.md
-- project-status.md
+- roadmap
+- project-status
 
-Its role is to preserve knowledge.
-
-The objective is to allow:
-
-- Vincent
-- future project contributors
-
-to rebuild the project context quickly without rereading months of conversations.
-
-This document may grow indefinitely.
-
-Information should be added over time.
-
-Information should not be removed unless proven incorrect or obsolete.
-
----
-
-# PROJECT TRUTH MODEL
-
-Project truth is distributed.
-
-No single file is considered the sole source of truth.
-
-The hierarchy of trust is:
+Source of Truth Priority:
 
 1. Source Code
-2. Automated Tests
-3. ADRs
-4. architecture.md
-5. product-vision.md
-6. roadmap.md
-7. project-status.md
-8. project-memory.md
+2. Database Schema
+3. Approved ADRs
+4. Architecture Documents
+5. Project Documentation
 
-When contradictions exist:
-
-Source Code wins.
-
-Tests are considered strong evidence of behaviour.
-
-Documentation must remain aligned with reality.
-
-Never assume undocumented behaviour.
-
-When uncertain:
-
-Request the real file.
+When conflicts exist, source code wins.
 
 ---
 
-# PROJECT OVERVIEW
+# PROJECT SUMMARY
 
-Project Name:
+Universal PUDO SaaS is a multi-tenant SaaS platform built on top of Universal PUDO Engine.
 
-Universal PUDO SaaS
+The SaaS owns:
 
-Repository Role:
+- authentication
+- organisations
+- users
+- memberships
+- permissions
+- carrier accounts
+- exports
+- administration
 
-Application Layer
+Universal PUDO Engine owns:
 
-Primary Purpose:
+- carrier integrations
+- provider implementations
+- search orchestration
+- normalization
+- carrier intelligence
 
-Provide a hosted platform allowing organisations to access pickup point capabilities without building carrier-specific integrations.
+The SaaS must consume the Core.
 
-The platform is built on top of:
-
-Universal PUDO Engine
-
-which acts as the technical Core.
+The SaaS must never duplicate Core logic.
 
 ---
 
-# REPOSITORY REFERENCES
-
----
+# PROJECT REPOSITORIES
 
 ## Universal PUDO SaaS
 
-Repository Status:
-
-Planning and Documentation
-
-Version:
-
-0.1.0-draft
-
-Repository Role:
+Role:
 
 Application Layer
+
+Status:
+
+Active Development
+
+Repository:
+
+universal-pudo-saas
 
 ---
 
 ## Universal PUDO Engine
 
-Repository URL:
+Role:
 
-https://github.com/Vincecodeur/universal-pudo-engine
+Carrier Intelligence Layer
 
-Repository Status:
+Status:
 
-Released
+Integrated
 
-Current Known Version:
+Version:
 
 v1.0.0
 
-Repository Role:
+Repository:
 
-Core
-
----
-
-# PRODUCT BOUNDARY
-
-This section defines responsibilities that should remain stable over time.
+https://github.com/Vincecodeur/universal-pudo-engine
 
 ---
 
-## Always Core
+# STRATEGIC ARCHITECTURAL DECISIONS
 
-These responsibilities belong permanently to Universal PUDO Engine.
+## D001
 
-Examples:
+Hosting Strategy
 
-- carrier integrations
-- provider implementations
-- ProviderFactory
-- carrier payload handling
-- carrier API clients
-- pickup point normalization
-- synchronization
-- hybrid search
-- carrier abstraction
+Decision:
 
----
+SaaS-first
 
-## Never SaaS
+Self-host-ready
 
-The SaaS must never:
+Status:
 
-- implement carrier APIs
-- duplicate providers
-- duplicate mappers
-- duplicate payload parsers
-- duplicate normalization logic
+Accepted
+
+ADR:
+
+ADR-0006
 
 ---
 
-## Always SaaS
+## D002
 
-These responsibilities belong permanently to Universal PUDO SaaS.
+Repository Strategy
 
-Examples:
+Decision:
 
-- authentication
-- organisations
-- users
-- permissions
-- carrier credentials
-- administration
-- exports
-- dashboards
-- platform monitoring
+Monorepo
 
----
+Status:
 
-## Never Core
+Accepted
 
-The Core must never:
+ADR:
 
-- own users
-- own organisations
-- own tenants
-- own billing
-- own SaaS administration
-- own credential management interfaces
+ADR-0001
 
 ---
 
-# PROJECT VISION SUMMARY
+## D003
+
+Authentication
+
+Decision:
+
+Email + Password
+
+JWT
+
+Status:
+
+Accepted
+
+ADR:
+
+ADR-0002
+
+---
+
+## D004
+
+Credential Ownership
+
+Decision:
+
+Credentials managed by SaaS.
+
+Core consumes credentials.
+
+Status:
+
+Accepted
+
+ADR:
+
+ADR-0003
+
+---
+
+## D005
+
+Multi-Tenant Strategy
+
+Decision:
+
+Tenant = Organisation
+
+Status:
+
+Accepted
+
+ADR:
+
+ADR-0004
+
+---
+
+## D006
+
+Module Boundaries
+
+Decision:
+
+Business Modules
+
+Status:
+
+Accepted
+
+ADR:
+
+ADR-0005
+
+---
+
+# VALIDATED TECHNOLOGY STACK
+
+Frontend
+
+- Next.js
+- React
+- TypeScript
+
+Status:
+
+Planned
+
+---
+
+Backend
+
+- FastAPI
+- Python 3.14
+
+Status:
+
+Validated
+
+---
+
+Database
+
+- PostgreSQL 17
+
+Status:
+
+Validated
+
+---
+
+ORM
+
+- SQLAlchemy
+
+Status:
+
+Validated
+
+---
+
+Migrations
+
+- Alembic
+
+Status:
+
+Validated
+
+---
+
+Maps
+
+- Leaflet
+- OpenStreetMap
+
+Status:
+
+Planned
+
+---
+
+# DATABASE OWNERSHIP STRATEGY
+
+## Universal PUDO Engine Database
+
+Database:
+
+universal_pudo
+
+Owner:
+
+Universal PUDO Engine
+
+Status:
+
+Validated
+
+---
+
+## Universal PUDO SaaS Database
+
+Database:
+
+universal_pudo_saas
+
+Owner:
+
+Universal PUDO SaaS
+
+Status:
+
+Validated
+
+Created:
+
+2026-07-23
+
+---
+
+## Architectural Rule
+
+Core and SaaS databases remain independent.
+
+Benefits:
+
+- migration isolation
+- deployment isolation
+- ownership clarity
+- upgrade flexibility
+- lower coupling
+
+This decision is now considered validated.
+
+---
+
+# IMPLEMENTED FOUNDATIONS
+
+## Documentation Foundation
+
+Status:
+
+Completed
+
+---
+
+## Repository Foundation
+
+Status:
+
+Completed
+
+---
+
+## Architecture Foundation
+
+Status:
+
+Completed
+
+---
+
+## ADR Foundation
+
+Status:
+
+Completed
+
+Approved ADRs:
+
+ADR-0001
+
+ADR-0002
+
+ADR-0003
+
+ADR-0004
+
+ADR-0005
+
+ADR-0006
+
+---
+
+## Domain Model Design
+
+Status:
+
+Completed
+
+---
+
+## Database Model Design
+
+Status:
+
+Completed
+
+---
+
+## Persistence Decisions
+
+Status:
+
+Completed
+
+---
+
+## Backend Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ FastAPI
+
+✅ Health Endpoint
+
+✅ Configuration Layer
+
+✅ Project Structure
+
+✅ Tests Foundation
+
+---
+
+## Database Configuration Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ SQLAlchemy Base
+
+✅ BaseEntity
+
+✅ SessionLocal
+
+✅ Environment Configuration
+
+✅ .env.example
+
+✅ Runtime DATABASE_URL
+
+---
+
+## Alembic Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ Alembic Installed
+
+✅ alembic.ini
+
+✅ env.py
+
+✅ SQLAlchemy Metadata Integration
+
+✅ PostgreSQL Integration
+
+✅ Dedicated SaaS Database
+
+✅ alembic current Validation
+
+---
+
+# IMPLEMENTED PERSISTENCE DECISIONS
+
+UUID Strategy
+
+Implemented
+
+---
+
+BaseEntity Strategy
+
+Implemented
+
+---
+
+Timestamp Strategy
+
+Implemented
+
+---
+
+Soft Delete Strategy
+
+Implemented
+
+---
+
+Audit Strategy
+
+Designed
+
+Not Implemented
+
+---
+
+Search Persistence Strategy
+
+Designed
+
+Not Implemented
+
+---
+
+Membership Ownership Strategy
+
+Designed
+
+Not Implemented
+
+---
+
+# CURRENT TEST STATUS
+
+Validated Tests:
+
+test_main.py
+
+test_entities.py
+
+test_settings.py
+
+---
+
+Current Result:
+
+3 passed
+
+0 failed
+
+---
+
+# CURRENT CODE STATUS
+
+Implemented:
+
+✅ FastAPI Startup
+
+✅ Health Endpoint
+
+✅ Settings
+
+✅ PostgreSQL Configuration
+
+✅ SQLAlchemy Base
+
+✅ BaseEntity
+
+✅ Session Factory
+
+✅ Alembic
+
+✅ Dedicated SaaS Database
+
+---
+
+Not Implemented:
+
+❌ Organisation
+
+❌ Membership
+
+❌ User
+
+❌ Authentication
+
+❌ Carrier Accounts
+
+❌ Searches
+
+❌ Exports
+
+❌ Administration
+
+❌ Frontend
+
+---
+
+# LESSONS LEARNED
+
+## Lesson 001
+
+Infrastructure First Works
+
+Observation:
+
+Building the foundations before business entities reduced rework.
+
+Validated Sequence:
+
+Documentation
+
+↓
+
+Architecture
+
+↓
+
+ADR
+
+↓
+
+Persistence
+
+↓
+
+Business Entities
+
+---
+
+## Lesson 002
+
+Alembic Must Be Installed Before First Entity
+
+Observation:
+
+Creating entities before validating Alembic would have increased migration risk.
+
+Decision:
+
+Always validate migrations before creating business tables.
+
+---
+
+## Lesson 003
+
+The Real Source Of Truth Is The Code
+
+Observation:
+
+Several documents drifted from reality during implementation.
+
+Decision:
+
+Code + validated documentation are the source of truth.
+
+Documentation must be synchronized after each phase.
+
+---
+
+## Lesson 004
+
+Separate Databases Early
+
+Observation:
+
+The Universal PUDO Engine database already existed.
+
+Discussion revealed the risk of sharing it with the SaaS.
+
+Decision:
+
+One database per product.
+
+Validated Structure:
+
+universal_pudo
+
+→ Core
+
+universal_pudo_saas
+
+→ SaaS
+
+---
+
+## Lesson 005
+
+PostgreSQL Validation Prevents False Assumptions
+
+Observation:
+
+Initial debugging suggested a credential problem.
+
+Root Cause:
+
+The SaaS database did not exist yet.
+
+Decision:
+
+Always validate:
+
+- PostgreSQL service
+- credentials
+- database existence
+
+before modifying application code.
+
+---
+
+## Lesson 006
+
+Documentation Must Be Updated Before Forward
+
+Observation:
+
+Several phases were technically complete but not documented.
+
+Decision:
+
+A phase is complete only after:
+
+Development
+
+↓
+
+Validation
+
+↓
+
+Documentation
+
+↓
+
+Commit
+
+↓
+
+Push
+
+↓
+
+Forward
+
+---
+
+## Lesson 007
+
+Core And SaaS Boundaries Must Stay Explicit
+
+Observation:
+
+Several implementation decisions naturally pushed toward higher coupling.
+
+Decision:
+
+The SaaS consumes the Core.
+
+The SaaS never reimplements:
+
+- providers
+- carrier clients
+- normalization
+- carrier intelligence
+
+---
+
+# CURRENT PROJECT WORKFLOW
+
+For every phase:
+
+1. Production
+
+2. Auto-Critique
+
+3. Validation
+
+4. Documentation Update
+
+5. Commit
+
+6. Push
+
+7. Forward
+
+No phase is considered complete before documentation synchronization.
+
+---
+
+# CURRENT PROJECT STATE
+
+Completed:
+
+✅ Documentation Foundation
+
+✅ Repository Foundation
+
+✅ Architecture Foundation
+
+✅ ADR Foundation
+
+✅ Domain Model Design
+
+✅ Database Model Design
+
+✅ Persistence Decisions
+
+✅ Backend Foundation
+
+✅ Database Configuration Foundation
+
+✅ Alembic Foundation
+
+---
+
+Current Focus:
+
+Organisation Foundation
+
+---
+
+# NEXT MILESTONE
+
+Organisation Foundation
+
+Objectives:
+
+- Create Organisation ORM Model
+- Create First Business Table
+- Create First Alembic Migration
+- Execute alembic revision --autogenerate
+- Execute alembic upgrade head
+- Validate End-To-End Persistence
+
+---
+
+# FUTURE MILESTONES
+
+Organisation
+
+↓
+
+Membership
+
+↓
+
+Users
+
+↓
+
+Authentication
+
+↓
+
+Roles & Permissions
+
+↓
+
+Carrier Accounts
+
+↓
+
+Search Platform
+
+↓
+
+Map Experience
+
+↓
+
+Export Platform
+
+↓
+
+Administration
+
+↓
+
+Public API
+
+↓
+
+Frontend
+
+↓
+
+Universal PUDO SaaS v1.0.0
+
+---
+
+# LONG-TERM OBJECTIVE
+
+Universal PUDO SaaS v1.0.0
+
+An organisation can:
+
+- authenticate
+- manage users
+- manage memberships
+- manage carrier accounts
+- search pickup points
+- visualize results
+- export results
+- administer the platform
+
+while Universal PUDO Engine remains the dedicated carrier intelligence layer.
+
+---
+
+# CHANGE HISTORY
+
+2026-07-22
+
+Initial Project Memory created.
+
+---
+
+2026-07-22
+
+ADR Foundation completed.
+
+---
+
+2026-07-22
+
+Backend Foundation completed.
+
+---
+
+2026-07-22
+
+Database Configuration Foundation completed.
+
+---
+
+2026-07-23
+
+Alembic Foundation completed.
+
+---
+
+2026-07-23
+
+Dedicated SaaS PostgreSQL database created.
+
+---
+
+2026-07-23
+
+Alembic successfully connected to PostgreSQL.
+
+---
+
+2026-07-23
+
+Lessons Learned section added.
+
+---
+
+2026-07-23
+
+Organisation Foundation defined as next milestone.
