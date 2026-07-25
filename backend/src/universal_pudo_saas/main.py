@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from fastapi import FastAPI
 
+from universal_pudo_saas.auth.routes import router as auth_router
 from universal_pudo_saas.core.settings import get_settings
 
 
@@ -20,6 +21,8 @@ def create_app() -> FastAPI:
             "service": settings.app_name,
             "environment": settings.environment,
         }
+
+    app.include_router(auth_router)
 
     return app
 
