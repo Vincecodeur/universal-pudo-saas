@@ -46,6 +46,12 @@ class User(BaseEntity):
         default=False,
     )
 
+    is_platform_admin: Mapped[bool] = mapped_column(
+        Boolean,
+        nullable=False,
+        default=False,
+    )    
+
     last_login_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
         nullable=True,

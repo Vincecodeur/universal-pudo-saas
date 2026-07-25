@@ -7,20 +7,20 @@ def test_membership_creation() -> None:
     membership = Membership(
         organisation_id=uuid.uuid4(),
         user_id=uuid.uuid4(),
-        role="ADMIN",
+        role="OWNER",
     )
 
-    assert membership.role == "ADMIN"
+    assert membership.role == "OWNER"
 
 
 def test_membership_role_is_stored() -> None:
     membership = Membership(
         organisation_id=uuid.uuid4(),
         user_id=uuid.uuid4(),
-        role="USER",
+        role="VIEWER",
     )
 
-    assert membership.role == "USER"
+    assert membership.role == "VIEWER"
 
 
 def test_membership_has_valid_organisation_reference() -> None:
@@ -29,7 +29,7 @@ def test_membership_has_valid_organisation_reference() -> None:
     membership = Membership(
         organisation_id=organisation_id,
         user_id=uuid.uuid4(),
-        role="ADMIN",
+        role="OWNER",
     )
 
     assert membership.organisation_id == organisation_id
@@ -41,7 +41,7 @@ def test_membership_has_valid_user_reference() -> None:
     membership = Membership(
         organisation_id=uuid.uuid4(),
         user_id=user_id,
-        role="ADMIN",
+        role="OWNER",
     )
 
     assert membership.user_id == user_id
@@ -51,7 +51,7 @@ def test_membership_inherits_base_entity_fields() -> None:
     membership = Membership(
         organisation_id=uuid.uuid4(),
         user_id=uuid.uuid4(),
-        role="ADMIN",
+        role="OWNER",
     )
 
     assert hasattr(membership, "id")
@@ -64,7 +64,7 @@ def test_membership_deleted_at_default_is_none() -> None:
     membership = Membership(
         organisation_id=uuid.uuid4(),
         user_id=uuid.uuid4(),
-        role="ADMIN",
+        role="OWNER",
     )
 
     assert membership.deleted_at is None
