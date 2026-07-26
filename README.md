@@ -1,8 +1,10 @@
 # Universal PUDO SaaS
 
-Version: 0.5.0
+Version: 1.5.0
 
-Status: Active Development
+Status: Engine Catalog Foundation Completed
+
+Last Updated: 2026-07-26
 
 ---
 
@@ -15,6 +17,7 @@ The objective of the platform is to allow organisations to:
 - manage users
 - manage organisations
 - manage memberships
+- manage roles
 - connect carrier accounts
 - search pickup points
 - visualize pickup points
@@ -43,18 +46,29 @@ Universal PUDO Engine remains responsible for:
 - carrier abstraction
 - carrier synchronization
 - carrier intelligence
+- search orchestration
 
 Universal PUDO SaaS remains responsible for:
 
 - authentication
-- users
 - organisations
+- users
+- memberships
 - permissions
+- carrier accounts
 - carrier credentials
 - exports
 - administration
 
 The SaaS must never duplicate Core responsibilities.
+
+Carrier catalog ownership:
+
+Universal PUDO Engine owns the carrier catalog.
+
+Universal PUDO SaaS does not persist carrier definitions.
+
+Universal PUDO SaaS stores carrier_code as a logical reference to carriers exposed by the Engine.
 
 ---
 
@@ -62,15 +76,21 @@ The SaaS must never duplicate Core responsibilities.
 
 Current Phase:
 
-Phase 8
+Phase 16.1
 
-Organisation Foundation
+Engine Catalog Foundation
+
+Status:
+
+Completed
 
 Current State:
 
 ✅ Documentation Foundation
 
 ✅ Repository Foundation
+
+✅ Architecture Foundation
 
 ✅ ADR Foundation
 
@@ -86,6 +106,34 @@ Current State:
 
 ✅ Alembic Foundation
 
+✅ Organisation Foundation
+
+✅ Users Foundation
+
+✅ Membership Foundation
+
+✅ Authentication Model Foundation
+
+✅ Password Hashing Foundation
+
+✅ JWT Foundation
+
+✅ Authentication Service Foundation
+
+✅ Authentication API Foundation
+
+✅ Persistence Test Foundation Implementation
+
+✅ Carrier Account Model Foundation
+
+✅ Carrier Credential Foundation
+
+✅ Carrier Account Persistence Foundation
+
+✅ Carrier Account Repository Foundation
+
+✅ Carrier Credential Repository Foundation
+
 ---
 
 # IMPLEMENTED FOUNDATIONS
@@ -100,11 +148,17 @@ Backend
 
 ✅ Application Foundation
 
+✅ Engine Catalog Models
+
+✅ Engine Catalog Client
+
+✅ Engine Catalog Service
+
 ---
 
 Persistence
 
-✅ PostgreSQL
+✅ PostgreSQL 17
 
 ✅ SQLAlchemy
 
@@ -117,6 +171,32 @@ Persistence
 ✅ Timestamp Strategy
 
 ✅ Soft Delete Strategy
+
+---
+
+Identity Domain
+
+✅ Organisation Foundation
+
+✅ Users Foundation
+
+✅ Membership Foundation
+
+✅ Authentication Model Foundation
+
+✅ Password Hashing Foundation
+
+✅ JWT Foundation
+
+✅ Authentication Service Foundation
+
+✅ Authentication API Foundation
+
+✅ User Lookup Foundation
+
+✅ Carrier Account Foundation
+
+✅ Carrier Credential Foundation
 
 ---
 
@@ -136,69 +216,126 @@ Testing
 
 ✅ test_main.py
 
+✅ test_settings.py
+
 ✅ test_entities.py
 
-✅ test_settings.py
+✅ test_organisation.py
+
+✅ test_user.py
+
+✅ test_membership.py
+
+✅ test_passwords.py
+
+✅ test_tokens.py
+
+✅ test_auth_service.py
+
+✅ test_auth_api.py
+
+✅ test_organisation_persistence.py
+
+✅ test_user_persistence.py
+
+✅ test_membership_persistence.py
+
+✅ test_carrier_account.py
+
+✅ test_carrier_account_persistence.py
+
+✅ test_carrier_credential.py
+
+✅ test_carrier_credential_persistence.py
 
 Result:
 
-3 passed
+113 passed
 
 0 failed
 
 ---
 
-# NOT IMPLEMENTED YET
+# CURRENT DATABASE MODEL
 
-Authentication
+Implemented Tables:
 
-Users
+✅ organisations
 
-Organisations
+✅ users
 
-Memberships
+✅ memberships
 
-Carrier Accounts
+✅ carrier_accounts
 
-Searches
-
-Exports
-
-Administration
-
-Frontend
-
-Public API
+✅ carrier_credentials
 
 ---
 
-# TARGET TECHNOLOGY STACK
+User Authentication Fields:
 
-Frontend
+✅ password_hash
 
-- Next.js
-- React
-- TypeScript
+✅ is_active
 
-Backend
+✅ is_verified
 
-- FastAPI
-- Python 3.14
-
-Database
-
-- PostgreSQL 17
-- SQLAlchemy
-- Alembic
-
-Maps
-
-- Leaflet
-- OpenStreetMap
+✅ last_login_at
 
 ---
 
-# PROJECT STRUCTURE
+Validated Foreign Keys:
+
+✅ memberships.organisation_id
+→ organisations.id
+
+✅ memberships.user_id
+→ users.id
+
+✅ carrier_accounts.organisation_id
+→ organisations.id
+
+✅ carrier_credentials.carrier_account_id
+→ carrier_accounts.id
+
+---
+
+# CURRENT DOMAIN MODEL
+
+Organisation
+▲
+│
+Membership
+│
+▼
+User
+
+Organisation
+│
+▼
+CarrierAccount
+│
+▼
+CarrierCredential
+
+carrier_code
+│
+▼
+Universal PUDO Engine Carrier Catalog
+
+Status:
+
+✅ Implemented
+
+✅ Persisted
+
+✅ Validated
+
+✅ Persistence Tested
+
+---
+
+# CURRENT PROJECT STRUCTURE
 
 UNIVERSAL-PUDO-SAAS/
 
@@ -206,15 +343,261 @@ UNIVERSAL-PUDO-SAAS/
 
 │ ├── alembic/
 
+│ ├── alembic.ini
+
+│ ├── .env.example
+
+│ ├── pyproject.toml
+
+│ ├── README.md
+
 │ ├── src/
 
 │ │ └── universal_pudo_saas/
 
+│ │ ├── carrier_accounts/
+│ │ ├── carrier_credentials/
+
+│ ├── engine_catalog/
+│ │ ├── **init**.py
+│ │ ├── client.py
+│ │ ├── models.py
+│ │ ├──service.py
+
+│ │ ├── auth/
+
+│ │ ├── core/
+
+│ │ ├── database/
+
+│ │ ├── shared/
+
+│ │ ├── organisations/
+
+│ │ ├── users/
+
+│ │ ├── memberships/
+
+│ │ ├── security/
+
+│ │ └── main.py
+
 │ └── tests/
 
-│
+│ ├── test_main.py
+
+│ ├── test_settings.py
+
+│ ├── test_entities.py
+
+│ ├── test_organisation.py
+
+│ ├── test_user.py
+
+│ ├── test_membership.py
+
+│ ├── test_passwords.py
+
+│ ├── test_tokens.py
+
+│ ├── test_auth_service.py
+
+│ └── test_auth_api.py
+
+| ├── test_organisation_persistence.py
+
+| ├── test_user_persistence.py
+
+│ ├── test_carrier_account.py
+│ ├── test_carrier_account_persistence.py
+│ ├── test_carrier_credential.py
+│ ├── test_carrier_credential_persistence.py
+│ ├── test_carrier_account_repository.py
+│ ├── test_carrier_credential_repository.py
+│ └── test_membership_persistence.py
 
 └── docs/
+
+---
+
+# VALIDATED TECHNOLOGY STACK
+
+Frontend
+
+- Next.js
+- React
+- TypeScript
+
+Status:
+
+Planned
+
+---
+
+Backend
+
+- FastAPI
+- Python 3.14
+
+Status:
+
+Validated
+
+---
+
+Database
+
+- PostgreSQL 17
+- SQLAlchemy
+- Alembic
+
+Status:
+
+Validated
+
+---
+
+Authentication
+
+- passlib
+- bcrypt
+- python-jose
+- cryptography
+
+Status:
+
+Validated
+
+---
+
+Maps
+
+- Leaflet
+- OpenStreetMap
+
+Status:
+
+Planned
+
+---
+
+# AUTHENTICATION STATUS
+
+Completed:
+
+✅ Authentication Model Foundation
+
+✅ password_hash
+
+✅ is_active
+
+✅ is_verified
+
+✅ last_login_at
+
+✅ Alembic Migration
+
+✅ PostgreSQL Validation
+
+✅ Automated Tests
+
+---
+
+✅ Password Hashing Foundation
+
+✅ hash_password()
+
+✅ verify_password()
+
+---
+
+✅ JWT Foundation
+
+✅ create_access_token()
+
+✅ decode_access_token()
+
+---
+
+✅ Authentication Service Foundation
+
+✅ authenticate_user()
+
+✅ create_user_token()
+
+---
+
+✅ Authentication API Foundation
+
+✅ POST /auth/login
+
+✅ GET /auth/me
+
+✅ JWT Authentication Flow
+
+✅ User Lookup Foundation
+
+✅ Repository-Based Authentication
+
+---
+
+# PERSISTENCE STATUS
+
+Implemented:
+
+✅ test_organisation_persistence.py
+
+✅ test_user_persistence.py
+
+✅ test_membership_persistence.py
+
+✅ test_carrier_account_persistence.py
+
+✅ test_carrier_credential_persistence.py
+
+✅ test_carrier_account_repository.py
+
+✅ test_carrier_credential_repository.py
+
+Validated:
+
+✅ session.add()
+
+✅ session.commit()
+
+✅ session.refresh()
+
+✅ session.get()
+
+✅ session.delete()
+
+✅ PostgreSQL Reads
+
+✅ PostgreSQL Writes
+
+✅ CRUD Persistence Validation
+
+✅ Foreign Key Persistence Validation
+
+Status:
+
+Implementation Complete
+
+Repository Layer Complete
+
+Documentation Synchronization Complete
+
+---
+
+Not Yet Implemented:
+
+❌ Refresh Tokens
+
+❌ Password Reset
+
+❌ Email Verification
+
+❌ Roles & Permissions
 
 ---
 
@@ -228,11 +611,31 @@ Persistence
 
 ↓
 
-Business Entities
+Domain Models
 
 ↓
 
 Authentication
+
+✅ Completed
+
+↓
+
+Persistence Validation
+
+✅ Implemented
+
+↓
+
+Roles & Permissions 
+
+Planned
+
+↓
+
+Carrier Account Management
+
+✅ Foundation Completed
 
 ↓
 
@@ -246,14 +649,49 @@ Frontend
 
 # NEXT MILESTONE
 
-Organisation Foundation
+Carrier Catalog Integration Service
 
 Objectives:
 
-- First ORM Model
-- First Business Table
-- First Alembic Migration
-- Persistence Validation
+- Cross Engine catalog with CarrierAccount
+- Preserve carrier_code mapping
+- No Engine modifications
+- No carrier catalog persistence
+- Prepare organisation carrier activation workflows
+
+---
+
+# FUTURE ROADMAP
+
+Universal PUDO Engine Integration
+
+↓
+
+Search Platform
+
+↓
+
+Map Experience
+
+↓
+
+Export Platform
+
+↓
+
+Administration Portal
+
+↓
+
+Public API
+
+↓
+
+Frontend
+
+↓
+
+Universal PUDO SaaS v1.0.0
 
 ---
 
@@ -271,7 +709,11 @@ Multi-tenant SaaS
 
 Future Possibility:
 
-Enterprise self-hosted deployments.
+Enterprise self-hosted deployments
+
+ADR:
+
+ADR-0006
 
 ---
 
@@ -288,6 +730,41 @@ Main Documents:
 - architecture.md
 - roadmap.md
 - project-status.md
+- domain-model.md
+- database-model.md
+- persistence-decisions.md
+
+---
+
+# CURRENT QUALITY STATUS
+
+Database:
+
+✅ Validated
+
+PostgreSQL:
+
+✅ Validated
+
+Migrations:
+
+✅ Validated
+
+Tests:
+
+✅ 113 passed
+
+Documentation:
+
+⏳ Synchronization In Progress
+
+Git:
+
+⏳ Pending Commit
+
+GitHub:
+
+⏳ Pending Push
 
 ---
 

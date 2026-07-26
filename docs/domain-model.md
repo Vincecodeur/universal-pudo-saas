@@ -1,10 +1,10 @@
 # Universal PUDO SaaS - Domain Model
 
-Version: 0.1.0
+Version: 2.0.0
 
-Status: Domain Modeling
+Status: Approved
 
-Last Updated: 2026-07-22
+Last Updated: 2026-07-25
 
 ---
 
@@ -12,549 +12,325 @@ Last Updated: 2026-07-22
 
 This document defines the business domain model of Universal PUDO SaaS.
 
-It describes:
+The objective is to identify:
 
 - business entities
-- ownership
-- responsibilities
+- ownership boundaries
 - relationships
+- responsibilities
 
-It does not describe:
-
-- database schema
-- implementation
-- APIs
-- infrastructure
-
-These topics belong to later phases.
+The model is business-driven and independent from persistence implementation details.
 
 ---
 
-# DOMAIN PRINCIPLES
+# DOMAIN VISION
 
-The domain model must respect:
+Universal PUDO SaaS enables organisations to:
 
-ADR-0002 Authentication Strategy
+- connect carrier accounts
+- access pickup point information
+- search pickup points
+- visualize PUDO information
+- consume normalized PUDO data
 
-ADR-0003 Credential Storage Strategy
+The platform is organisation-centric.
 
-ADR-0004 Multi-Tenant Strategy
-
-ADR-0005 Module Boundary Strategy
-
-ADR-0006 Self-Hosted Compatibility Strategy
+All business entities belong to an organisation except platform entities managed by the SaaS Administrator.
 
 ---
 
-# DOMAIN OVERVIEW
+# DOMAIN ENTITIES
 
-The platform is composed of the following business domains:
+The platform currently contains two layers:
+
+1. Platform Layer
+2. Organisation Layer
+
+---
+
+# PLATFORM LAYER
+
+Managed by:
+
+SaaS Administrator
+
+Entities:
+
+```text
+CarrierIntegration
+```
+
+---
+
+## CarrierIntegration
+
+Represents a carrier integration available on the platform.
+
+Examples:
+
+- Colissimo
+- Mondial Relay
+- Chronopost
+- DPD
+- GLS
+- UPS
+
+Responsibilities:
+
+- identify supported carriers
+- expose available integrations
+- control platform availability
+
+Owner:
+
+SaaS Administrator
+
+---
+
+# ORGANISATION LAYER
+
+Managed by:
+
+Organisation Owner
+
+Entities:
 
 ```text
 Organisation
-User
-Carrier Account
-Search
-Export
-Administration
-```
-
----
-
-# ORGANISATION DOMAIN
-
-Organisation is the primary tenant of the platform.
-
-All business objects belong to an organisation.
-
----
-
-## Entity
-
-Organisation
-
----
-
-## Responsibilities
-
-```text
-Own Users
-Own Carrier Accounts
-Own Searches
-Own Exports
-Own Settings
-```
-
----
-
-## Business Rules
-
-```text
-An organisation owns its data.
-
-An organisation cannot access another organisation's data.
-```
-
----
-
-# USER DOMAIN
-
-Users represent authenticated identities.
-
-Authentication and tenancy remain separate concerns.
-
----
-
-## Entity
 
 User
 
----
-
-## Responsibilities
-
-```text
-Authentication Identity
-Profile Ownership
-Preference Ownership
-```
-
----
-
-## Business Rules
-
-```text
-A user may belong to multiple organisations.
-
-A user authenticates before tenant resolution.
-```
-
----
-
-# MEMBERSHIP DOMAIN
-
-Membership links users and organisations.
-
----
-
-## Entity
-
 Membership
-
----
-
-## Responsibilities
-
-```text
-Tenant Association
-Role Assignment
-Access Control Context
-```
-
----
-
-## Business Rules
-
-```text
-A membership belongs to one user.
-
-A membership belongs to one organisation.
-
-Permissions are evaluated through memberships.
-```
-
----
-
-# ROLE DOMAIN
-
-Roles define permissions.
-
----
-
-## Entity
-
-Role
-
----
-
-## Initial Roles
-
-```text
-SuperAdmin
-OrganisationAdmin
-OrganisationUser
-```
-
----
-
-## Business Rules
-
-```text
-Roles do not authenticate users.
-
-Roles define capabilities.
-```
-
----
-
-# CARRIER ACCOUNT DOMAIN
-
-Carrier Accounts represent carrier connectivity owned by organisations.
-
----
-
-## Entity
 
 CarrierAccount
 
----
+DashboardConfiguration
 
-## Responsibilities
+ApiCredential
 
-```text
-Carrier Configuration
-Credential Ownership
-Connection Status
-Account Lifecycle
+SearchHistory
 ```
 
 ---
 
-## Business Rules
+## Organisation
 
-```text
-A Carrier Account belongs to one organisation.
+Represents a customer tenant.
 
-Carrier credentials are organisation-owned.
+Examples:
 
-Carrier Accounts never belong to users.
-```
+- Spriiint
+- PrintChic
+- Retailer ABC
 
----
+Responsibilities:
 
-# CREDENTIAL DOMAIN
-
-Credentials are sensitive assets attached to Carrier Accounts.
-
----
-
-## Entity
-
-CredentialReference
+- owns users
+- owns carrier accounts
+- owns dashboards
+- owns searches
+- owns credentials
 
 ---
 
-## Responsibilities
+## User
 
-```text
-Credential Ownership
-Credential Access
-Credential Security
-```
+Represents a platform user.
 
----
+A User may belong to multiple organisations.
 
-## Business Rules
+A User has no role by itself.
 
-```text
-Credentials belong to Carrier Accounts.
-
-Credentials must remain isolated per organisation.
-```
+Roles are organisation-specific.
 
 ---
 
-# SEARCH DOMAIN
+## Membership
 
-Searches represent pickup point discovery requests.
+Represents the relationship between:
 
----
-
-## Entity
-
-Search
-
----
-
-## Responsibilities
-
-```text
-Search Execution Request
-Search History
-Search Traceability
-```
-
----
-
-## Business Rules
-
-```text
-Searches belong to an organisation.
-
-Searches never belong directly to a carrier.
-```
-
----
-
-# SEARCH REQUEST DOMAIN
-
-Search requests capture search criteria.
-
----
-
-## Entity
-
-SearchRequest
-
----
-
-## Examples
-
-```text
-Postal Code Search
-City Search
-Coordinate Search
-```
-
----
-
-## Responsibilities
-
-```text
-Input Validation
-Search Criteria Definition
-```
-
----
-
-# SEARCH RESULT DOMAIN
-
-Search results represent normalized pickup point responses.
-
----
-
-## Entity
-
-SearchResult
-
----
-
-## Responsibilities
-
-```text
-Result Presentation
-Result Reuse
-Export Source Data
-```
-
----
-
-## Business Rules
-
-```text
-Search results originate from Universal PUDO Engine.
-
-Normalization belongs to the Core.
-```
-
----
-
-# EXPORT DOMAIN
-
-Exports represent reusable output generated from search activity.
-
----
-
-## Entity
-
-Export
-
----
-
-## Responsibilities
-
-```text
-Export Creation
-Export Lifecycle
-Export Ownership
-```
-
----
-
-## Business Rules
-
-```text
-Exports belong to one organisation.
-```
-
----
-
-# EXPORT FILE DOMAIN
-
-Represents generated export artifacts.
-
----
-
-## Entity
-
-ExportFile
-
----
-
-## Responsibilities
-
-```text
-Download Availability
-Export Delivery
-Export Retention
-```
-
----
-
-# ADMINISTRATION DOMAIN
-
-Administration manages the platform.
-
----
-
-## Entity
-
-PlatformSettings
-
----
-
-## Responsibilities
-
-```text
-Platform Configuration
-Operational Governance
-```
-
----
-
-# AUDIT DOMAIN
-
-Captures important platform events.
-
----
-
-## Entity
-
-AuditEvent
-
----
-
-## Responsibilities
-
-```text
-Traceability
-Security Monitoring
-Operational Visibility
-```
-
----
-
-## Examples
-
-```text
-User Login
-Carrier Account Creation
-Credential Update
-Search Execution
-Export Creation
-```
-
----
-
-# DOMAIN OWNERSHIP MAP
-
-```text
-Auth Module
- ├── User
- ├── Role
-
-Organisation Module
- ├── Organisation
- ├── Membership
-
-Carrier Accounts Module
- ├── CarrierAccount
- ├── CredentialReference
-
-Search Module
- ├── Search
- ├── SearchRequest
- ├── SearchResult
-
-Export Module
- ├── Export
- ├── ExportFile
-
-Administration Module
- ├── PlatformSettings
- ├── AuditEvent
-```
-
----
-
-# AGGREGATE CANDIDATES
-
-Potential future aggregates:
-
-Organisation Aggregate
-
-```text
 Organisation
-Membership
-Role
-```
+↔
+User
 
-Carrier Account Aggregate
+Responsibilities:
+
+- organisation membership
+- access control
+- role assignment
+
+Owner:
+
+Organisation
+
+Role values:
 
 ```text
+OWNER
+
+VIEWER
+```
+
+Note:
+
+SAAS_ADMIN exists outside tenant scope.
+
+---
+
+## CarrierAccount
+
+Represents an organisation-owned carrier configuration.
+
+A CarrierAccount references a carrier exposed by Universal PUDO Engine through carrier_code.
+
+Owner:
+
+Organisation
+
+---
+
+## CarrierCredential
+
+Represents credentials attached to a CarrierAccount.
+
+Owner:
+
 CarrierAccount
-CredentialReference
-```
 
-Search Aggregate
+Security note:
+
+Credential encryption is not part of the current phase.
+
+---
+
+## DashboardConfiguration
+
+Represents dashboard configuration for an organisation.
+
+Responsibilities:
+
+- selected KPIs
+- dashboard layout
+- reporting preferences
+
+Owner:
+
+Organisation Owner
+
+---
+
+## ApiCredential
+
+Represents organisation API access configuration.
+
+Responsibilities:
+
+- API access
+- authentication
+- application integration
+
+Owner:
+
+Organisation Owner
+
+---
+
+## SearchHistory
+
+Represents historical PUDO searches.
+
+Responsibilities:
+
+- usage analytics
+- auditability
+- reporting
+
+Owner:
+
+Organisation
+
+---
+
+# RELATIONSHIP MODEL
 
 ```text
-Search
-SearchRequest
-SearchResult
-```
-
-Export Aggregate
-
-```text
-Export
-ExportFile
+CarrierIntegration
+        │
+        │ 1
+        │
+        ▼
+CarrierAccount
+        ▲
+        │
+        │ N
+        │
+Organisation
+        │
+        ├── Membership
+        │       │
+        │       ▼
+        │      User
+        │
+        ├── DashboardConfiguration
+        │
+        ├── ApiCredential
+        │
+        └── SearchHistory
 ```
 
 ---
 
-# OUT OF SCOPE
+# ROLE OWNERSHIP
 
-This document does not define:
+Platform scope:
 
 ```text
-Database Tables
-SQL Types
-Indexes
-APIs
-Controllers
-Repositories
-Services
+SAAS_ADMIN
 ```
 
-These belong to future phases.
+Organisation scope:
+
+```text
+OWNER
+
+VIEWER
+```
+
+Role ownership is managed through Membership.
 
 ---
 
-# NEXT STEP
+# PRODUCT GUARDRAIL
 
-Phase 6
+The domain model must remain focused on:
 
-Database Model Design
+- pickup point access
+- pickup point search
+- pickup point consumption
 
-Objective:
+The following concepts are intentionally excluded:
+
+- shipment creation
+- labels
+- tracking
+- carrier services
+- transport execution
+- TMS functionalities
+
+These concepts belong outside Universal PUDO SaaS.
+
+---
+
+# SUCCESS CRITERIA
+
+The domain model is valid when:
+
+✅ Organisation ownership is clear
+
+✅ Platform ownership is clear
+
+✅ Carrier Integration and Carrier Account remain separate
+
+✅ Membership owns organisation roles
+
+✅ PUDO-focused scope remains enforced

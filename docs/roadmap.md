@@ -1,10 +1,10 @@
 # Universal PUDO SaaS - Roadmap
 
-Version: 0.5.0
+Version: 1.5.0
 
-Status: Organisation Foundation Ready
+Status: Engine Catalog Foundation Completed
 
-Last Updated: 2026-07-23
+Last Updated: 2026-07-26
 
 ---
 
@@ -16,15 +16,17 @@ Every phase must produce:
 
 - deliverables
 - validation
+- PostgreSQL validation
 - documentation
 - commit
 - push
 
 before the next phase begins.
 
-The objective is to maintain synchronization between:
+The goal is to keep synchronization between:
 
 - source code
+- database
 - tests
 - ADRs
 - documentation
@@ -40,13 +42,14 @@ Universal PUDO SaaS V1 is successful when an organisation can:
 - authenticate
 - manage users
 - manage memberships
+- manage roles
 - manage carrier accounts
 - search pickup points
 - visualize pickup points
 - export pickup point data
 - administer the platform
 
-while Universal PUDO Engine remains responsible for carrier intelligence and carrier integrations.
+while Universal PUDO Engine remains fully responsible for carrier intelligence.
 
 ---
 
@@ -58,15 +61,6 @@ Status:
 
 Completed
 
-Deliverables:
-
-- README.md
-- product-vision.md
-- architecture.md
-- roadmap.md
-- project-memory.md
-- project-status.md
-
 ---
 
 # PHASE 2
@@ -76,13 +70,6 @@ Repository Foundation
 Status:
 
 Completed
-
-Deliverables:
-
-- Git repository
-- GitHub repository
-- Initial commit
-- Branch strategy
 
 ---
 
@@ -94,12 +81,6 @@ Status:
 
 Completed
 
-Deliverables:
-
-- Architecture Definition
-- Core/SaaS Separation
-- Technology Stack Validation
-
 ---
 
 # PHASE 4
@@ -110,7 +91,7 @@ Status:
 
 Completed
 
-Deliverables:
+Approved ADRs:
 
 ADR-0001 Repository Structure Strategy
 
@@ -174,13 +155,6 @@ Status:
 
 Completed
 
-Deliverables:
-
-- FastAPI Application
-- Health Endpoint
-- Configuration Foundation
-- Universal PUDO Engine Dependency
-
 Validation:
 
 1 passed
@@ -196,14 +170,6 @@ Database Configuration Foundation
 Status:
 
 Completed
-
-Deliverables:
-
-- SQLAlchemy Base
-- BaseEntity
-- Database Session
-- Runtime Settings
-- .env.example
 
 Validation:
 
@@ -221,25 +187,15 @@ Status:
 
 Completed
 
-Deliverables:
-
-- alembic.ini
-- alembic/env.py
-- Alembic Integration
-- PostgreSQL Connectivity
-- Dedicated SaaS Database
-
 Validation:
 
-✅ alembic init
+✅ Alembic
 
-✅ alembic current
+✅ PostgreSQL
 
-✅ SQLAlchemy metadata integration
+✅ Metadata Integration
 
-✅ PostgreSQL connectivity
-
-✅ Dedicated SaaS database
+✅ Dedicated SaaS Database
 
 ---
 
@@ -249,67 +205,57 @@ Organisation Foundation
 
 Status:
 
-Next
-
-Priority:
-
-High
-
-Objectives:
-
-- Create Organisation ORM Model
-- Create Organisation Repository Foundation
-- Create Organisation Table
-- Create Organisation Constraints
-- Create Organisation Persistence Tests
-
-Deliverables:
-
-organisation.py
-
-First Business Entity
-
-First Business Table
+Completed
 
 Validation:
 
-alembic revision --autogenerate
+✅ ORM Model
 
-alembic upgrade head
+✅ Migration
 
-Organisation persistence validation
+✅ PostgreSQL
+
+✅ Tests
 
 ---
 
 # PHASE 9
 
-Membership Foundation
+Users Foundation
 
 Status:
 
-Planned
+Completed
 
-Objectives:
+Validation:
 
-- Membership Entity
-- Organisation Memberships
-- Role Assignment Foundation
+✅ ORM Model
+
+✅ Migration
+
+✅ PostgreSQL
+
+✅ Tests
 
 ---
 
 # PHASE 10
 
-Users Foundation
+Membership Foundation
 
 Status:
 
-Planned
+Completed
 
-Objectives:
+Validation:
 
-- User Entity
-- User Profiles
-- User Persistence
+✅ ORM Model
+
+✅ Foreign Keys
+
+✅ PostgreSQL
+
+✅ Tests
 
 ---
 
@@ -319,54 +265,752 @@ Authentication Foundation
 
 Status:
 
-Planned
+Completed
 
-Objectives:
+Objective:
 
-- Password Hashing
-- JWT
-- Login
-- Logout
-- Session Management
+Secure platform identities.
+
+---
+
+## Phase 11.1
+
+Authentication Model Foundation
+
+Status:
+
+Completed
+
+Validation:
+
+✅ Migration generated
+
+✅ Migration audited
+
+✅ Migration applied
+
+✅ PostgreSQL validated
+
+✅ Tests passing
+
+---
+
+## Phase 11.2
+
+Password Hashing Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+security/passwords.py
+
+Functions:
+
+- hash_password()
+- verify_password()
+
+Validation:
+
+✅ Password hashing
+
+✅ Password verification
+
+✅ Dedicated tests
+
+✅ bcrypt compatibility validated
+
+Result:
+
+26 passed
+
+0 failed
+
+---
+
+## Phase 11.3
+
+JWT Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+security/tokens.py
+
+Functions:
+
+- create_access_token()
+- decode_access_token()
+
+Validation:
+
+✅ JWT generation
+
+✅ JWT validation
+
+✅ JWT decoding
+
+Result:
+
+30 passed
+
+0 failed
+
+---
+
+## Phase 11.4
+
+Authentication Service Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+auth/service.py
+
+Functions:
+
+- authenticate_user()
+- create_user_token()
+
+Validation:
+
+✅ Password verification integration
+
+✅ JWT integration
+
+✅ Service tests
+
+Result:
+
+35 passed
+
+0 failed
+
+---
+
+## Phase 11.5
+
+Authentication API Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+auth/routes.py
+
+auth/schemas.py
+
+users/repository.py
+
+Endpoints:
+
+✅ POST /auth/login
+
+✅ GET /auth/me
+
+Validation:
+
+✅ API tests
+
+✅ Authentication workflow tests
+
+✅ End-to-end authentication flow
+
+✅ JWT Authentication Flow
+
+✅ User Lookup Foundation
+
+Result:
+
+42 passed
+
+0 failed
+
+---
+
+## Authentication Success Criteria
+
+✅ Password Hashing
+
+✅ JWT
+
+✅ Authentication Service
+
+✅ Login Endpoint
+
+✅ Current User Endpoint
+
+✅ Dedicated Tests
+
+✅ Documentation Updated
 
 ---
 
 # PHASE 12
 
-Roles And Permissions
+Persistence Test Foundation
 
 Status:
 
-Planned
+Completed
 
 Objectives:
 
-- RBAC
-- Organisation Roles
-- Permission Matrix
+- SQLAlchemy Session Tests
+- PostgreSQL Persistence Tests
+- CRUD Validation
+- Relationship Validation
+- Migration Validation
+
+Deliverables:
+
+tests/test_organisation_persistence.py
+
+tests/test_user_persistence.py
+
+tests/test_membership_persistence.py
+
+Validation:
+
+✅ session.add()
+
+✅ session.commit()
+
+✅ session.refresh()
+
+✅ session.delete()
+
+✅ PostgreSQL persistence verified
+
+✅ Relationship persistence verified
+
+✅ CRUD workflow verified
 
 ---
 
 # PHASE 13
 
-Carrier Account Management
+Tenant Access Foundation
 
 Status:
 
-Planned
+Completed
 
 Objectives:
 
-- CarrierAccount Entity
-- Credential Storage
-- Validation Layer
-- Encryption Strategy
+- Tenant Access Model
+- Role Strategy
+- Role Definitions
+- Permission Matrix
+
+## Phase 13.1
+
+Access Model Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ product-vision.md
+
+✅ PUDO-focused product scope
+
+✅ access-model.md
+
+✅ permission-matrix.md
+
+✅ carrier-integration-model.md
+
+✅ role-strategy.md
+
+✅ domain-model.md
+
+✅ database-model.md
+
+✅ architecture.md
+
+## Phase 13.2
+
+Role Persistence Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ users.is_platform_admin
+
+✅ memberships.role alignment
+
+✅ migration 2270054c9c72
+
+✅ test_user_platform_admin.py
+
+Validated:
+
+✅ PostgreSQL migration applied
+
+✅ Platform role persistence
+
+✅ Membership role alignment
+
+✅ OWNER role
+
+✅ VIEWER role
+
+Validation:
+
+54 passed
+
+0 failed
 
 ---
 
 # PHASE 14
 
+Carrier Account Management
+
+Status:
+
+Completed
+
+---
+
+## Phase 14.1
+
+Carrier Account Model Foundation
+
+Status:
+
+Completed
+
+Validated:
+
+✅ Organisation ownership
+
+✅ Carrier Account ownership
+
+✅ Carrier Credential ownership
+
+✅ Universal PUDO Engine owns Carrier Catalog
+
+✅ SaaS references carriers through carrier_code
+
+---
+
+## Phase 14.2
+
+Carrier Account Database Model
+
+Status:
+
+Completed
+
+Validated:
+
+✅ carrier_accounts
+
+✅ carrier_credentials
+
+✅ no carrier_integrations table
+
+✅ carrier_code reference strategy
+
+---
+
+## Phase 14.3
+
+Carrier Account ORM Model
+
+Status:
+
+Completed
+
+Validated:
+
+✅ CarrierAccount
+
+✅ CarrierCredential
+
+✅ no CarrierIntegration SaaS entity
+
+---
+
+## Phase 14.4
+
+Carrier Account Lifecycle
+
+Status:
+
+Completed
+
+---
+
+## Phase 14.5
+
+Carrier Account Architecture
+
+Status:
+
+Completed
+
+---
+
+## Phase 14.6
+
+Carrier Account Implementation Plan
+
+Status:
+
+Completed
+
+---
+
+## Phase 14.7
+
+Documentation Realignment Foundation
+
+Status:
+
+Completed
+
+Result:
+
+✅ Option B validated
+
+✅ Universal PUDO Engine owns carrier catalog
+
+✅ Universal PUDO SaaS does not persist carrier definitions
+
+---
+
+## Phase 14.8
+
+Carrier Account SQLAlchemy Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ carrier_accounts/models.py
+
+✅ migration 3fb1f82a4474_create_carrier_accounts_table
+
+✅ test_carrier_account.py
+
+✅ test_carrier_account_persistence.py
+
+Validation:
+
+✅ PostgreSQL migration applied
+
+✅ Persistence tests passing
+
+---
+
+## Phase 14.9
+
+Carrier Credential Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ carrier_credentials/models.py
+
+✅ migration 2bc5746479e6_create_carrier_credentials_table
+
+✅ test_carrier_credential.py
+
+✅ test_carrier_credential_persistence.py
+
+Validation:
+
+✅ PostgreSQL migration applied
+
+✅ Persistence tests passing
+
+---
+
+## Phase 14.10
+
+Carrier Account Persistence Test Foundation
+
+Status:
+
+Completed
+
+Result:
+
+73 passed
+
+0 failed
+
+---
+
+## Phase 14.11
+
+Carrier Account Repository Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ carrier_accounts/repository.py
+
+✅ test_carrier_account_repository.py
+
+Validated:
+
+✅ get_carrier_account()
+
+✅ list_carrier_accounts_by_organisation()
+
+Result:
+
+75 passed
+
+0 failed
+
+---
+
+## Phase 14.12
+
+Carrier Credential Repository Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ carrier_credentials/repository.py
+
+✅ test_carrier_credential_repository.py
+
+Validated:
+
+✅ get_carrier_credential()
+
+✅ list_credentials_by_carrier_account()
+
+Result:
+
+77 passed
+
+0 failed
+
+---
+
+## Phase 14.13
+
+Carrier Account Service Foundation
+
+Status:
+
+Completed
+
+Objectives:
+
+- Create Carrier Account service layer
+- Define business validation rules
+- Prepare API consumption
+
+Validated:
+
+✅ create_carrier_account()
+✅ get_carrier_account_service()
+✅ list_carrier_accounts_for_organisation()
+
+Result:
+
+85 passed
+0 failed
+
+---
+
+## Phase 14.14
+
+Carrier Credential Service Foundation
+
+Status:
+
+Completed
+
+Objectives:
+
+- Create Carrier Credential service layer
+- Define credential validation rules
+- Prepare API consumption
+
+Validated:
+
+✅ get_carrier_credential_service()
+✅ list_credentials_for_carrier_account()
+
+Result:
+
+85 passed
+0 failed
+
+---
+
+## Phase 14.15
+
+Carrier Account API Foundation
+
+Status:
+
+Completed
+
+Objectives:
+
+- Create Carrier Account endpoints
+- Create request schemas
+- Create response schemas
+- Add API tests
+
+Validated:
+
+✅ GET /carrier-accounts/
+✅ GET /carrier-accounts/organisation/
+
+Result:
+
+93 passed
+0 failed
+
+---
+
+## Phase 14.16
+
+Carrier Credential API Foundation
+
+Status:
+
+Completed
+
+Objectives:
+
+- Create Carrier Credential endpoints
+- Create request schemas
+- Create response schemas
+- Add API tests
+
+Validated:
+
+✅ GET /carrier-credentials/
+✅ GET /carrier-credentials/carrier-account/
+
+Result:
+
+93 passed
+0 failed
+
+---
+
+## Phase 14.17
+
+End-to-End Validation
+
+Status:
+
+Completed
+
+Objectives:
+
+- Repository validation
+- Service validation
+- API validation
+- PostgreSQL validation
+
+---
+
+## Phase 14.18
+
+Documentation Closure
+
+Status:
+
+Completed
+
+Objectives:
+
+- Synchronize documentation
+- Synchronize roadmap
+- Synchronize project-status
+- Synchronize project-memory
+
+---
+
+# PHASE 15
+
 Universal PUDO Engine Integration
+
+Status:
+
+In Progress
+
+Objectives:
+
+- Adapter Layer
+- Search Integration
+- Multi-Carrier Execution
+
+---
+
+## Phase 15.1
+
+Engine Catalog Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ engine_catalog/models.py
+✅ engine_catalog/client.py
+✅ engine_catalog/service.py
+
+Validated:
+
+✅ Carrier
+✅ CarrierCapability
+✅ CarrierLifecycle
+✅ EngineCatalogClient
+✅ InMemoryEngineCatalogClient
+✅ EngineCatalogService
+
+Result:
+
+113 passed
+0 failed
+
+---
+
+## Phase 15.2
+
+Carrier Catalog Integration Service
 
 Status:
 
@@ -374,13 +1018,15 @@ Planned
 
 Objectives:
 
-- Core Adapter Layer
-- Search Service Integration
-- Multi-Carrier Execution
+- Cross Engine carriers with CarrierAccount
+- Preserve carrier_code mapping
+- No Engine modifications
+- No catalog persistence
+- Prepare organisation carrier activation workflows
 
 ---
 
-# PHASE 15
+# PHASE 16
 
 Search Platform
 
@@ -388,15 +1034,9 @@ Status:
 
 Planned
 
-Objectives:
-
-- Search Execution
-- Search History
-- Search Persistence
-
 ---
 
-# PHASE 16
+# PHASE 17
 
 Map Experience
 
@@ -409,14 +1049,9 @@ Technology:
 - Leaflet
 - OpenStreetMap
 
-Objectives:
-
-- Search Visualization
-- Pickup Point Discovery
-
 ---
 
-# PHASE 17
+# PHASE 18
 
 Export Platform
 
@@ -424,16 +1059,9 @@ Status:
 
 Planned
 
-Objectives:
-
-- CSV Export
-- Excel Export
-- JSON Export
-- Export History
-
 ---
 
-# PHASE 18
+# PHASE 19
 
 Administration Portal
 
@@ -441,15 +1069,9 @@ Status:
 
 Planned
 
-Objectives:
-
-- Platform Monitoring
-- Organisation Management
-- Support Tools
-
 ---
 
-# PHASE 19
+# PHASE 20
 
 Public API Foundation
 
@@ -461,15 +1083,9 @@ Future ADR:
 
 ADR-0007 Public API Strategy
 
-Objectives:
-
-- API Authentication
-- API Access Control
-- API Search Access
-
 ---
 
-# PHASE 20
+# PHASE 21
 
 Observability And Audit
 
@@ -477,15 +1093,9 @@ Status:
 
 Planned
 
-Objectives:
-
-- Audit Logs
-- Monitoring
-- Diagnostics
-
 ---
 
-# PHASE 21
+# PHASE 22
 
 Security Hardening
 
@@ -501,7 +1111,7 @@ Objectives:
 
 ---
 
-# PHASE 22
+# PHASE 23
 
 Frontend Foundation
 
@@ -515,15 +1125,9 @@ Technology:
 - React
 - TypeScript
 
-Objectives:
-
-- Authentication UI
-- Organisation UI
-- Search UI
-
 ---
 
-# PHASE 23
+# PHASE 24
 
 Core Upgrade Strategy
 
@@ -531,15 +1135,9 @@ Status:
 
 Planned
 
-Objectives:
-
-- Core Versioning
-- Upgrade Procedures
-- Compatibility Management
-
 ---
 
-# PHASE 24
+# PHASE 25
 
 Release Preparation
 
@@ -547,17 +1145,11 @@ Status:
 
 Planned
 
-Objectives:
-
-- Documentation Freeze
-- QA Validation
-- Release Checklist
-
 ---
 
-# PHASE 25
+# PHASE 26
 
-Universal PUDO SaaS V1.0.0
+Universal PUDO SaaS v1.0.0
 
 Status:
 
@@ -565,37 +1157,25 @@ Future
 
 Release Criteria:
 
-Organisation Management
+✅ Authentication
 
-✅
+✅ Organisations
 
-User Management
+✅ Users
 
-✅
+✅ Memberships
 
-Authentication
+✅ Roles
 
-✅
+✅ Carrier Accounts
 
-Carrier Accounts
+✅ Searches
 
-✅
+✅ Maps
 
-Searches
+✅ Exports
 
-✅
-
-Maps
-
-✅
-
-Exports
-
-✅
-
-Administration
-
-✅
+✅ Administration
 
 ---
 
@@ -623,9 +1203,61 @@ Completed:
 
 ✅ Alembic Foundation
 
+✅ Organisation Foundation
+
+✅ Users Foundation
+
+✅ Membership Foundation
+
+✅ Authentication Model Foundation
+
+✅ Password Hashing Foundation
+
+✅ JWT Foundation
+
+✅ Authentication Service Foundation
+
+✅ Authentication API Foundation
+
+✅ Persistence Test Foundation Implementation
+
+✅ Access Model Foundation
+
+✅ Tenant Access Foundation
+
+✅ Role Persistence Foundation
+
+✅ Carrier Account SQLAlchemy Foundation
+
+✅ Carrier Credential Foundation
+
+✅ Carrier Account Persistence Test Foundation
+
+✅ Carrier Account Repository Foundation
+
+✅ Carrier Credential Repository Foundation
+
+✅ Carrier Account Service Foundation
+
+✅ Carrier Credential Service Foundation
+
+✅ Carrier Account API Foundation
+
+✅ Carrier Credential API Foundation
+
+✅ Engine Catalog Foundation
+
+---
+
 Current Focus:
 
-Organisation Foundation
+Carrier Catalog Integration Service
+
+---
+
+Future Validation Gate:
+
+Universal PUDO Engine Integration
 
 ---
 
@@ -635,37 +1267,106 @@ Validated:
 
 ✅ FastAPI
 
+✅ PostgreSQL 17
+
 ✅ SQLAlchemy
 
 ✅ Alembic
 
-✅ PostgreSQL 17
+✅ Universal PUDO Engine v1.0.0
 
-✅ Universal PUDO Engine
+✅ Organisation Model
 
-✅ BaseEntity
+✅ User Model
 
-✅ Database Session
+✅ Membership Model
 
-✅ Dedicated SaaS Database
+✅ Authentication Fields
 
-✅ 3 Automated Tests
+✅ Password Hashing
 
-Current Databases:
+✅ JWT
 
-universal_pudo
+✅ Authentication Service
 
-Purpose:
+✅ Authentication API
 
-Universal PUDO Engine
+✅ User Lookup Foundation
+
+✅ 113 Automated Tests
+
+✅ Organisation Persistence Tests
+
+✅ User Persistence Tests
+
+✅ Membership Persistence Tests
+
+✅ users.is_platform_admin
+
+✅ SAAS_ADMIN persistence
+
+✅ OWNER / VIEWER role strategy
+
+✅ CarrierAccount Model
+
+✅ CarrierCredential Model
+
+✅ carrier_accounts table
+
+✅ carrier_credentials table
+
+✅ carrier_code reference strategy
+
+✅ Universal PUDO Engine carrier catalog ownership
+
+✅ CarrierAccount Repository
+
+✅ CarrierCredential Repository
+
+✅ CarrierAccount Repository Tests
+
+✅ CarrierCredential Repository Tests
+
+✅ Engine Catalog Models
+
+✅ Engine Catalog Client
+
+✅ Engine Catalog Service
+
+✅ Engine Catalog Tests
 
 ---
 
+# CURRENT DATABASE STATE
+
+Database:
+
 universal_pudo_saas
 
-Purpose:
+Tables:
 
-Universal PUDO SaaS
+- alembic_version
+- organisations
+- users
+- memberships
+
+Authentication Fields:
+
+- password_hash
+- is_active
+- is_verified
+- last_login_at
+- is_platform_admin
+
+Carrier Account Tables:
+
+- carrier_accounts
+- carrier_credentials
+
+Carrier Account Migrations:
+
+- 3fb1f82a4474_create_carrier_accounts_table
+- 2bc5746479e6_create_carrier_credentials_table
 
 ---
 
@@ -675,70 +1376,230 @@ A phase is completed only when:
 
 1. Development Finished
 
-2. Auto-Critique Completed
+2. Validation Finished
 
-3. Validation Completed
+3. PostgreSQL Validated
 
-4. Documentation Updated
+4. Tests Passing
 
-5. Commit Created
+5. Documentation Updated
 
-6. Push Completed
+6. Commit Created
 
-7. Next Phase Opened
+7. Push Completed
+
+8. Forward Approved
 
 ---
 
 # CHANGE HISTORY
 
-2026-07-22
+2026-07-23
 
-Roadmap V1 created.
+Authentication Model Foundation completed.
 
----
-
-2026-07-22
-
-ADR Foundation added.
-
----
-
-2026-07-22
-
-Domain Model and Database Model phases added.
-
----
-
-2026-07-22
-
-Backend Foundation completed.
-
----
-
-2026-07-22
-
-Database Configuration Foundation completed.
+19 automated tests passing.
 
 ---
 
 2026-07-23
 
-Alembic Foundation completed.
+Password Hashing Foundation completed.
+
+26 automated tests passing.
 
 ---
 
 2026-07-23
 
-Dedicated SaaS PostgreSQL database created.
+JWT Foundation completed.
+
+30 automated tests passing.
 
 ---
 
-2026-07-23
+2026-07-25
 
-Roadmap aligned with real implementation progress.
+Authentication Service Foundation completed.
+
+35 automated tests passing.
 
 ---
 
-2026-07-23
+2026-07-25
 
-Organisation Foundation defined as next milestone.
+Authentication API Foundation completed.
+
+Implemented:
+
+- POST /auth/login
+- GET /auth/me
+
+Implemented:
+
+- JWT Authentication Flow
+- User Lookup Foundation
+- Repository-Based Authentication
+
+42 automated tests passing.
+
+---
+
+2026-07-25
+
+Persistence Test Foundation selected as next milestone.
+
+---
+
+2026-07-25
+
+Persistence Test Foundation implemented.
+
+Added:
+
+- test_organisation_persistence.py
+- test_user_persistence.py
+- test_membership_persistence.py
+
+Validated:
+
+- session.add()
+- session.commit()
+- session.refresh()
+- session.get()
+- session.delete()
+
+- PostgreSQL persistence
+- CRUD persistence
+- Foreign key persistence
+
+52 automated tests passing.
+
+Documentation synchronization in progress.
+
+---
+
+2026-07-25
+
+Role Persistence Foundation completed.
+
+Implemented:
+
+- users.is_platform_admin
+- migration 2270054c9c72_add_platform_admin_to_users
+- test_user_platform_admin.py
+
+Validated:
+
+- SAAS_ADMIN persistence
+- OWNER role alignment
+- VIEWER role alignment
+
+Result:
+
+54 passed
+
+0 failed
+
+---
+
+2026-07-25
+
+Carrier Account Persistence Foundation completed.
+
+Implemented:
+
+- CarrierAccount model
+- CarrierCredential model
+- carrier_accounts table
+- carrier_credentials table
+- Carrier Account persistence tests
+- Carrier Credential persistence tests
+
+Validated:
+
+- Universal PUDO Engine owns carrier catalog
+- SaaS does not persist carrier definitions
+- SaaS references carriers through carrier_code
+- Carrier credentials belong to carrier accounts
+- child-before-parent deletion order in persistence tests
+
+Result:
+
+73 passed
+
+0 failed
+
+---
+
+2026-07-25
+
+Carrier Account Repository Foundation completed.
+
+Implemented:
+
+- carrier_accounts/repository.py
+- test_carrier_account_repository.py
+
+Validated:
+
+- get_carrier_account()
+- list_carrier_accounts_by_organisation()
+
+Result:
+
+75 passed
+
+0 failed
+
+---
+
+2026-07-25
+
+Carrier Credential Repository Foundation completed.
+
+Implemented:
+
+- carrier_credentials/repository.py
+- test_carrier_credential_repository.py
+
+Validated:
+
+- get_carrier_credential()
+- list_credentials_by_carrier_account()
+
+Result:
+
+77 passed
+
+0 failed
+
+---
+
+2026-07-26
+
+Engine Catalog Foundation completed.
+
+Implemented:
+
+- engine_catalog/models.py
+- engine_catalog/client.py
+- engine_catalog/service.py
+- engine_catalog/**init**.py
+- test_engine_catalog_models.py
+- test_engine_catalog_client.py
+- test_engine_catalog_service.py
+
+Validated:
+
+- Carrier DTO
+- CarrierCapability DTO
+- CarrierLifecycle DTO
+- EngineCatalogClient
+- InMemoryEngineCatalogClient
+- EngineCatalogService
+
+Result:
+
+113 passed
+0 failed

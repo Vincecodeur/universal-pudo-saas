@@ -1,467 +1,188 @@
 # Universal PUDO SaaS - Database Model
 
-Version: 0.1.0
+Version: 2.0.0
 
-Status: Database Model Design
+Status: Approved
 
-Last Updated: 2026-07-22
+Last Updated: 2026-07-25
 
 ---
 
 # PURPOSE
 
-This document translates the Domain Model into a persistence model.
+This document defines the persistence model used by Universal PUDO SaaS.
 
-It defines:
+The objective is to describe:
 
-- persisted entities
-- ownership
+- database entities
 - relationships
-- cardinalities
-- tenant boundaries
-
-It does not define:
-
-- SQL syntax
-- SQLAlchemy implementation
-- Alembic migrations
-- indexes
-- API contracts
-
-These topics belong to future implementation phases.
+- ownership boundaries
+- database constraints
 
 ---
 
-# DATABASE DESIGN PRINCIPLES
+# DATABASE STRATEGY
 
-The database model must respect:
-
-- ADR-0002 Authentication Strategy
-- ADR-0003 Credential Storage Strategy
-- ADR-0004 Multi-Tenant Strategy
-- ADR-0005 Module Boundary Strategy
-- ADR-0006 Self-Hosted Compatibility Strategy
-
----
-
-# GLOBAL OWNERSHIP MODEL
+Database:
 
 ```text
-Organisation (Tenant)
-│
-├── Memberships
-├── Carrier Accounts
-├── Searches
-├── Exports
-└── Settings
-
-User
-│
-└── Memberships
+universal_pudo_saas
 ```
 
-Organisation remains the primary ownership boundary.
+Technology:
+
+```text
+PostgreSQL 17
+SQLAlchemy
+Alembic
+```
 
 ---
 
-# ENTITY: ORGANISATIONS
+# TABLES
 
-Purpose:
+Current:
 
-Represents a tenant.
+organisations
+users
+memberships
+carrier_accounts
+carrier_credentials
+
+Planned:
+
+```text
+carrier_integrations
+carrier_accounts
+dashboard_configurations
+api_credentials
+search_history
+```
+
+---
+
+# ORGANISATIONS
+
+```text
+organisations
+
+id UUID PK
+
+name
+
+created_at
+
+updated_at
+```
+
+---
+
+# USERS
+
+```text
+users
+
+id UUID PK
+
+email
+
+password_hash
+
+is_active
+
+is_verified
+
+last_login_at
+
+created_at
+
+updated_at
+```
+
+---
+
+# MEMBERSHIPS
+
+```text
+memberships
+
+id UUID PK
+
+organisation_id UUID FK
+
+user_id UUID FK
+
+role
+
+created_at
+
+updated_at
+```
+
+---
+
+## Role Strategy
+
+Official decision:
+
+```text
+Membership.role
+```
+
+Supported values:
+
+```text
+OWNER
+
+VIEWER
+```
+
+SaaS Administrator remains platform-scoped and is intentionally not stored through organisation memberships.
+
+---
+
+## Constraints
+
+```text
+organisation_id + user_id
+
+UNIQUE
+```
+
+A user may only have one role per organisation.
+
+---
+
+# CARRIER INTEGRATIONS
+
+```text
+carrier_integrations
+
+id UUID PK
+
+code
+
+name
+
+description
+
+documentation_url
+
+is_enabled
+
+created_at
+
+updated_at
+```
 
 ---
 
 ## Ownership
 
-Owns:
+Managed by:
 
 ```text
-Memberships
-Carrier Accounts
-Searches
-Exports
-Organisation Settings
-```
-
----
-
-## Cardinalities
-
-```text
-Organisation
-    ├── 0..N Memberships
-    ├── 0..N Carrier Accounts
-    ├── 0..N Searches
-    ├── 0..N Exports
-    └── 0..1 Settings
-```
-
----
-
-# ENTITY: USERS
-
-Purpose:
-
-Represents an authenticated identity.
-
----
-
-## Ownership
-
-Owns:
-
-```text
-User Profile
-Preferences
-```
-
----
-
-## Cardinalities
-
-```text
-User
-    └── 0..N Memberships
-```
-
-A user may belong to multiple organisations.
-
----
-
-# ENTITY: MEMBERSHIPS
-
-Purpose:
-
-Associates users and organisations.
-
----
-
-## Ownership
-
-Belongs to:
-
-```text
-One User
-One Organisation
-```
-
----
-
-## Cardinalities
-
-```text
-Membership
-    ├── 1 User
-    └── 1 Organisation
-```
-
----
-
-# ROLE STRATEGY
-
-Decision:
-
-Role is attached to Membership.
-
-Not to User.
-
----
-
-## Reason
-
-A user may have:
-
-```text
-Organisation Admin
-```
-
-in one organisation
-
-and
-
-```text
-Organisation User
-```
-
-in another.
-
-Role therefore belongs to the relationship.
-
----
-
-## Initial Values
-
-```text
-SuperAdmin
-OrganisationAdmin
-OrganisationUser
-```
-
----
-
-# ENTITY: CARRIER ACCOUNTS
-
-Purpose:
-
-Represents carrier connectivity.
-
----
-
-## Ownership
-
-Belongs to:
-
-```text
-One Organisation
-```
-
----
-
-## Cardinalities
-
-```text
-Organisation
-    └── 0..N Carrier Accounts
-```
-
----
-
-## Candidate Attributes
-
-```text
-Carrier Type
-Status
-Validation Status
-Last Validation Date
-```
-
----
-
-# ENTITY: CREDENTIAL REFERENCES
-
-Purpose:
-
-Represents encrypted credential storage.
-
----
-
-## Ownership
-
-Belongs to:
-
-```text
-One Carrier Account
-```
-
----
-
-## Cardinalities
-
-```text
-Carrier Account
-    └── 1 Credential Reference
-```
-
-Current V1 decision:
-
-```text
-One carrier account
-One credential set
-```
-
----
-
-# ENTITY: SEARCHES
-
-Purpose:
-
-Represents search activity.
-
----
-
-## Ownership
-
-Belongs to:
-
-```text
-One Organisation
-```
-
----
-
-## Cardinalities
-
-```text
-Organisation
-    └── 0..N Searches
-```
-
----
-
-# ENTITY: SEARCH REQUESTS
-
-Purpose:
-
-Represents search criteria.
-
----
-
-## Ownership
-
-Belongs to:
-
-```text
-One Search
-```
-
----
-
-## Cardinalities
-
-```text
-Search
-    └── 1 Search Request
-```
-
----
-
-# ENTITY: SEARCH RESULTS
-
-Purpose:
-
-Represents normalized pickup point responses.
-
----
-
-# IMPORTANT DECISION
-
-Current Direction:
-
-Persist Search Results.
-
----
-
-## Reasoning
-
-Benefits:
-
-```text
-Auditability
-Export Support
-Search History
-Diagnostics
-Future Analytics
-```
-
----
-
-## Cardinalities
-
-```text
-Search
-    └── 0..N Search Results
-```
-
----
-
-# ENTITY: EXPORTS
-
-Purpose:
-
-Represents export operations.
-
----
-
-## Ownership
-
-Belongs to:
-
-```text
-One Organisation
-```
-
----
-
-## Cardinalities
-
-```text
-Organisation
-    └── 0..N Exports
-```
-
----
-
-# ENTITY: EXPORT FILES
-
-Purpose:
-
-Represents generated downloadable artifacts.
-
----
-
-## Ownership
-
-Belongs to:
-
-```text
-One Export
-```
-
----
-
-## Cardinalities
-
-```text
-Export
-    └── 1 Export File
-```
-
----
-
-# ENTITY: PLATFORM SETTINGS
-
-Purpose:
-
-Global platform configuration.
-
----
-
-## Ownership
-
-Platform Wide
-
-Not tenant-owned.
-
----
-
-## Cardinality
-
-```text
-Platform
-    └── 1 Settings Record
-```
-
----
-
-# ENTITY: AUDIT EVENTS
-
-Purpose:
-
-Capture important system events.
-
----
-
-## Ownership
-
-Events may reference:
-
-```text
-User
-Organisation
-Carrier Account
-Search
-Export
+SAAS_ADMIN
 ```
 
 ---
@@ -469,144 +190,267 @@ Export
 ## Examples
 
 ```text
-Login
-Credential Update
-Carrier Validation
-Search Execution
-Export Creation
+COLISSIMO
+
+MONDIAL_RELAY
+
+CHRONOPOST
+
+DPD
 ```
 
 ---
 
-# TENANT BOUNDARY RULES
+# CARRIER ACCOUNTS
 
-Mandatory rules:
+carrier_accounts
+
+id UUID PK
+
+organisation_id UUID FK
+
+carrier_code
+
+name
+
+is_active
+
+created_at
+
+updated_at
+
+deleted_at
+
+---
+
+# CARRIER CREDENTIALS
+
+carrier_credentials
+
+id UUID PK
+
+carrier_account_id UUID FK
+
+credential_key
+
+credential_value
+
+created_at
+
+updated_at
+
+deleted_at
+
+---
+
+## Ownership
+
+Managed by:
 
 ```text
-Organisation data isolated
-
-Carrier Accounts isolated
-
-Credentials isolated
-
-Searches isolated
-
-Exports isolated
+OWNER
 ```
-
-Cross-tenant ownership is forbidden.
 
 ---
 
-# AGGREGATE CANDIDATES
-
-Organisation Aggregate
+## Constraints
 
 ```text
 Organisation
-Memberships
+must exist
+
+Carrier Integration
+must exist
 ```
 
 ---
 
-Carrier Aggregate
+# DASHBOARD CONFIGURATIONS
 
 ```text
-CarrierAccount
-CredentialReference
+dashboard_configurations
+
+id UUID PK
+
+organisation_id UUID FK
+
+name
+
+configuration_json
+
+created_at
+
+updated_at
 ```
 
 ---
 
-Search Aggregate
+## Ownership
+
+Managed by:
 
 ```text
-Search
-SearchRequest
-SearchResult
+OWNER
 ```
 
 ---
 
-Export Aggregate
+# API CREDENTIALS
 
 ```text
-Export
-ExportFile
+api_credentials
+
+id UUID PK
+
+organisation_id UUID FK
+
+name
+
+credential_hash
+
+status
+
+created_at
+
+updated_at
 ```
 
 ---
 
-# DATABASE MODEL QUESTIONS
+## Ownership
 
-The following questions remain intentionally open.
-
----
-
-## Search Retention Policy
-
-How long should Search Results be stored?
-
-Status:
-
-Future decision.
-
----
-
-## Export Retention Policy
-
-How long should export files remain available?
-
-Status:
-
-Future decision.
-
----
-
-## Audit Retention Policy
-
-How long should audit events remain stored?
-
-Status:
-
-Future decision.
-
----
-
-# OUT OF SCOPE
-
-This document does not define:
+Managed by:
 
 ```text
-SQLAlchemy Models
-Alembic Migrations
-Database Tables
-Indexes
-Constraints
-Query Optimization
+OWNER
 ```
 
-These topics belong to implementation.
+---
+
+# SEARCH HISTORY
+
+```text
+search_history
+
+id UUID PK
+
+organisation_id UUID FK
+
+user_id UUID FK
+
+carrier_account_id UUID FK
+
+search_type
+
+search_payload
+
+result_count
+
+created_at
+```
 
 ---
 
-# NEXT STEP
+# ENTITY RELATIONSHIPS
 
-Phase 7
-
-Persistence Design
-
-Objectives:
-
-- SQLAlchemy models
-- entity mapping
-- migration strategy
-- indexing strategy
+```text
+Organisation
+│
+├── Membership
+│       │
+│       └── User
+│
+├── CarrierAccount
+│       │
+│       └── CarrierIntegration
+│
+├── DashboardConfiguration
+│
+├── ApiCredential
+│
+└── SearchHistory
+```
 
 ---
 
-# CHANGE HISTORY
+# OWNERSHIP MODEL
 
-2026-07-22
+Platform entities:
 
-Initial database model created.
+```text
+carrier_integrations
+```
+
+Organisation entities:
+
+```text
+memberships
+
+carrier_accounts
+
+dashboard_configurations
+
+api_credentials
+
+search_history
+```
+
+---
+
+# ARCHITECTURAL RULES
+
+Rule 1
+
+Carrier Integration and Carrier Account must remain separate entities.
+
+---
+
+Rule 2
+
+Customer credentials must never be stored inside Carrier Integration.
+
+---
+
+Rule 3
+
+Role ownership belongs to Membership.
+
+---
+
+Rule 4
+
+Every Carrier Account belongs to exactly one Organisation.
+
+---
+
+Rule 5
+
+Universal PUDO SaaS stores only concepts necessary for PUDO data access and consumption.
+
+---
+
+Rule 6
+
+Universal PUDO SaaS does not persist carrier definitions.
+
+Carrier definitions are owned by Universal PUDO Engine.
+
+Universal PUDO SaaS stores carrier_code as a logical reference to the Engine carrier catalog.
+
+---
+
+# SUCCESS CRITERIA
+
+The database model is considered valid when:
+
+✅ Membership.role is implemented
+
+✅ Carrier Integration exists
+
+✅ Carrier Account exists
+
+✅ Ownership boundaries are enforced
+
+✅ PostgreSQL constraints are validated
+
+✅ Documentation remains synchronized

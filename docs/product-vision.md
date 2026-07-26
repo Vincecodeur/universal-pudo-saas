@@ -1,16 +1,16 @@
 # Universal PUDO SaaS - Product Vision
 
-Version: 0.2.0
+Version: 1.0.0
 
-Status: Phase 1 Documentation Review
+Status: Approved
 
-Last Updated: 2026-07-22
+Last Updated: 2026-07-25
 
 ---
 
 # EXECUTIVE SUMMARY
 
-Universal PUDO SaaS is a multi-tenant platform that enables organisations to connect their carrier accounts and access pickup point capabilities through a unified interface.
+Universal PUDO SaaS is a multi-tenant platform that enables organisations to connect their carrier accounts and access pickup point information through a unified interface.
 
 The platform is built on top of:
 
@@ -43,11 +43,11 @@ Users should not need to:
 
 Instead they should simply:
 
-- connect carrier credentials
+- connect carrier accounts
 - search pickup points
 - visualize pickup points
 - export pickup point data
-- consume pickup point services
+- consume normalized PUDO information
 
 through a single platform.
 
@@ -87,13 +87,11 @@ Universal PUDO SaaS solves the operational consumption problem.
 
 # VALUE PROPOSITION
 
----
-
 ## For Logistics Providers
 
 Instead of integrating and maintaining multiple carriers independently:
 
-Connect carrier accounts once and access pickup point capabilities through a unified platform.
+Connect carrier accounts once and access pickup point information through a unified platform.
 
 Benefits:
 
@@ -121,7 +119,7 @@ Benefits:
 
 Instead of maintaining carrier-specific implementations:
 
-Consume pickup point capabilities through a stable platform.
+Consume pickup point information through a stable platform.
 
 Benefits:
 
@@ -132,8 +130,6 @@ Benefits:
 ---
 
 # TARGET CUSTOMERS
-
----
 
 ## Logistics Providers
 
@@ -172,7 +168,7 @@ Universal PUDO SaaS is:
 
 - a platform
 - an application layer
-- a pickup point services platform
+- a PUDO information platform
 
 Universal PUDO SaaS is NOT:
 
@@ -184,9 +180,54 @@ Universal PUDO SaaS is NOT:
 
 ---
 
-# PRODUCT BOUNDARIES
+# PRODUCT SCOPE
+
+Universal PUDO SaaS is a PUDO-focused platform.
+
+The purpose of the platform is to make pickup point information available through a unified SaaS experience.
+
+The platform focuses on:
+
+- carrier account connectivity
+- pickup point discovery
+- pickup point visualization
+- pickup point analytics
+- pickup point data consumption
+- pickup point data export
+
+The platform must remain focused on PUDO usage and administration.
+
+Universal PUDO SaaS is not intended to become a generic logistics platform.
 
 ---
+
+# OUT OF SCOPE
+
+The following capabilities are outside the current product scope:
+
+- shipment creation
+- shipping label generation
+- tracking management
+- delivery orchestration
+- transport rating
+- transport execution
+- customs management
+- carrier product management
+- carrier service management
+- non-PUDO carrier capabilities
+
+These responsibilities belong to:
+
+- OMS platforms
+- WMS platforms
+- TMS platforms
+- carrier execution systems
+
+Universal PUDO SaaS focuses exclusively on pickup point information.
+
+---
+
+# PRODUCT BOUNDARIES
 
 ## Responsibilities Owned By The SaaS
 
@@ -197,6 +238,8 @@ The SaaS owns:
 - authentication
 - permissions
 - carrier credential management
+- carrier integration catalog
+- dashboard administration
 - exports
 - administration
 - operational interfaces
@@ -207,7 +250,7 @@ The SaaS owns:
 
 The SaaS does not own:
 
-- carrier integrations
+- carrier integrations implementation logic
 - provider implementations
 - carrier API clients
 - pickup point normalization
@@ -219,13 +262,31 @@ Universal PUDO Engine
 
 ---
 
+# PRODUCT GUARDRAIL
+
+Universal PUDO SaaS exists to provide access to PUDO information.
+
+Any new feature must support:
+
+- pickup point access
+- pickup point search
+- pickup point visualization
+- pickup point analytics
+- pickup point consumption
+
+Features unrelated to PUDO information must be considered out of scope unless a strong business case is validated.
+
+The platform must not evolve into a generic OMS, WMS, TMS, shipping or carrier execution platform.
+
+---
+
 # RELATIONSHIP WITH UNIVERSAL PUDO ENGINE
 
 Universal PUDO Engine remains the Core.
 
 Repository:
 
-https://github.com/Vincecodeur/universal-pudo-engine
+[Universal PUDO Engine Repository](https://github.com/Vincecodeur/universal-pudo-engine)
 
 The SaaS consumes the Core.
 
@@ -241,13 +302,16 @@ The platform is organisation-centric.
 
 Relationship:
 
+```text
 Organisation
 │
 ├── Users
 ├── Carrier Accounts
 ├── Searches
 ├── Exports
-└── Permissions
+├── Dashboard Configuration
+└── API Credentials
+```
 
 All business data belongs to an organisation.
 
@@ -257,38 +321,113 @@ Users are not considered standalone entities.
 
 # USER TYPES
 
----
+The platform currently supports:
 
-## Organisation User
-
-Capabilities:
-
-- searches
-- exports
-- operational usage
+- SaaS Administrator
+- Owner
+- Viewer
 
 ---
 
-## Organisation Administrator
+## SaaS Administrator
 
-Capabilities:
+Scope:
 
-- manage users
-- manage carrier accounts
-- manage organisation settings
+Entire platform
 
----
-
-## SaaS Super Administrator
-
-Capabilities:
+Responsibilities:
 
 - manage organisations
-- monitor platform operations
-- investigate issues
-- platform administration
+- manage subscriptions
+- manage quotas
+- manage billing
+- manage platform operations
+- manage carrier integration catalog
+- publish carrier integrations
+- expose carrier integrations to Owners
 
-Exists from V1.
+---
+
+## Owner
+
+Scope:
+
+Single organisation
+
+Responsibilities:
+
+- create Viewers
+- remove Viewers
+- connect carrier accounts
+- configure carrier credentials
+- manage organisation settings
+- configure dashboards
+- configure API access
+- manage organisation analytics
+
+---
+
+## Viewer
+
+Scope:
+
+Single organisation
+
+Responsibilities:
+
+- search pickup points
+- view dashboards
+- view analytics
+- export search results
+- consume PUDO data
+
+---
+
+# CARRIER INTEGRATION MODEL
+
+The platform distinguishes between:
+
+- Carrier Integration
+- Carrier Account
+
+---
+
+## Carrier Integration
+
+Platform-level entity.
+
+Owned by the SaaS Administrator.
+
+Examples:
+
+- Colissimo
+- Mondial Relay
+- Chronopost
+- DPD
+- GLS
+- UPS
+
+The SaaS Administrator manages the Carrier Integration Catalog.
+
+The SaaS Administrator decides which integrations are available to Owners.
+
+---
+
+## Carrier Account
+
+Organisation-level entity.
+
+Owned by the Organisation Owner.
+
+Examples:
+
+- Spriiint Colissimo account
+- PrintChic Mondial Relay account
+- Organisation A DPD account
+
+The Owner may connect carrier accounts only for integrations made available by the SaaS Administrator.
+
+The two concepts must remain separate.
 
 ---
 
@@ -307,7 +446,7 @@ Universal PUDO SaaS is not a carrier reseller.
 
 Universal PUDO SaaS is not responsible for carrier contracts.
 
-The platform only provides access to technical capabilities.
+The platform only provides access to PUDO information.
 
 ---
 
@@ -351,9 +490,8 @@ Map functionality is a first-class feature.
 
 Technology:
 
-Leaflet
-
-OpenStreetMap
+- Leaflet
+- OpenStreetMap
 
 Objectives:
 
@@ -365,17 +503,15 @@ Objectives:
 
 # EXPORT EXPERIENCE
 
-Export capabilities are equally important as visualization.
+Export capabilities are important because PUDO information must be reusable operationally.
 
-Long-term objective:
-
-Allow pickup point data to be reused operationally.
-
-Future export formats may include:
+Possible formats:
 
 - CSV
 - Excel
 - JSON
+
+Exports remain focused on PUDO information.
 
 ---
 
@@ -385,13 +521,15 @@ The platform should not be designed exclusively around the user interface.
 
 Long-term vision:
 
+```text
 UI
-
-- API
+↓
+API
+```
 
 Whenever reasonable:
 
-Capabilities exposed through the UI should also be exposable through APIs.
+Capabilities exposed through the UI should also be exposed through APIs.
 
 This principle must guide future architectural decisions.
 
@@ -487,6 +625,8 @@ These capabilities must be evaluated individually.
 
 No future capability should compromise Core/SaaS separation.
 
+No future capability should compromise the PUDO-focused scope of the platform.
+
 ---
 
 # SUCCESS CRITERIA
@@ -509,15 +649,15 @@ without custom carrier development.
 
 Current Phase:
 
-Phase 1
+Phase 13
 
 Status:
 
-Documentation Review
+Access Model Foundation
 
 Next Major Objective:
 
-Validate documentation and open Phase 2.
+Validate Access Model and Permission Matrix before RBAC implementation.
 
 ---
 
@@ -526,6 +666,8 @@ Validate documentation and open Phase 2.
 2026-07-22
 
 V1 created.
+
+---
 
 2026-07-22
 
@@ -539,3 +681,31 @@ Added:
 - Credential Ownership Rationale
 - International Strategy
 - Long-Term Expansion Principles
+
+---
+
+2026-07-25
+
+Product scope clarified.
+
+Validated concepts:
+
+- SaaS Administrator
+- Owner
+- Viewer
+
+Added:
+
+- Product Scope
+- Out Of Scope
+- Product Guardrail
+- Carrier Integration Model
+
+Validated separation:
+
+- Carrier Integration
+- Carrier Account
+
+Confirmed product focus:
+
+PUDO information access, search, visualization and consumption.
