@@ -1014,7 +1014,7 @@ Carrier Catalog Integration Service
 
 Status:
 
-Planned
+Completed
 
 Objectives:
 
@@ -1023,6 +1023,27 @@ Objectives:
 - No Engine modifications
 - No catalog persistence
 - Prepare organisation carrier activation workflows
+
+Deliverables:
+
+✅ carrier_catalog/**init**.py
+✅ carrier_catalog/service.py
+✅ test_carrier_catalog_service.py
+
+Validated:
+
+✅ list_available_carriers()
+✅ list_organisation_carriers()
+✅ list_activatable_carriers_for_organisation()
+✅ Carrier.code to CarrierAccount.carrier_code mapping
+✅ No catalog persistence
+✅ No Engine modifications
+✅ No database migration
+
+Result:
+
+118 passed
+0 failed
 
 ---
 
@@ -1247,6 +1268,8 @@ Completed:
 
 ✅ Engine Catalog Foundation
 
+✅ Carrier Catalog Integration Service
+
 ---
 
 Current Focus:
@@ -1293,7 +1316,7 @@ Validated:
 
 ✅ User Lookup Foundation
 
-✅ 113 Automated Tests
+✅ 118 Automated Tests
 
 ✅ Organisation Persistence Tests
 
@@ -1334,6 +1357,10 @@ Validated:
 ✅ Engine Catalog Service
 
 ✅ Engine Catalog Tests
+
+✅ Carrier Catalog Service
+
+✅ Carrier Catalog Service Tests
 
 ---
 
@@ -1602,4 +1629,29 @@ Validated:
 Result:
 
 113 passed
+0 failed
+
+---
+
+2026-07-26
+
+Carrier Catalog Integration Service completed.
+
+Implemented:
+
+- carrier_catalog/**init**.py
+- carrier_catalog/service.py
+- test_carrier_catalog_service.py
+
+Validated:
+
+- Engine Catalog and CarrierAccount crossing
+- Carrier.code to CarrierAccount.carrier_code mapping
+- Available carrier listing
+- Organisation carrier listing
+- Activatable carrier listing
+
+Result:
+
+118 passed
 0 failed

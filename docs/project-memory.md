@@ -371,6 +371,8 @@ Authentication Columns
 
 ✅ Engine Catalog Service
 
+✅ Carrier Catalog Integration Service
+
 ---
 
 # CURRENT DOMAIN MODEL
@@ -615,7 +617,7 @@ Validated Test Suites
 
 Current Result
 
-113 passed
+118 passed
 
 0 failed
 
@@ -704,6 +706,10 @@ Implemented
 ✅ InMemory Engine Catalog Client
 
 ✅ Engine Catalog Tests
+
+✅ Carrier Catalog Service
+
+✅ Carrier Catalog Integration Tests
 
 ---
 
@@ -834,6 +840,14 @@ Engine carrier metadata must not be duplicated inside the SaaS.
 Lesson 018
 
 Engine integration should begin with DTOs and service abstractions before introducing runtime connectivity.
+
+Lesson 019
+
+The SaaS can expose organisation-specific carrier catalogue views without persisting Engine carrier definitions.
+
+Lesson 020
+
+Carrier catalogue integration must use Carrier.code and CarrierAccount.carrier_code as the mapping boundary.
 
 ---
 
@@ -1157,4 +1171,27 @@ Validated:
 
 Result:
 113 passed
+0 failed
+
+---
+
+2026-07-26
+
+Carrier Catalog Integration Service completed.
+
+Implemented:
+
+- carrier_catalog/**init**.py
+- carrier_catalog/service.py
+- test_carrier_catalog_service.py
+
+Validated:
+
+- Available carrier listing
+- Organisation carrier listing
+- Activatable carrier listing
+- Carrier.code to CarrierAccount.carrier_code mapping
+
+Result:
+118 passed
 0 failed

@@ -6,6 +6,48 @@ The format follows a milestone-based approach.
 
 ---
 
+## [1.7.0-draft] - 2026-07-26
+
+### Added
+
+Carrier Catalog Integration Service.
+
+Created:
+
+- src/universal_pudo_saas/carrier_catalog/**init**.py
+- src/universal_pudo_saas/carrier_catalog/service.py
+- tests/test_carrier_catalog_service.py
+
+### Validation
+
+Validated:
+
+- list_available_carriers()
+- list_organisation_carriers()
+- list_activatable_carriers_for_organisation()
+- Carrier.code to CarrierAccount.carrier_code mapping
+- Engine Catalog to CarrierAccount crossing
+
+Result:
+118 passed
+0 failed
+
+### Architecture
+
+The SaaS can now derive organisation-specific carrier catalogue views by crossing Engine carrier metadata with SaaS CarrierAccount records.
+
+No carrier catalog is persisted by the SaaS.
+
+No Engine modification was introduced.
+
+No Alembic migration was introduced.
+
+### Status
+
+Carrier Catalog Integration Service completed.
+
+---
+
 ## [1.6.0-draft] - 2026-07-26
 
 ### Added
