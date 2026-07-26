@@ -3,6 +3,12 @@ from __future__ import annotations
 from fastapi import FastAPI
 
 from universal_pudo_saas.auth.routes import router as auth_router
+from universal_pudo_saas.carrier_accounts.router import (
+    router as carrier_accounts_router,
+)
+from universal_pudo_saas.carrier_credentials.router import (
+    router as carrier_credentials_router,
+)
 from universal_pudo_saas.core.settings import get_settings
 
 
@@ -23,6 +29,8 @@ def create_app() -> FastAPI:
         }
 
     app.include_router(auth_router)
+    app.include_router(carrier_accounts_router)
+    app.include_router(carrier_credentials_router)
 
     return app
 
