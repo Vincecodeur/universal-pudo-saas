@@ -2,7 +2,7 @@
 
 Version: 1.7.0
 
-Status: Multi-Carrier Execution Foundation Completed
+Status: Search Domain Design Planned
 
 Last Updated: 2026-07-27
 
@@ -28,7 +28,7 @@ universal-pudo-saas
 
 Lifecycle Stage:
 
-15.6 Universal PUDO Engine Integration Closure
+16.1 Search Domain Design
 
 Status:
 
@@ -43,10 +43,10 @@ Application Layer built on top of Universal PUDO Engine.
 # CURRENT PHASE
 
 Phase:
-15.6
+16.1
 
 Name:
-Universal PUDO Engine Integration Closure
+Search Domain Design
 
 Status:
 Planned
@@ -535,7 +535,7 @@ Architecture Rules:
 ✅ No SQLAlchemy model
 ✅ No Alembic migration
 ✅ No Engine modification
-✅ No multi-carrier orchestration
+✅ No Engine-side multi-carrier orchestration
 
 Organisation Search Foundation
 
@@ -783,43 +783,47 @@ EngineCatalogService implemented.
 
 Engine Catalog tests validated.
 
+Universal PUDO Engine Integration Closure completed.
+
+Phase 15 officially closed.
+
+Phase 16.1 Search Domain Design is the current focus.
+
 ---
 
 # Next Milestone:
 
-Phase 15.6
+Phase 16.1
 
-Universal PUDO Engine Integration Closure
+Search Domain Design
 
 Objectives:
 
-- End-to-end validation
-- Architecture validation
-- Documentation validation
-- Repository synchronization
-- Phase 15 closure
+- Define Search Platform scope
+- Define SearchRequest concept
+- Define SearchResult concept
+- Define Search Platform boundaries
+- Confirm persistence boundaries
+- Prepare Phase 16.2
 
 ---
 
 # FUTURE PHASES
 
-Phase 15
-Universal PUDO Engine Integration
+Phase 16
+Search Platform
 
 Status:
-In Progress
+Planned
 
-Completed:
+Sub-phases:
 
-✅ 15.1 Engine Catalog Foundation
-✅ 15.2 Carrier Catalog Integration Service
-✅ 15.3 Engine Search Foundation
-✅ 15.4 Organisation Search Foundation
-✅ 15.5 Multi-Carrier Execution Foundation
-
-Remaining:
-
-⏳ 15.6 Universal PUDO Engine Integration Closure
+⏳ 16.1 Search Domain Design
+⏳ 16.2 Search Platform Models Foundation
+⏳ 16.3 Search Platform Service Foundation
+⏳ 16.4 Search Result Enrichment Foundation
+⏳ 16.5 Search Platform Validation
+⏳ 16.6 Search Platform Closure
 
 ---
 
@@ -871,7 +875,7 @@ User Lookup Foundation implemented.
 
 2026-07-25
 
-Persistence Test Foundation in progress.
+Persistence Test Foundation completed.
 
 Implemented:
 
@@ -889,7 +893,7 @@ Validated:
 
 52 automated tests passing.
 
-Documentation update in progress.
+Documentation synchronized.
 
 ---
 

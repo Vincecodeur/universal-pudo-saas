@@ -251,6 +251,26 @@ Organisation
 
 ---
 
+# Future Domain
+
+Search Platform
+
+SearchRequest
+
+Scope:
+Organisation
+
+SearchResult
+
+Scope:
+Organisation
+
+Status:
+Planned
+
+Implementation:
+Phase 16
+
 # RELATIONSHIP MODEL
 
 ```text
@@ -334,3 +354,5 @@ The domain model is valid when:
 ✅ Membership owns organisation roles
 
 ✅ PUDO-focused scope remains enforced
+
+#

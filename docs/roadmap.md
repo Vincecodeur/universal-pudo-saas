@@ -2,7 +2,7 @@
 
 Version: 1.7.0
 
-Status: Universal PUDO Engine Integration In Progress
+Status: Search Domain Design Planned
 
 Last Updated: 2026-07-27
 
@@ -968,7 +968,7 @@ Universal PUDO Engine Integration
 
 Status:
 
-In Progress
+Completed
 
 Objectives:
 
@@ -1212,7 +1212,7 @@ Universal PUDO Engine Integration Closure
 
 Status:
 
-Planned
+Completed
 
 Objectives:
 
@@ -1248,8 +1248,47 @@ Exit Criteria:
 Search Platform
 
 Status:
+In Progress
 
-Planned
+## Phase 16.1
+
+Search Domain Design
+
+Objectives:
+
+- Define Search Platform scope
+- Define SearchRequest concept
+- Define SearchResult concept
+- Define Search Platform boundaries
+- Confirm persistence boundaries
+- Prepare Phase 16.2
+
+Out of Scope:
+
+- Search persistence
+- SearchHistory table
+- SearchResult table
+- Alembic migration
+
+## Phase 16.2
+
+Search Platform Models Foundation
+
+## Phase 16.3
+
+Search Platform Service Foundation
+
+## Phase 16.4
+
+Search Result Enrichment Foundation
+
+## Phase 16.5
+
+Search Platform Validation
+
+## Phase 16.6
+
+Search Platform Closure
 
 ---
 
@@ -1400,7 +1439,23 @@ Release Criteria:
 
 Completed:
 
+✅ Phase 15.1 Engine Catalog Foundation
+
+✅ Phase 15.2 Carrier Catalog Integration Service
+
+✅ Phase 15.3 Engine Search Foundation
+
+✅ Phase 15.4 Organisation Search Foundation
+
+✅ Phase 15.5 Multi-Carrier Execution Foundation
+
+✅ Phase 15.6 Universal PUDO Engine Integration Closure
+
 ✅ Organisation Search Foundation
+
+✅ Multi-Carrier Execution Foundation
+
+✅ Universal PUDO Engine Integration Closure
 
 ✅ Documentation Foundation
 
@@ -1474,21 +1529,33 @@ Completed:
 
 Current Focus:
 
-Phase 15.6
+Phase 16.1
 
-Universal PUDO Engine Integration Closure
+Search Domain Design
+
+Status:
+
+Current
 
 ---
 
 Future Validation Gate:
 
-Universal PUDO Engine Integration
+Phase 16 Search Platform Validation
 
 ---
 
 # CURRENT TECHNICAL BASELINE
 
 Validated:
+
+✅ Organisation Search Service
+
+✅ MultiCarrierSearchService
+
+✅ Multi-Carrier Search Tests
+
+✅ Organisation Search Tests
 
 ✅ FastAPI
 
@@ -1517,8 +1584,6 @@ Validated:
 ✅ Authentication API
 
 ✅ User Lookup Foundation
-
-✅ 133 Automated Tests
 
 ✅ Organisation Persistence Tests
 
@@ -1571,6 +1636,8 @@ Validated:
 ✅ Engine Search Service
 
 ✅ Engine Search Tests
+
+✅ 136 Automated Tests
 
 ---
 

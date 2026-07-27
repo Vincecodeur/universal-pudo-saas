@@ -1,20 +1,85 @@
 # Universal PUDO SaaS - Persistence Decisions
 
-Version: 0.1.0
+Version: 0.2.0
 
-Status: Persistence Design
+Status: Updated After Universal PUDO Engine Integration
 
-Last Updated: 2026-07-22
+Last Updated: 2026-07-27
 
 ---
 
 # PURPOSE
 
-This document captures persistence decisions that affect the entire data model.
+This document captures persistence decisions that affect the Universal PUDO SaaS data model.
 
 Its purpose is to avoid making structural persistence decisions directly in implementation.
 
-These decisions apply across all future entities.
+These decisions apply across current and future SaaS-owned entities.
+
+Universal PUDO Engine has its own database and persistence lifecycle.
+
+---
+
+# SOURCE OF TRUTH
+
+Persistence decisions must remain aligned with:
+
+1. Source code
+2. Tests
+3. Database schema
+4. Approved ADRs
+5. Architecture documents
+6. Roadmap
+7. Project documentation
+
+When conflicts exist, source code and database schema win.
+
+---
+
+# CURRENT DATABASES
+
+## Universal PUDO SaaS
+
+Database:
+
+```text
+universal_pudo_saas
+```
+
+Owner:
+
+```text
+Universal PUDO SaaS
+```
+
+Current tables:
+
+```text
+alembic_version
+organisations
+users
+memberships
+carrier_accounts
+carrier_credentials
+```
+
+---
+
+## Universal PUDO Engine
+
+Database:
+
+```text
+universal_pudo
+```
+
+Owner:
+
+```text
+Universal PUDO Engine
+```
+
+Universal PUDO SaaS does not own this database.
 
 ---
 
@@ -30,7 +95,7 @@ Accepted
 
 ## Decision
 
-Use UUID identifiers for all business entities.
+Use UUID identifiers for all SaaS business entities.
 
 Examples:
 
@@ -39,30 +104,31 @@ Organisation
 User
 Membership
 CarrierAccount
-Search
-Export
-AuditEvent
+CarrierCredential
+Future Search
+Future Export
+Future AuditEvent
 ```
 
 ---
 
 ## Reasoning
 
-Benefits:
+UUID identifiers support:
 
 ```text
-Globally Unique
-Distributed-System Friendly
-Self-Hosted Friendly
-API Friendly
-Safer Than Sequential IDs
+Globally unique identifiers
+Distributed-system compatibility
+Self-hosted compatibility
+API compatibility
+Reduced predictability compared to sequential identifiers
 ```
 
 ---
 
 ## Consequences
 
-All primary entities will use:
+All primary SaaS-owned entities should use:
 
 ```text
 UUID
@@ -84,11 +150,9 @@ Accepted
 
 ## Decision
 
-All persisted business entities inherit from a common Base Entity.
+Persisted business entities inherit or align with a common base entity strategy.
 
----
-
-## Common Attributes
+Current common attributes:
 
 ```text
 id
@@ -100,15 +164,7 @@ updated_at
 
 ## Goal
 
-Provide:
-
-```text
-Consistency
-Traceability
-Maintainability
-```
-
-across the data model.
+Provide consistency across the data model.
 
 ---
 
@@ -124,7 +180,7 @@ Accepted
 
 ## Decision
 
-Every persisted entity contains:
+Persisted entities should contain:
 
 ```text
 created_at
@@ -135,28 +191,27 @@ updated_at
 
 ## Reasoning
 
-Supports:
+Timestamps support:
 
 ```text
 Auditing
 Diagnostics
 Debugging
-Analytics
+Operational tracking
 ```
 
 ---
 
 ## Future Possibility
 
-Additional timestamps may be added:
+Additional timestamps may be introduced when required:
 
 ```text
 deleted_at
 last_accessed_at
 last_validated_at
+last_executed_at
 ```
-
-when required.
 
 ---
 
@@ -172,26 +227,26 @@ Accepted
 
 ## Decision
 
-Business entities use Soft Delete.
+Business entities should support soft delete where operationally required.
 
 ---
 
 ## Applicability
 
-Examples:
+Potential examples:
 
 ```text
-CarrierAccount
-Search
-Export
 Organisation
+CarrierAccount
+Future Search History
+Future Export
 ```
 
 ---
 
 ## Implementation Principle
 
-Entities are marked inactive rather than physically removed.
+Entities should be marked inactive rather than physically removed when business recovery or auditability is required.
 
 Future common attribute:
 
@@ -201,16 +256,11 @@ deleted_at
 
 ---
 
-## Reasoning
+## Current Status
 
-Supports:
+Soft delete strategy is accepted as a long-term persistence direction.
 
-```text
-Recovery
-Auditability
-Compliance
-Diagnostics
-```
+Not every current entity has implemented a dedicated soft delete field yet.
 
 ---
 
@@ -226,13 +276,15 @@ Accepted
 
 ## Decision
 
-Centralized Audit Model.
+A centralized audit model should be introduced in a future phase.
 
 ---
 
-## Entity
+## Future Entity
 
+```text
 AuditEvent
+```
 
 ---
 
@@ -242,16 +294,18 @@ AuditEvent
 User Login
 Password Reset
 Credential Update
-Carrier Validation
+Carrier Account Change
 Search Execution
 Export Creation
 ```
 
 ---
 
-## Goal
+## Current Status
 
-Provide a single audit source.
+Deferred.
+
+No current audit table has been implemented.
 
 ---
 
@@ -267,13 +321,15 @@ Accepted
 
 ## Decision
 
-Organisation-specific settings are supported.
+Organisation-specific settings are supported in the target architecture.
 
 ---
 
-## Entity
+## Future Entity
 
+```text
 OrganisationSettings
+```
 
 ---
 
@@ -290,11 +346,22 @@ Future Preferences
 
 ## Ownership
 
-Belongs to:
-
 ```text
-One Organisation
+Organisation
+    1
+    │
+    ▼
+OrganisationSettings
+    1
 ```
+
+---
+
+## Current Status
+
+Deferred.
+
+No organisation settings table has been implemented.
 
 ---
 
@@ -310,9 +377,9 @@ Accepted
 
 ## Decision
 
-Roles belong to Membership.
+Organisation-scoped roles belong to Membership.
 
-Not to User.
+They do not belong directly to User.
 
 ---
 
@@ -321,17 +388,27 @@ Not to User.
 ```text
 User A
  ├── Organisation X
- │      └── Admin
+ │      └── OWNER
  │
  └── Organisation Y
-        └── User
+        └── VIEWER
 ```
 
 ---
 
-## Reasoning
+## Implemented Strategy
 
-Supports multi-organisation membership.
+```text
+SAAS_ADMIN -> users.is_platform_admin
+OWNER      -> memberships.role
+VIEWER     -> memberships.role
+```
+
+---
+
+## Current Status
+
+Implemented.
 
 ---
 
@@ -341,31 +418,85 @@ Search Result Persistence
 
 Status:
 
-Accepted
+Deferred
 
 ---
 
-## Decision
+## Previous Decision
 
-Search Results are persisted.
-
----
-
-## Benefits
+The previous persistence design stated:
 
 ```text
-Search History
-Exports
-Auditability
-Diagnostics
-Analytics
+Search Results are persisted.
+```
+
+and:
+
+```text
+SearchResult becomes a persistent business entity.
 ```
 
 ---
 
-## Consequence
+## Updated Decision
 
-SearchResult becomes a persistent business entity.
+Search result persistence is deferred until after Search Platform Foundation.
+
+Phase 16 introduces Search Platform business models and service boundaries only.
+
+Phase 16 does not introduce:
+
+```text
+Search persistence
+Search history table
+SearchResult SQLAlchemy model
+Alembic migration
+Search retention policy
+```
+
+---
+
+## Reason
+
+The project must first establish the Search Platform domain contract before deciding persistence.
+
+Current confirmed phases:
+
+```text
+Phase 16.1 Search Domain Design
+Phase 16.2 Search Platform Models Foundation
+Phase 16.3 Search Platform Service Foundation
+Phase 16.4 Search Result Enrichment Foundation
+Phase 16.5 Search Platform Validation
+Phase 16.6 Search Platform Closure
+```
+
+Persistence is intentionally out of scope for Phase 16.
+
+---
+
+## Future Decision Required
+
+A future phase must decide whether to persist:
+
+```text
+SearchRequest
+SearchResult
+SearchHistory
+SearchExecution
+```
+
+Future decision must define:
+
+```text
+Retention duration
+Storage format
+Tenant ownership
+Audit requirements
+Export dependency
+Analytics dependency
+Privacy constraints
+```
 
 ---
 
@@ -384,16 +515,47 @@ Accepted
 Carrier credentials remain:
 
 ```text
-Encrypted
-Tenant-Owned
-CarrierAccount-Owned
+Tenant-owned
+CarrierAccount-owned
+Sensitive
+```
+
+---
+
+## Current Model
+
+Implemented entity:
+
+```text
+CarrierCredential
+```
+
+Relationship:
+
+```text
+CarrierAccount
+    1
+    │
+    ▼
+CarrierCredential
+    N
 ```
 
 ---
 
 ## Constraint
 
-Plain text credential storage is forbidden.
+Plain text credential storage is not acceptable for production.
+
+Credential encryption remains a required future hardening topic.
+
+---
+
+## Current Status
+
+Persistence implemented.
+
+Encryption hardening deferred.
 
 ---
 
@@ -409,16 +571,36 @@ Accepted
 
 ## Decision
 
-Every tenant-owned entity must reference an Organisation.
+Every tenant-owned entity must reference an Organisation directly or indirectly.
 
 Examples:
 
 ```text
-CarrierAccount
-Search
-Export
 Membership
-OrganisationSettings
+CarrierAccount
+CarrierCredential
+Future Search
+Future Export
+Future OrganisationSettings
+```
+
+---
+
+## Current Implementation
+
+Direct organisation ownership:
+
+```text
+CarrierAccount.organisation_id
+Membership.organisation_id
+```
+
+Indirect organisation ownership:
+
+```text
+CarrierCredential
+    -> CarrierAccount
+    -> Organisation
 ```
 
 ---
@@ -429,97 +611,294 @@ Guarantee tenant isolation.
 
 ---
 
-# ENTITY CLASSIFICATION
+# DECISION 011
+
+Carrier Catalog Persistence
+
+Status:
+
+Accepted
 
 ---
 
+## Decision
+
+Universal PUDO SaaS does not persist carrier definitions.
+
+Universal PUDO Engine owns the carrier catalog.
+
+Universal PUDO SaaS references carriers through:
+
+```text
+carrier_code
+```
+
+---
+
+## Current Implementation
+
+Implemented entity:
+
+```text
+CarrierAccount
+```
+
+Implemented field:
+
+```text
+carrier_code
+```
+
+Mapping:
+
+```text
+CarrierAccount.carrier_code
+        ↓
+Engine Carrier.code
+```
+
+---
+
+## Consequences
+
+The SaaS must not introduce:
+
+```text
+CarrierIntegration table
+CarrierDefinition table
+CarrierCatalog table
+CarrierCapability table
+```
+
+unless a future ADR explicitly changes the ownership model.
+
+---
+
+# DECISION 012
+
+Search Platform Persistence Boundary
+
+Status:
+
+Accepted
+
+---
+
+## Decision
+
+Phase 16 Search Platform is a non-persistent domain foundation.
+
+---
+
+## Phase 16 May Introduce
+
+```text
+SearchRequest
+SearchResult
+SearchPlatformService
+```
+
+as business models or DTOs.
+
+---
+
+## Phase 16 Must Not Introduce
+
+```text
+Search SQLAlchemy model
+SearchResult table
+SearchHistory table
+Alembic migration
+Retention policy
+```
+
+---
+
+## Reason
+
+Search persistence must be designed separately from Search Platform execution.
+
+Search Platform should first define:
+
+```text
+What is searched
+How a search request is represented
+How a search result is returned
+How the Search Platform consumes MultiCarrierSearchService
+```
+
+Persistence can be decided after the domain boundary is stable.
+
+---
+
+# ENTITY CLASSIFICATION
+
 ## Global Entities
+
+Implemented:
 
 ```text
 User
-Role
-PlatformSettings
-AuditEvent
+```
+
+Future:
+
+```text
+Future PlatformSettings
+Future AuditEvent
 ```
 
 ---
 
 ## Tenant-Owned Entities
 
+Implemented:
+
 ```text
 Organisation
 Membership
 CarrierAccount
-CredentialReference
-Search
-SearchRequest
-SearchResult
-Export
-ExportFile
-OrganisationSettings
+CarrierCredential
 ```
+
+Future:
+
+```text
+Future Search
+Future SearchRequest
+Future SearchResult
+Future Export
+Future ExportFile
+Future OrganisationSettings
+```
+
+---
+
+## Engine-Owned Entities
+
+Owned by Universal PUDO Engine:
+
+```text
+Carrier
+CarrierCapability
+CarrierLifecycle
+PickupPoint normalization
+Provider execution
+Carrier metadata
+Carrier catalog implementation
+```
+
+Universal PUDO SaaS may consume SaaS-side projections of these concepts, but it does not persist Engine-owned definitions.
+
+---
+
+# CURRENT IMPLEMENTED TABLES
+
+```text
+alembic_version
+organisations
+users
+memberships
+carrier_accounts
+carrier_credentials
+```
+
+---
+
+# CURRENT NON-PERSISTENT FOUNDATIONS
+
+Implemented without database persistence:
+
+```text
+Engine Catalog Foundation
+Carrier Catalog Integration Service
+Engine Search Foundation
+Organisation Search Foundation
+Multi-Carrier Execution Foundation
+```
+
+No tables were introduced for these foundations.
 
 ---
 
 # FUTURE DECISIONS
 
-Not yet decided.
-
----
-
-## Search Retention
-
-How long SearchResults remain stored.
+## Search Persistence
 
 Status:
 
-Deferred.
+Deferred
+
+Questions:
+
+```text
+Should SearchResult be persisted?
+Should SearchRequest be persisted?
+Should SearchHistory be persisted?
+How long should searches remain available?
+Should exports depend on persisted search results?
+```
 
 ---
 
-## Export Retention
-
-How long ExportFiles remain available.
+## Export Persistence
 
 Status:
 
-Deferred.
+Deferred
+
+Questions:
+
+```text
+How long should ExportFiles remain available?
+Should generated files be stored?
+Should exports reference SearchResults?
+```
 
 ---
 
 ## Audit Retention
 
-How long AuditEvents remain stored.
-
 Status:
 
-Deferred.
+Deferred
+
+Questions:
+
+```text
+How long should AuditEvents remain stored?
+Which actions require audit?
+```
 
 ---
 
 ## API Key Strategy
 
-Public API identifiers.
-
 Status:
 
-Deferred.
+Deferred
+
+Questions:
+
+```text
+How should public API credentials be stored?
+How should API keys be rotated?
+How should organisation-level API access be scoped?
+```
 
 ---
 
 # NEXT STEP
 
-Implementation Preparation
-
-Future objectives:
+Current next persistence-related action:
 
 ```text
-SQLAlchemy Models
-Alembic Strategy
-Database Constraints
-Indexes
-Repository Layer
+No persistence action required for Phase 16.
 ```
+
+Phase 16 Search Platform must remain non-persistent.
+
+Future persistence decisions should be revisited after Search Platform Foundation is complete.
 
 ---
 
@@ -528,3 +907,17 @@ Repository Layer
 2026-07-22
 
 Initial persistence decisions created.
+
+---
+
+2026-07-27
+
+Persistence decisions updated after Universal PUDO Engine Integration.
+
+Updated decisions:
+
+- Search Result Persistence deferred
+- Carrier Catalog Persistence clarified
+- Search Platform Persistence Boundary added
+- Engine-owned entities separated from SaaS-owned entities
+- Phase 16 confirmed as non-persistent Search Platform Foundation

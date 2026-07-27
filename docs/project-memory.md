@@ -52,8 +52,10 @@ The SaaS owns:
 - organisations
 - users
 - memberships
-- permissions
 - carrier accounts
+- carrier credentials
+- organisation search orchestration
+- multi-carrier search orchestration
 - exports
 - administration
 
@@ -177,27 +179,24 @@ Validated during Phase 14.
 
 ---
 
----
-
 ## D008
 
 Universal PUDO Engine Integration Strategy
 
 Decision:
 
-Phase 15 remains open until Universal PUDO Engine integration closure is completed.
+Phase 15 was kept open until Universal PUDO Engine integration closure was completed.
 
-Completed:
+Status:
+
+Completed
 
 ✅ Phase 15.1 Engine Catalog Foundation
 ✅ Phase 15.2 Carrier Catalog Integration Service
 ✅ Phase 15.3 Engine Search Foundation
 ✅ Phase 15.4 Organisation Search Foundation
 ✅ Phase 15.5 Multi-Carrier Execution Foundation
-
-Planned:
-
-⏳ Phase 15.6 Universal PUDO Engine Integration Closure
+✅ Phase 15.6 Universal PUDO Engine Integration Closure
 
 Reason:
 
@@ -206,6 +205,54 @@ The primary SaaS use case is allowing an organisation to locate pickup points us
 The SaaS owns orchestration.
 
 Universal PUDO Engine owns carrier integrations.
+
+---
+
+D009
+
+Search Platform Strategy
+
+Decision:
+
+Search Platform is implemented in six phases:
+
+16.1 Search Domain Design
+16.2 Search Platform Models Foundation
+16.3 Search Platform Service Foundation
+16.4 Search Result Enrichment Foundation
+16.5 Search Platform Validation
+16.6 Search Platform Closure
+
+Reason:
+
+Prevent roadmap drift and enforce Planning Freeze.
+
+---
+
+## D010
+
+Phase 16 Persistence Boundary
+
+Decision:
+
+Phase 16 Search Platform is non-persistent.
+
+Search Platform may introduce:
+
+- SearchRequest
+- SearchResult
+- SearchPlatformService
+
+Phase 16 must not introduce:
+
+- SearchResult table
+- SearchHistory table
+- Alembic migration
+- Search persistence
+
+Reason:
+
+Search Platform domain boundaries must be stabilised before persistence decisions.
 
 ---
 
@@ -803,7 +850,11 @@ Not Implemented
 
 ❌ Permission Enforcement
 
-❌ Searches
+❌ Search Platform
+
+❌ Search Result Enrichment
+
+❌ Search Persistence
 
 ❌ Exports
 
@@ -981,6 +1032,8 @@ This rule exists to prevent roadmap zig-zagging and architectural redefinition d
 
 Completed
 
+✅ Phase 15.6 Universal PUDO Engine Integration Closure
+
 ✅ Multi-Carrier Execution Foundation
 
 ✅ Engine Search Foundation
@@ -1045,32 +1098,31 @@ Completed
 
 Current Focus
 
-Phase 15.6
+Phase 16.1
 
-Universal PUDO Engine Integration Closure
+Search Domain Design
 
 ---
 
 # NEXT MILESTONE
 
-Phase 15.6
+Phase 16.1
 
-Universal PUDO Engine Integration Closure
+Search Domain Design
 
 Objectives:
 
-- End-to-end validation
-- Architecture validation
-- Documentation validation
-- Repository synchronization
-- Phase 15 closure
+- Define Search Platform scope
+- Define SearchRequest concept
+- Define SearchResult concept
+- Define Search Platform boundaries
+- Confirm persistence boundaries
+- Prepare Phase 16.2
 
 ---
 
 # FUTURE MILESTONES
 
-Phase 15.6 Universal PUDO Engine Integration Closure
-↓
 Phase 16 Search Platform
 ↓
 Phase 17 Map Experience
@@ -1407,3 +1459,26 @@ Result:
 
 136 passed
 0 failed
+
+---
+
+2026-07-27
+
+Universal PUDO Engine Integration Closure completed.
+
+Validated:
+
+- Engine Catalog Foundation
+- Carrier Catalog Integration
+- Engine Search Foundation
+- Organisation Search Foundation
+- Multi-Carrier Search Foundation
+
+Result:
+
+136 passed
+0 failed
+
+Phase 15 closed.
+
+Phase 16.1 Search Domain Design becomes current focus.

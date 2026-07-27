@@ -2,7 +2,7 @@
 
 Version: 1.7.0
 
-Status: Universal PUDO Engine Integration In Progress
+Status: Search Domain Design In Progress
 
 Last Updated: 2026-07-27
 
@@ -76,13 +76,12 @@ Universal PUDO SaaS stores carrier_code as a logical reference to carriers expos
 
 Current Phase:
 
-Phase 15.6
-
-Universal PUDO Engine Integration Closure
+Phase 16.1
+Search Domain Design
 
 Status:
 
-Planned
+In Progress
 
 Completed Milestones:
 
@@ -779,24 +778,23 @@ Frontend
 
 # NEXT MILESTONE
 
-Phase 15.6
+Phase 16.1
 
-Universal PUDO Engine Integration Closure
+Search Domain Design
 
 Objectives:
 
-- End-to-end validation
-- Architecture validation
-- Documentation validation
-- Repository synchronization
-- Phase 15 closure
+- Define Search Platform scope
+- Define SearchRequest concept
+- Define SearchResult concept
+- Define Search Platform boundaries
+- Confirm persistence boundaries
+- Prepare Phase 16.2
 
 ---
 
 # FUTURE ROADMAP
 
-Universal PUDO Engine Integration Closure
-↓
 Search Platform
 ↓
 Map Experience

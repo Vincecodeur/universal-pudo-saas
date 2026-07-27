@@ -1,25 +1,35 @@
 # Universal PUDO SaaS - Carrier Integration Model
 
-Version: 1.0.0
+Version: 2.0.0
 
-Status: Approved
+Status: Updated After Universal PUDO Engine Integration
 
-Last Updated: 2026-07-25
+Last Updated: 2026-07-27
 
 ---
 
 # PURPOSE
 
-This document defines the carrier integration model used by Universal PUDO SaaS.
+This document defines how Universal PUDO SaaS consumes carrier capabilities.
 
 The objective is to clearly separate:
 
-- carrier integrations available on the platform
-- carrier accounts configured by customers
-- platform responsibilities
+- carrier catalog ownership
+- carrier account ownership
+- carrier credential ownership
+- Engine responsibilities
+- SaaS responsibilities
 - organisation responsibilities
 
-This separation is required to support multi-tenancy, future scalability, and clean ownership boundaries.
+This document replaces the previous SaaS-owned CarrierIntegration model.
+
+The current architecture follows the final Phase 15 ownership decision:
+
+Universal PUDO Engine owns the carrier catalog.
+
+Universal PUDO SaaS owns carrier accounts and carrier credentials.
+
+Universal PUDO SaaS does not persist carrier definitions.
 
 ---
 
@@ -27,30 +37,83 @@ This separation is required to support multi-tenancy, future scalability, and cl
 
 Universal PUDO SaaS allows organisations to consume pickup point data from multiple carriers.
 
-A carrier integration must be available on the platform before an organisation can connect its own carrier account.
+Organisations do not directly manage carrier integrations.
 
-This creates two distinct business concepts:
+Organisations connect carrier accounts that reference carriers exposed by Universal PUDO Engine.
 
-1. Carrier Integration
+The business model is based on three distinct concepts:
+
+1. Engine Carrier Catalog
 2. Carrier Account
+3. Carrier Credential
 
 These concepts must never be merged.
 
 ---
 
-# CARRIER INTEGRATION
+# FINAL OWNERSHIP MODEL
 
-Scope:
+## Universal PUDO Engine Owns
 
-Platform
+Universal PUDO Engine owns:
 
-Owner:
+- carrier integrations
+- provider implementations
+- carrier clients
+- carrier response parsers
+- carrier mappers
+- carrier discovery
+- carrier lifecycle management
+- carrier capabilities
+- pickup point normalization
+- provider execution
+- hybrid search
+- carrier metadata
+- carrier catalog implementation
 
-SaaS Administrator
+Universal PUDO Engine is the single source of truth for carrier functionality.
 
-Purpose:
+---
 
-Represents a carrier integration available within Universal PUDO SaaS.
+## Universal PUDO SaaS Owns
+
+Universal PUDO SaaS owns:
+
+- organisations
+- users
+- memberships
+- permissions
+- carrier accounts
+- carrier credentials
+- organisation-level carrier activation
+- organisation search experience
+- multi-carrier search entry point
+- future dashboards
+- future exports
+- future administration
+- future frontend
+
+Universal PUDO SaaS consumes Universal PUDO Engine.
+
+Universal PUDO SaaS must never duplicate carrier integration logic.
+
+---
+
+# ENGINE CARRIER CATALOG
+
+## Scope
+
+Universal PUDO Engine
+
+## Owner
+
+Universal PUDO Engine
+
+## Purpose
+
+The Engine Carrier Catalog represents the carrier capabilities exposed by Universal PUDO Engine.
+
+It describes which carriers exist, what their lifecycle state is, and which capabilities they expose.
 
 Examples:
 
@@ -58,432 +121,622 @@ Examples:
 - Mondial Relay
 - Chronopost
 - DPD France
-- DPD South Africa
 - GLS
 - UPS
+- InPost
 
-A Carrier Integration defines:
+## SaaS Consumption
 
-- supported carrier
-- supported API version
-- capabilities
-- documentation
-- availability status
-
-It does not contain customer credentials.
-
----
-
-# CARRIER INTEGRATION RESPONSIBILITIES
-
-The SaaS Administrator is responsible for:
-
-- publishing integrations
-- disabling integrations
-- maintaining integrations
-- exposing integrations to tenants
-- controlling platform availability
-
-Examples:
-
-✅ Enable Colissimo integration
-
-✅ Disable DPD South Africa integration
-
-✅ Publish new GLS integration
-
-✅ Upgrade Mondial Relay connector
-
-Examples not allowed:
-
-❌ Configure customer credentials
-
-❌ Configure customer account numbers
-
-❌ Configure tenant-specific settings
-
----
-
-# CARRIER INTEGRATION ENTITY
-
-Proposed entity:
-
-CarrierIntegration
-
-Fields:
+Universal PUDO SaaS consumes the Engine Carrier Catalog through:
 
 ```text
-id
-
-code
-
-name
-
-description
-
-provider
-
-engine_provider
-
-documentation_url
-
-status
-
-is_enabled
-
-created_at
-
-updated_at
+engine_catalog/
+├── models.py
+├── client.py
+└── service.py
 ```
 
-Example:
+## SaaS Read Model
+
+The SaaS consumes carriers through a SaaS-side read model:
 
 ```text
-id: 1
-
-code: COLISSIMO
-
-name: Colissimo
-
-provider: La Poste
-
-is_enabled: true
+Carrier
+CarrierCapability
+CarrierLifecycle
 ```
+
+These models are not SQLAlchemy models.
+
+They are not persisted by the SaaS.
+
+The Engine remains the source of truth.
 
 ---
 
 # CARRIER ACCOUNT
 
-Scope:
+## Scope
 
 Organisation
 
-Owner:
+## Owner
 
 Organisation Owner
 
-Purpose:
+## Purpose
 
-Represents a customer account connected to an available carrier integration.
+A Carrier Account represents an organisation-specific connection to a carrier exposed by Universal PUDO Engine.
 
 A Carrier Account belongs to exactly one organisation.
 
 Examples:
 
+```text
 Organisation A
-
-- Colissimo Account
-- Mondial Relay Account
+├── Colissimo Account
+├── Mondial Relay Account
+└── Chronopost Account
 
 Organisation B
+└── DPD Account
+```
 
-- Chronopost Account
+## Important Boundary
 
-Organisation C
+A Carrier Account does not define the carrier.
 
-- DPD Account
+A Carrier Account references a carrier through:
+
+```text
+carrier_code
+```
+
+The value maps to:
+
+```text
+Engine Carrier.code
+```
+
+The SaaS does not persist carrier metadata.
 
 ---
 
 # CARRIER ACCOUNT RESPONSIBILITIES
 
-The Owner is responsible for:
+The Organisation Owner is responsible for:
 
 - creating carrier accounts
-- configuring credentials
-- updating credentials
-- testing connectivity
+- configuring carrier credentials
+- updating carrier credentials
 - enabling carrier accounts
 - disabling carrier accounts
+- managing organisation-specific carrier access
 
-Examples:
+Allowed examples:
 
-✅ Configure Colissimo API credentials
+```text
+✅ Configure Colissimo credentials
+✅ Configure Mondial Relay credentials
+✅ Enable a carrier account
+✅ Disable a carrier account
+```
 
-✅ Configure Mondial Relay merchant account
+Not allowed examples:
 
-✅ Test DPD connectivity
-
-✅ Disable Chronopost account
-
-Examples not allowed:
-
-❌ Publish a new carrier integration
-
-❌ Add a carrier to the SaaS catalog
-
-❌ Make an integration available to other organisations
+```text
+❌ Create a carrier integration
+❌ Modify Engine carrier metadata
+❌ Publish a carrier globally
+❌ Add carrier capabilities
+❌ Implement carrier-specific provider logic
+```
 
 ---
 
 # CARRIER ACCOUNT ENTITY
 
-Proposed entity:
+Implemented entity:
 
+```text
 CarrierAccount
+```
 
-Fields:
+Implemented fields:
 
 ```text
 id
-
 organisation_id
-
-carrier_integration_id
-
-account_name
-
-status
-
-credentials
-
-last_validation_at
-
+carrier_code
+name
+is_active
 created_at
-
 updated_at
 ```
 
-Example:
-
-```text
-Organisation:
-Spriiint
-
-Carrier:
-Colissimo
-
-Account:
-Production Account
-```
-
----
-
-# OWNERSHIP MODEL
-
-Carrier Integration ownership:
-
-SaaS Administrator
-
-```text
-Carrier Integration Catalog
-
-COLISSIMO
-MONDIAL_RELAY
-CHRONOPOST
-DPD_FRANCE
-```
-
----
-
-Carrier Account ownership:
-
-Organisation Owner
+Ownership:
 
 ```text
 Organisation
-
-├── Colissimo Account
-├── Mondial Relay Account
-└── Chronopost Account
-```
-
----
-
-# RELATIONSHIP MODEL
-
-```text
-CarrierIntegration
-
     1
     │
-    │
     ▼
-
 CarrierAccount
-
     N
 ```
 
-One Carrier Integration may be used by many organisations.
+Status:
+
+```text
+Implemented
+Persisted
+Validated
+Tested
+```
 
 ---
 
-Example:
+# CARRIER CREDENTIAL
+
+## Scope
+
+Organisation Carrier Account
+
+## Owner
+
+Organisation Owner
+
+## Purpose
+
+A Carrier Credential stores authentication configuration attached to a Carrier Account.
+
+Implemented entity:
 
 ```text
-COLISSIMO
+CarrierCredential
+```
 
-├── Spriiint Account
-├── PrintChic Account
-├── Retailer A Account
-└── Retailer B Account
+Implemented fields:
+
+```text
+id
+carrier_account_id
+credential_key
+credential_value
+created_at
+updated_at
+```
+
+Ownership:
+
+```text
+CarrierAccount
+    1
+    │
+    ▼
+CarrierCredential
+    N
+```
+
+Status:
+
+```text
+Implemented
+Persisted
+Validated
+Tested
+```
+
+---
+
+# CARRIER CREDENTIAL RESPONSIBILITIES
+
+The SaaS stores organisation-owned credentials.
+
+The Engine consumes credentials when required for carrier execution.
+
+Current rules:
+
+```text
+✅ Credentials belong to an organisation
+✅ Credentials belong to a carrier account
+✅ Credentials are never stored in the Engine Carrier Catalog
+✅ Credentials are never stored in the Engine carrier metadata
+```
+
+Future rule:
+
+```text
+Credential encryption must be implemented before production usage.
+```
+
+---
+
+# ORGANISATION CARRIER CATALOG
+
+Universal PUDO SaaS exposes organisation-specific carrier views through:
+
+```text
+carrier_catalog/service.py
+```
+
+Implemented service:
+
+```text
+CarrierCatalogService
+```
+
+Implemented responsibilities:
+
+```text
+list_available_carriers()
+list_organisation_carriers()
+list_activatable_carriers_for_organisation()
+```
+
+The service crosses:
+
+```text
+Engine Carrier.code
+```
+
+with:
+
+```text
+CarrierAccount.carrier_code
+```
+
+This allows the SaaS to expose:
+
+- available carriers
+- organisation-linked carriers
+- activatable carriers
+
+without persisting carrier definitions.
+
+---
+
+# SEARCH CONSUMPTION MODEL
+
+Universal PUDO SaaS consumes pickup point search through:
+
+```text
+engine_search/
+├── models.py
+├── client.py
+└── service.py
+```
+
+Implemented service:
+
+```text
+EngineSearchService
+```
+
+Implemented responsibilities:
+
+```text
+search_pickup_points()
+search_pickup_points_by_radius()
+get_pickup_point()
+list_carrier_pickup_points()
+```
+
+The SaaS consumes Engine search capabilities.
+
+The SaaS does not reimplement Engine search use cases.
+
+---
+
+# ORGANISATION SEARCH MODEL
+
+Implemented service:
+
+```text
+OrganisationSearchService
+```
+
+Location:
+
+```text
+organisation_search/service.py
+```
+
+Purpose:
+
+```text
+Allow an organisation to search pickup points only through its linked carrier accounts.
+```
+
+Architecture:
+
+```text
+OrganisationSearchService
+        ↓
+CarrierCatalogService
+        ↓
+EngineSearchService
+```
+
+Responsibilities:
+
+```text
+✅ Use organisation carriers
+✅ Use CarrierCatalogService
+✅ Use EngineSearchService
+✅ Return PickupPoint results
+✅ Avoid search persistence
+✅ Avoid Engine modification
+```
+
+---
+
+# MULTI-CARRIER SEARCH MODEL
+
+Implemented service:
+
+```text
+MultiCarrierSearchService
+```
+
+Location:
+
+```text
+multi_carrier_search/service.py
+```
+
+Purpose:
+
+```text
+Provide a dedicated SaaS search entry point for future Search Platform features.
+```
+
+Architecture:
+
+```text
+MultiCarrierSearchService
+        ↓
+OrganisationSearchService
+        ↓
+CarrierCatalogService
+        ↓
+EngineSearchService
+        ↓
+Universal PUDO Engine
+```
+
+Responsibilities:
+
+```text
+✅ Expose a dedicated SaaS multi-carrier search boundary
+✅ Use OrganisationSearchService
+✅ Return PickupPoint results
+✅ Prepare Search Platform
+```
+
+Out of scope:
+
+```text
+❌ Search persistence
+❌ Search history
+❌ Advanced ranking
+❌ Distance calculation
+❌ Provider timeout handling
+❌ Parallel execution
+❌ Cache
+```
+
+---
+
+# FINAL RELATIONSHIP MODEL
+
+```text
+Universal PUDO Engine
+│
+├── Carrier Catalog
+│
+├── Provider Implementations
+│
+└── Pickup Point Search
+        ▲
+        │
+EngineSearchService
+        ▲
+        │
+CarrierCatalogService
+        ▲
+        │
+OrganisationSearchService
+        ▲
+        │
+MultiCarrierSearchService
+        ▲
+        │
+Search Platform
+```
+
+Organisation ownership:
+
+```text
+Organisation
+│
+├── CarrierAccount
+│       │
+│       └── CarrierCredential
+│
+└── Future Search Platform
+```
+
+Carrier mapping:
+
+```text
+CarrierAccount.carrier_code
+        ↓
+Engine Carrier.code
 ```
 
 ---
 
 # AVAILABILITY WORKFLOW
 
-Step 1
+## Step 1
 
-SaaS Administrator publishes an integration.
+Universal PUDO Engine exposes carriers through its carrier catalog.
 
 Example:
 
 ```text
 Colissimo
+Mondial Relay
+Chronopost
 ```
 
----
+## Step 2
 
-Step 2
-
-The integration becomes visible to Owners.
+Universal PUDO SaaS consumes the Engine carrier catalog.
 
 Example:
 
 ```text
-Available Integrations
-
-✅ Colissimo
-
-✅ Mondial Relay
-
-✅ Chronopost
+CarrierCatalogService.list_available_carriers()
 ```
 
----
+## Step 3
 
-Step 3
-
-The Owner connects a carrier account.
+An Organisation Owner connects a carrier account.
 
 Example:
 
 ```text
-Organisation
-
+Organisation A
 Connect Colissimo
-
-Enter API credentials
-
-Save
+Store carrier_code = COLISSIMO
 ```
 
----
+## Step 4
 
-Step 4
-
-Viewer users can consume data.
+The organisation can search pickup points through activated carriers.
 
 Example:
 
 ```text
-Search pickup points
-
-Carrier:
-Colissimo
+Organisation A
+├── Colissimo account
+└── Mondial Relay account
 ```
 
----
-
-# FUTURE EVOLUTION
-
-Future entities may include:
+The search uses:
 
 ```text
-CarrierCapability
-
-CarrierProduct
-
-CarrierService
-
-CarrierOption
-
-CarrierCoverage
+MultiCarrierSearchService
 ```
 
-Examples:
+which uses:
 
 ```text
-Saturday Delivery
-
-Hazmat
-
-Signature
-
-Age Verification
-
-Relay Delivery
+OrganisationSearchService
 ```
-
-These are not part of the current scope.
 
 ---
 
 # ARCHITECTURAL RULES
 
-Rule 1
+## Rule 1
 
-Carrier Integration and Carrier Account must remain separate entities.
+Universal PUDO Engine owns carrier integrations.
 
----
+## Rule 2
 
-Rule 2
+Universal PUDO SaaS does not persist carrier definitions.
 
-Customer credentials must never be stored inside Carrier Integration.
+## Rule 3
 
----
+Universal PUDO SaaS references carriers through `carrier_code`.
 
-Rule 3
+## Rule 4
 
-Carrier Account must always belong to an Organisation.
+Universal PUDO SaaS owns carrier accounts.
 
----
+## Rule 5
 
-Rule 4
+Universal PUDO SaaS owns carrier credentials.
 
-Only the SaaS Administrator can manage the Carrier Integration Catalog.
+## Rule 6
 
----
+Carrier credentials must never be stored in the Engine Carrier Catalog.
 
-Rule 5
+## Rule 7
 
-Only the Organisation Owner can manage Carrier Accounts.
-
----
-
-Rule 6
-
-Universal PUDO SaaS is a PUDO platform.
-
-The platform must only model carrier concepts required for:
+Universal PUDO SaaS must only model carrier concepts required for:
 
 - pickup point access
 - pickup point search
+- pickup point visualization
+- pickup point analytics
 - pickup point consumption
+- pickup point export
 
-Non-PUDO carrier capabilities are out of scope.
+## Rule 8
+
+Universal PUDO SaaS must not evolve into:
+
+- an OMS
+- a WMS
+- a TMS
+- a shipping platform
+- a carrier execution platform
+
+---
+
+# OUTDATED MODEL REPLACED
+
+The previous model introduced:
+
+```text
+CarrierIntegration
+```
+
+as a SaaS-owned platform entity.
+
+This is no longer the target model.
+
+Final decision:
+
+```text
+Carrier catalog belongs to Universal PUDO Engine.
+
+Carrier accounts belong to Universal PUDO SaaS.
+
+Carrier definitions are not persisted by Universal PUDO SaaS.
+```
+
+The SaaS may expose carrier availability views, but these views are derived from the Engine Carrier Catalog.
 
 ---
 
 # SUCCESS CRITERIA
 
-The model is considered implemented when:
+The carrier integration model is considered implemented when:
 
-✅ Carrier Integration entity exists
-
-✅ Carrier Account entity exists
-
-✅ Ownership boundaries are enforced
-
-✅ SaaS Administrator permissions are enforced
-
-✅ Owner permissions are enforced
-
-✅ Automated tests validate ownership rules
-
+```text
+✅ Universal PUDO Engine owns carrier catalog
+✅ Universal PUDO SaaS does not persist carrier definitions
+✅ CarrierAccount exists
+✅ CarrierCredential exists
+✅ CarrierAccount references Engine carrier through carrier_code
+✅ CarrierCatalogService lists available carriers
+✅ CarrierCatalogService lists organisation carriers
+✅ OrganisationSearchService searches through organisation carriers
+✅ MultiCarrierSearchService provides a SaaS search boundary
+✅ Tests validate the model
 ✅ Documentation remains synchronized
+```
+
+Current status:
+
+```text
+Implemented through Phase 15.
+```
 
 ---
 
@@ -493,14 +746,25 @@ The model is considered implemented when:
 
 Initial Carrier Integration Model created.
 
-Validated business separation:
+The initial model separated:
 
 - Carrier Integration
 - Carrier Account
 
-Validated ownership model:
+---
 
-- SaaS Administrator
-- Organisation Owner
+2026-07-27
 
-Carrier Integration Catalog introduced as official platform entity.
+Carrier Integration Model updated after Universal PUDO Engine Integration.
+
+Updated decisions:
+
+- Universal PUDO Engine owns carrier catalog
+- Universal PUDO SaaS does not persist carrier definitions
+- Universal PUDO SaaS owns CarrierAccount
+- Universal PUDO SaaS owns CarrierCredential
+- CarrierAccount references Engine carriers through carrier_code
+- CarrierIntegration is no longer the active SaaS implementation model
+- MultiCarrierSearchService becomes the SaaS search entry point
+
+Validated through Phase 15.

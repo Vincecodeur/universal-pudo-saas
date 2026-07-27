@@ -1,10 +1,10 @@
 # Universal PUDO SaaS - Architecture
 
-Version: 1.2.0
+Version: 2.0.0
 
-Status: Carrier Repository Foundation Completed
+Status: Universal PUDO Engine Integration Completed
 
-Last Updated: 2026-07-25
+Last Updated: 2026-07-27
 
 ---
 
@@ -15,18 +15,30 @@ This document defines the target architecture of Universal PUDO SaaS.
 The objective is to:
 
 - isolate business responsibilities
-
 - separate SaaS concerns from carrier intelligence
-
 - support multi-tenancy
-
 - support future self-hosted deployments
-
 - preserve long-term maintainability
-
 - keep the product focused on PUDO information access and consumption
+- prevent architectural confusion between Universal PUDO SaaS and Universal PUDO Engine
 
-This document describes the target architecture, validated implementation decisions, and current architectural direction.
+This document describes the target architecture, validated implementation decisions, current architectural state, and next architectural direction.
+
+---
+
+# SOURCE OF TRUTH
+
+Architecture decisions must remain aligned with:
+
+1. Source code
+2. Tests
+3. Database schema
+4. Approved ADRs
+5. Architecture documents
+6. Roadmap
+7. Project documentation
+
+When conflicts exist, source code and tests win.
 
 ---
 
@@ -37,42 +49,41 @@ Universal PUDO SaaS is a multi-tenant application built on top of Universal PUDO
 Universal PUDO SaaS owns:
 
 - authentication
-
 - organisations
-
 - users
-
 - memberships
-
 - tenant access model
-
-- carrier account management
-
+- carrier accounts
+- carrier credentials
+- organisation carrier activation
+- search consumption experience
+- multi-carrier search entry point
 - dashboard configuration
-
 - exports
-
 - administration
-
 - SaaS-level access control
+- future frontend
 
 Universal PUDO Engine owns:
 
 - carrier provider implementations
-
+- carrier integrations
+- carrier clients
+- carrier response parsing
+- carrier mapping
 - pickup point retrieval
-
 - pickup point normalization
-
 - carrier abstraction
-
-- search orchestration
-
+- provider execution
+- provider health
+- carrier lifecycle
+- carrier capabilities
+- carrier catalog implementation
 - carrier intelligence related to PUDO search
 
-The SaaS consumes the Core.
+The SaaS consumes Universal PUDO Engine.
 
-The SaaS must never duplicate Core responsibilities.
+The SaaS must never duplicate Engine responsibilities.
 
 ---
 
@@ -85,35 +96,22 @@ Universal PUDO SaaS exists to provide access to PUDO information.
 The platform must remain focused on:
 
 - pickup point access
-
 - pickup point search
-
 - pickup point visualization
-
 - pickup point analytics
-
 - pickup point consumption
-
 - pickup point data export
 
 The following concepts are out of scope unless directly required for PUDO access or PUDO consumption:
 
 - shipment creation
-
 - label generation
-
 - tracking management
-
 - delivery orchestration
-
 - transport rating
-
 - transport execution
-
 - carrier product catalog management
-
 - carrier service catalog management
-
 - non-PUDO carrier capabilities
 
 This rule protects the product from drifting toward a generic OMS, WMS, TMS, or shipping platform.
@@ -122,94 +120,121 @@ This rule protects the product from drifting toward a generic OMS, WMS, TMS, or 
 
 # HIGH LEVEL ARCHITECTURE
 
+```text
 +-----------------------------+
-| Frontend |
-| Next.js |
-| React |
+| Frontend                    |
+| Next.js / React             |
 +-------------+---------------+
-|
-v
+              |
+              v
 +-----------------------------+
-| FastAPI Backend |
-| Universal PUDO SaaS |
+| FastAPI Backend             |
+| Universal PUDO SaaS         |
 +-------------+---------------+
-|
-v
+              |
+              v
 +-----------------------------+
-| PostgreSQL |
-| universal_pudo_saas |
+| PostgreSQL                  |
+| universal_pudo_saas         |
 +-------------+---------------+
-|
-v
+              |
+              v
 +-----------------------------+
-| Universal PUDO Engine |
-| PUDO Carrier Core |
+| Universal PUDO Engine       |
+| PUDO Carrier Core           |
 +-------------+---------------+
-|
-v
+              |
+              v
 +-----------------------------+
-| Carrier APIs |
+| Carrier APIs                |
 +-----------------------------+
+```
 
 ---
 
 # ARCHITECTURAL PRINCIPLES
 
-## P001
-
-Single Responsibility
+## P001 - Single Responsibility
 
 Each module owns a specific business domain.
 
 ---
 
-## P002
+## P002 - Clear Separation
 
-Clear Separation
+Universal PUDO SaaS manages users, tenants, access, credentials, accounts, and customer-facing workflows.
 
-Universal PUDO SaaS manages users, tenants, access, and customer-facing workflows.
-
-Universal PUDO Engine manages carrier-specific PUDO retrieval and normalization.
+Universal PUDO Engine manages carrier-specific PUDO retrieval, provider execution, carrier metadata, and normalization.
 
 ---
 
-## P003
+## P003 - Independent Databases
 
-Independent Databases
-
-Each product owns its own schema and lifecycle.
+Each product owns its own database lifecycle.
 
 Universal PUDO SaaS uses:
 
+```text
 universal_pudo_saas
+```
 
 Universal PUDO Engine uses:
 
+```text
 universal_pudo
+```
 
 ---
 
-## P004
+## P004 - Security First
 
-Security First
-
-Authentication, tenant access, and credential ownership must be designed before carrier account management.
+Authentication, tenant access, and credential ownership must be designed before carrier account management and operational search usage.
 
 ---
 
-## P005
-
-Documentation Driven Development
+## P005 - Documentation Driven Development
 
 Documentation must be synchronized before phase closure.
 
 ---
 
-## P006
-
-Product Scope Discipline
+## P006 - Product Scope Discipline
 
 The SaaS must only model carrier concepts required for PUDO information access and consumption.
+
+---
+
+## P007 - Phase Planning Freeze
+
+Before starting a new phase, sub-phases, objectives, deliverables, validation criteria, and exit criteria must be frozen.
+
+No phase implementation may start until phase planning is completed.
+
+---
+
+# REPOSITORY OWNERSHIP
+
+The ecosystem follows this ownership principle:
+
+```text
+Engine owns implementation.
+Consumer owns consumption.
+Consumer owns its contract documentation.
+```
+
+For the current SaaS implementation:
+
+```text
+universal-pudo-engine
+    owns carrier functionality
+
+universal-pudo-saas
+    owns SaaS consumption and user-facing workflows
+```
+
+Universal PUDO SaaS owns the Engine ↔ SaaS consumption contract documentation.
+
+Universal PUDO SaaS must not implement carrier-specific provider logic.
 
 ---
 
@@ -217,19 +242,27 @@ The SaaS must only model carrier concepts required for PUDO information access a
 
 Current Strategy:
 
+```text
 SaaS-first
+```
 
 Future Strategy:
 
+```text
 Self-host-ready
+```
 
 Status:
 
+```text
 Validated
+```
 
 ADR:
 
+```text
 ADR-0006
+```
 
 ---
 
@@ -237,15 +270,21 @@ ADR-0006
 
 Decision:
 
+```text
 Monorepo
+```
 
 Status:
 
+```text
 Validated
+```
 
 ADR:
 
+```text
 ADR-0001
+```
 
 ---
 
@@ -253,27 +292,33 @@ ADR-0001
 
 Decision:
 
+```text
 Tenant = Organisation
+```
 
 Status:
 
+```text
 Validated
+```
 
 ADR:
 
+```text
 ADR-0004
+```
 
 Relationship:
 
+```text
 Organisation
-
     ▲
     │
-
 Membership
-│
-▼
+    │
+    ▼
 User
+```
 
 ---
 
@@ -283,11 +328,11 @@ The access model is business-driven.
 
 The platform supports three user types in V1:
 
+```text
 SAAS_ADMIN
-
 OWNER
-
 VIEWER
+```
 
 ---
 
@@ -295,32 +340,26 @@ VIEWER
 
 Scope:
 
+```text
 Platform
+```
 
 Storage Strategy:
 
+```text
 users.is_platform_admin
+```
 
 Responsibilities:
 
 - create organisations
-
 - suspend organisations
-
 - manage subscriptions
-
 - manage quotas
-
 - manage billing
-
 - manage platform operations
-
-- carrier account management
-
-- carrier credential management
-
-- make carrier integrations available to organisation Owners
-
+- manage carrier accounts when required for support or administration
+- manage carrier credential visibility rules when required
 - monitor platform usage
 
 The SaaS Administrator is not scoped to a single organisation.
@@ -331,33 +370,29 @@ The SaaS Administrator is not scoped to a single organisation.
 
 Scope:
 
+```text
 Organisation
+```
 
 Storage Strategy:
 
+```text
 memberships.role = OWNER
+```
 
 Responsibilities:
 
 - create Viewer users
-
 - remove Viewer users
-
 - connect carrier accounts
-
 - configure carrier credentials
-
-- test carrier connectivity
-
+- test carrier connectivity when available
 - enable or disable organisation carrier accounts
-
 - configure dashboards
-
 - configure API access
-
 - manage organisation analytics
 
-The Owner uses only carrier integrations made available by the SaaS Administrator.
+The Owner uses carriers exposed by Universal PUDO Engine and referenced through SaaS Carrier Accounts.
 
 ---
 
@@ -365,22 +400,22 @@ The Owner uses only carrier integrations made available by the SaaS Administrato
 
 Scope:
 
+```text
 Organisation
+```
 
 Storage Strategy:
 
+```text
 memberships.role = VIEWER
+```
 
 Responsibilities:
 
 - search pickup points
-
 - view dashboards
-
 - view analytics
-
 - export search results
-
 - consume PUDO data
 
 Viewer users cannot modify tenant configuration.
@@ -391,21 +426,20 @@ Viewer users cannot modify tenant configuration.
 
 Official decision:
 
+```text
 SAAS_ADMIN -> users.is_platform_admin
-
-OWNER -> memberships.role
-
-VIEWER -> memberships.role
+OWNER      -> memberships.role
+VIEWER     -> memberships.role
+```
 
 Rejected strategy:
 
+```text
 roles table
-
 permissions table
-
 role_permissions table
-
 dynamic RBAC
+```
 
 Reason:
 
@@ -419,45 +453,47 @@ A dynamic RBAC model would introduce unnecessary complexity.
 
 # DOMAIN ARCHITECTURE
 
-Implemented domains:
+## Implemented Domains
 
+```text
 Organisation
-
 User
-
 Membership
-
 Authentication Model
-
 Authentication Service
-
 Authentication API
-
 User Lookup Foundation
-
 Persistence Test Foundation
-
-Validated product domains:
-
 CarrierAccount
-
 CarrierCredential
+Engine Catalog Consumption
+Carrier Catalog Integration
+Engine Search Consumption
+Organisation Search
+Multi-Carrier Search
+```
 
-Future domains:
+## Future Domains
 
-Roles & Permissions Enforcement
-
-Carrier Account Management
-
+```text
+Roles and Permissions Enforcement
 Search Platform
-
 Exports
-
 Administration
-
 Public API
-
 Frontend
+```
+
+## Phase 16 Search Platform Sub-Phases
+
+```text
+16.1 Search Domain Design
+16.2 Search Platform Models Foundation
+16.3 Search Platform Service Foundation
+16.4 Search Result Enrichment Foundation
+16.5 Search Platform Validation
+16.6 Search Platform Closure
+```
 
 ---
 
@@ -467,27 +503,25 @@ Frontend
 
 Purpose:
 
+```text
 Business tenant.
+```
 
 Status:
 
+```text
 Implemented
-
 Persisted
-
 Persistence Validated
+```
 
 Responsibilities:
 
 - owns memberships
-
 - owns carrier accounts
-
-- owns dashboard configuration
-
-- owns search history
-
-- owns API credentials
+- owns future dashboard configuration
+- owns future search platform usage
+- owns future API credentials
 
 ---
 
@@ -495,20 +529,22 @@ Responsibilities:
 
 Purpose:
 
+```text
 Platform identity.
+```
 
 Status:
 
+```text
 Implemented
-
 Persisted
-
 Authentication Ready
-
 Persistence Validated
+```
 
 Validated fields:
 
+```text
 email
 first_name
 last_name
@@ -516,13 +552,8 @@ password_hash
 is_active
 is_verified
 last_login_at
-
-Implemented field:
-
 is_platform_admin
-
-Purpose:
-Stores whether a user is a SaaS Administrator.
+```
 
 ---
 
@@ -530,62 +561,79 @@ Stores whether a user is a SaaS Administrator.
 
 Purpose:
 
+```text
 Connect users to organisations.
+```
 
 Status:
+
+```text
 Implemented
-
 Persisted
-
 Persistence Validated
+```
 
 Current fields:
+
+```text
 organisation_id
 user_id
 role
+```
 
 Role strategy:
+
+```text
 OWNER
 VIEWER
+```
 
 Membership owns organisation-level role assignment.
 
 ---
 
-## CarrierIntegration
+## Engine Carrier Catalog
 
 Purpose:
 
-Represents a carrier integration available on the SaaS platform.
+```text
+Represents carriers exposed by Universal PUDO Engine.
+```
 
 Scope:
 
-Platform
+```text
+Universal PUDO Engine
+```
 
 Owner:
 
-SaaS Administrator
+```text
+Universal PUDO Engine
+```
+
+Status in SaaS:
+
+```text
+Consumed
+Not Persisted
+Read Model Only
+```
 
 Examples:
 
+```text
 COLISSIMO
 MONDIAL_RELAY
 CHRONOPOST
 DPD
 GLS
 UPS
-
-Responsibilities:
-
-- identify available PUDO carrier integrations
-
-- expose integrations to organisation Owners
-
-- control platform-level carrier availability
+```
 
 Important boundary:
 
-CarrierIntegration must not store customer credentials.
+Universal PUDO SaaS does not persist carrier definitions.
 
 ---
 
@@ -593,28 +641,100 @@ CarrierIntegration must not store customer credentials.
 
 Purpose:
 
+```text
 Represents an organisation-specific carrier account.
+```
 
 Scope:
 
+```text
 Organisation
+```
 
 Owner:
 
+```text
 Organisation Owner
+```
 
-Examples:
+Status:
 
-Spriiint Colissimo account
+```text
+Implemented
+Persisted
+Persistence Validated
+Repository Implemented
+Service Implemented
+API Implemented
+```
 
-PrintChic Mondial Relay account
+Current fields:
 
-Responsibilities:
+```text
+id
+organisation_id
+carrier_code
+name
+is_active
+created_at
+updated_at
+```
 
-- store organisation carrier configuration
-- store customer credentials
-- test carrier connectivity
-- enable or disable carrier usage for the organisation
+Boundary:
+
+```text
+CarrierAccount.carrier_code
+        ↓
+Engine Carrier.code
+```
+
+---
+
+## CarrierCredential
+
+Purpose:
+
+```text
+Stores carrier authentication values attached to a CarrierAccount.
+```
+
+Scope:
+
+```text
+CarrierAccount
+```
+
+Owner:
+
+```text
+Organisation Owner
+```
+
+Status:
+
+```text
+Implemented
+Persisted
+Persistence Validated
+Repository Implemented
+Service Implemented
+API Implemented
+```
+
+Current fields:
+
+```text
+id
+carrier_account_id
+credential_key
+credential_value
+created_at
+updated_at
+```
+
+Security boundary:
+
+Credential encryption is required before production usage.
 
 ---
 
@@ -622,22 +742,21 @@ Responsibilities:
 
 Purpose:
 
+```text
 Represents dashboard configuration for an organisation.
+```
 
 Scope:
 
+```text
 Organisation
+```
 
-Owner:
+Status:
 
-Organisation Owner
-
-Responsibilities:
-
-- selected KPIs
-- displayed charts
-- dashboard layout
-- reporting preferences
+```text
+Future
+```
 
 ---
 
@@ -645,75 +764,159 @@ Responsibilities:
 
 Purpose:
 
+```text
 Represents organisation API access configuration.
+```
 
 Scope:
 
+```text
 Organisation
+```
 
-Owner:
+Status:
 
-Organisation Owner
-
-Responsibilities:
-
-- external API access
-- tenant-level API credentials
-- future integration access
+```text
+Future
+```
 
 ---
 
-## SearchHistory
+## Search Platform
 
 Purpose:
 
-Represents historical PUDO searches.
+```text
+Represents the customer-facing search capability.
+```
 
 Scope:
 
+```text
 Organisation
+```
 
-Owner:
+Status:
 
-Organisation
+```text
+Planned
+Phase 16
+```
 
-Responsibilities:
+Persistence:
 
-- usage analytics
-- auditability
-- reporting
-- future operational insights
+```text
+Deferred
+No database table in Phase 16
+```
+
+---
+
+# VALIDATED ENGINE INTEGRATION ARCHITECTURE
+
+The Phase 15 Engine integration is completed.
+
+Validated search architecture:
+
+```text
+MultiCarrierSearchService
+        ↓
+OrganisationSearchService
+        ↓
+CarrierCatalogService
+        ↓
+EngineSearchService
+        ↓
+Universal PUDO Engine
+```
+
+Validated services:
+
+```text
+engine_catalog/
+├── client.py
+├── models.py
+└── service.py
+
+carrier_catalog/
+└── service.py
+
+engine_search/
+├── client.py
+├── models.py
+└── service.py
+
+organisation_search/
+└── service.py
+
+multi_carrier_search/
+└── service.py
+```
+
+Validation:
+
+```text
+Engine Catalog consumed
+Carrier Catalog integrated with CarrierAccount
+Engine Search consumed
+Organisation Search implemented
+MultiCarrierSearchService implemented
+No SaaS carrier catalog persistence
+No Engine modification
+```
 
 ---
 
 # TARGET DOMAIN RELATIONSHIP MODEL
 
-Target future model:
-CarrierIntegration
+Engine and search relationship:
 
+```text
+Universal PUDO Engine
+│
+├── Carrier Catalog
+│
+├── Provider Implementations
+│
+└── Pickup Point Search
+        ▲
         │
-        │ 1
+EngineSearchService
+        ▲
         │
-        ▼
+CarrierCatalogService
+        ▲
+        │
+OrganisationSearchService
+        ▲
+        │
+MultiCarrierSearchService
+        ▲
+        │
+Search Platform
+```
 
-CarrierAccount
-▲
-│
-│ N
-│
+Organisation relationship:
+
+```text
 Organisation
-
-        │
-        ├── Membership
-        │       │
-        │       ▼
-        │      User
-        │
-        ├── DashboardConfiguration
-        │
-        ├── ApiCredential
-        │
-        └── SearchHistory
+│
+├── Membership
+│       │
+│       ▼
+│      User
+│
+├── CarrierAccount
+│       │
+│       ▼
+│      CarrierCredential
+│
+├── Future DashboardConfiguration
+│
+├── Future ApiCredential
+│
+└── Future Search Platform
+```
 
 ---
 
@@ -721,66 +924,85 @@ Organisation
 
 Technology:
 
+```text
 FastAPI
-
 Python 3.14
+```
 
 Status:
 
+```text
 Validated
+```
 
 Current structure:
 
+```text
 src/universal_pudo_saas/
 ├── auth/
-│ ├── **init**.py
-│ ├── routes.py
-│ ├── schemas.py
-│ └── service.py
+│   ├── __init__.py
+│   ├── routes.py
+│   ├── schemas.py
+│   └── service.py
 ├── carrier_accounts/
-│ ├── models.py
-│ └── repository.py
+│   ├── models.py
+│   ├── repository.py
+│   ├── router.py
+│   ├── schemas.py
+│   └── service.py
+├── carrier_catalog/
+│   └── service.py
 ├── carrier_credentials/
-│ ├── models.py
-│ └── repository.py
+│   ├── models.py
+│   ├── repository.py
+│   ├── router.py
+│   ├── schemas.py
+│   └── service.py
 ├── core/
 ├── database/
-│ ├── base.py
-│ ├── metadata.py
-│ └── session.py
+│   ├── base.py
+│   ├── metadata.py
+│   └── session.py
+├── engine_catalog/
+│   ├── __init__.py
+│   ├── client.py
+│   ├── models.py
+│   └── service.py
+├── engine_search/
+│   ├── __init__.py
+│   ├── client.py
+│   ├── models.py
+│   └── service.py
 ├── memberships/
-│ └── models.py
+│   └── models.py
+├── multi_carrier_search/
+│   └── service.py
+├── organisation_search/
+│   └── service.py
 ├── organisations/
-│ └── models.py
+│   └── models.py
 ├── security/
-│ ├── passwords.py
-│ └── tokens.py
+│   ├── passwords.py
+│   └── tokens.py
 ├── shared/
-│ └── entities.py
+│   └── entities.py
 ├── users/
-│ ├── models.py
-│ └── repository.py
+│   ├── models.py
+│   └── repository.py
 └── main.py
+```
 
 Planned structure:
 
-carrier_integrations/
-
-carrier_accounts/
-
-dashboard_configurations/
-
-api_credentials/
-
-search/
-
-roles/
-
-permissions/
-
+```text
+search_platform/
 exports/
-
 administration/
+frontend/
+public_api/
+```
+
+No planned SaaS `carrier_integrations/` module exists under the current Engine-owned carrier catalog strategy.
 
 ---
 
@@ -788,51 +1010,50 @@ administration/
 
 Technology:
 
+```text
 PostgreSQL 17
-
 SQLAlchemy
-
 Alembic
+```
 
 Status:
 
+```text
 Validated
+```
 
 Database:
 
+```text
 universal_pudo_saas
+```
 
 Current tables:
 
+```text
 alembic_version
-
 organisations
-
 users
-
 memberships
-
 carrier_accounts
-
 carrier_credentials
+```
 
-Planned tables:
+No SaaS carrier catalog table exists.
 
-carrier_integrations
+No SaaS carrier integration table exists.
 
+No search persistence table exists for Phase 16.
+
+Future possible tables:
+
+```text
 dashboard_configurations
-
 api_credentials
-
-search_history
-
-Planned columns:
-
-memberships.role with values:
-
-- OWNER
-
-- VIEWER
+future_search_history
+future_exports
+future_audit_events
+```
 
 ---
 
@@ -842,27 +1063,22 @@ memberships.role with values:
 
 Owner:
 
+```text
 Universal PUDO SaaS
+```
 
 Responsibilities:
 
 - identities
-
 - organisations
-
 - memberships
-
 - tenant access
-
 - carrier accounts
-
-- dashboard configuration
-
-- API credentials
-
-- search history
-
-- administration data
+- carrier credentials
+- future dashboard configuration
+- future API credentials
+- future search history
+- future administration data
 
 ---
 
@@ -870,67 +1086,56 @@ Responsibilities:
 
 Owner:
 
+```text
 Universal PUDO Engine
+```
 
 Responsibilities:
 
 - carrier provider implementations
-
+- carrier catalog implementation
+- carrier metadata
+- carrier lifecycle
+- carrier capabilities
 - PUDO search execution
-
 - pickup point normalization
-
 - provider-specific carrier logic
 
 ---
 
 # TEST ARCHITECTURE
 
-Current test suites:
+Current validated test coverage includes:
 
-test_main.py
+```text
+authentication tests
+settings tests
+entity tests
+organisation tests
+user tests
+membership tests
+persistence tests
+carrier account tests
+carrier credential tests
+carrier catalog tests
+engine catalog tests
+engine search tests
+organisation search tests
+multi-carrier search tests
+```
 
-test_settings.py
+Current latest known result:
 
-test_entities.py
-
-test_organisation.py
-
-test_user.py
-
-test_membership.py
-
-test_passwords.py
-
-test_tokens.py
-
-test_auth_service.py
-
-test_auth_api.py
-
-test_organisation_persistence.py
-
-test_user_persistence.py
-
-test_membership_persistence.py
-
-test_carrier_credential_persistence.py
-
-test_carrier_account_repository.py
-
-test_carrier_credential_repository.py
-
-test_carrier_account.py
-
-test_carrier_account_persistence.py
-
-test_carrier_credential.py
-
-Current result:
-
-77 passed
-
+```text
+136 passed
 0 failed
+```
+
+Known warning:
+
+```text
+StarletteDeprecationWarning
+```
 
 ---
 
@@ -942,7 +1147,9 @@ Model Tests
 
 Status:
 
+```text
 Implemented
+```
 
 ---
 
@@ -952,19 +1159,19 @@ Persistence Tests
 
 Status:
 
+```text
 Implemented
+```
 
 Validated:
 
+```text
 session.add()
-
 session.commit()
-
 session.refresh()
-
 session.get()
-
 session.delete()
+```
 
 ---
 
@@ -974,7 +1181,9 @@ Service Tests
 
 Status:
 
+```text
 Implemented
+```
 
 ---
 
@@ -984,7 +1193,9 @@ API Tests
 
 Status:
 
-Implemented
+```text
+Implemented for current carrier and auth APIs
+```
 
 ---
 
@@ -994,7 +1205,9 @@ Permission Tests
 
 Status:
 
+```text
 Planned
+```
 
 ---
 
@@ -1004,7 +1217,9 @@ Integration Tests
 
 Status:
 
+```text
 Planned
+```
 
 ---
 
@@ -1012,43 +1227,37 @@ Planned
 
 Validated operations:
 
+```text
 session.add()
-
 session.commit()
-
 session.refresh()
-
 session.get()
-
 session.delete()
+```
 
 Validated persistence layers:
 
+```text
 Organisation Persistence
-
 User Persistence
-
 Membership Persistence
-
 CarrierAccount Persistence
-
 CarrierCredential Persistence
-
 CarrierAccount Repository
-
 CarrierCredential Repository
+```
 
 Validated database operations:
 
+```text
 PostgreSQL Write
-
 PostgreSQL Read
-
 Entity Retrieval
-
 Entity Deletion
-
 Foreign Key Persistence
+```
+
+Search Platform persistence is deferred.
 
 ---
 
@@ -1056,123 +1265,89 @@ Foreign Key Persistence
 
 Validated dependencies:
 
+```text
 passlib 1.7.4
-
 bcrypt 4.3.0
-
 python-jose
-
 cryptography
-
-Current status:
-
-Authentication API Foundation completed.
+```
 
 Implemented:
 
+```text
 Password Hashing Service
-
 hash_password()
-
 verify_password()
-
 JWT Service
-
 create_access_token()
-
 decode_access_token()
-
 Authentication Service
-
 authenticate_user()
-
 create_user_token()
-
 Authentication API
-
 POST /auth/login
-
 GET /auth/me
-
 JWT Authentication Flow
-
 User Lookup Foundation
-
 Repository-Based Authentication
+```
 
 Not yet implemented:
 
+```text
 Role Enforcement
-
 Permission Enforcement
-
 Refresh Tokens
-
 Password Reset
-
 Email Verification
+Credential Encryption Hardening
+```
 
 ---
 
 # AUTHENTICATION ARCHITECTURE
 
+```text
 security/
-
 ├── passwords.py
-
 └── tokens.py
 
 auth/
-
-├── **init**.py
-
+├── __init__.py
 ├── schemas.py
-
 ├── routes.py
-
 └── service.py
 
 users/
-
 └── repository.py
+```
 
 Endpoints:
 
+```text
 POST /auth/login
-
 GET /auth/me
+```
 
 Flow:
 
+```text
 Login Request
-
-↓
-
+        ↓
 Repository Lookup
-
-↓
-
+        ↓
 authenticate_user()
-
-↓
-
+        ↓
 create_user_token()
-
-↓
-
+        ↓
 JWT
-
-↓
-
+        ↓
 GET /auth/me
-
-↓
-
+        ↓
 decode_access_token()
-
-↓
-
+        ↓
 CurrentUserResponse
+```
 
 ---
 
@@ -1180,75 +1355,74 @@ CurrentUserResponse
 
 Current status:
 
+```text
 Documented
+Partially implemented
+```
 
 Implemented in code:
 
-✅ users.is_platform_admin
-
-✅ memberships.role strategy
+```text
+users.is_platform_admin
+memberships.role strategy
+```
 
 Permission enforcement remains planned.
 
 Validated documents:
 
+```text
 product-vision.md
-
 access-model.md
-
 permission-matrix.md
-
 carrier-integration-model.md
-
 role-strategy.md
-
-Planned implementation:
-
-users.is_platform_admin
-
-memberships.role
-
-Role values:
-
-OWNER
-
-VIEWER
-
-Platform admin flag:
-
-is_platform_admin
-
-Permission enforcement:
-
-Planned
+```
 
 ---
 
-# CARRIER INTEGRATION ARCHITECTURE
+# CARRIER ARCHITECTURE
 
-The platform separates two concepts:
+The active carrier architecture separates:
 
-CarrierIntegration
-
+```text
+Engine Carrier Catalog
 CarrierAccount
+CarrierCredential
+```
 
-## CarrierIntegration
+The SaaS does not own CarrierIntegration as an active persisted entity.
+
+---
+
+## Engine Carrier Catalog
 
 Scope:
 
-Platform
+```text
+Universal PUDO Engine
+```
 
 Owner:
 
-SaaS Administrator
+```text
+Universal PUDO Engine
+```
 
-Represents:
+Status in SaaS:
 
-A carrier integration available in the SaaS platform.
+```text
+Consumed
+Not Persisted
+```
 
-Status:
+SaaS consumption:
 
-Planned
+```text
+engine_catalog/models.py
+engine_catalog/client.py
+engine_catalog/service.py
+```
 
 ---
 
@@ -1256,21 +1430,29 @@ Planned
 
 Status:
 
+```text
 Implemented
 Persisted
 Persistence Validated
+```
 
 Purpose:
 
+```text
 Organisation-specific carrier configuration.
+```
 
 Reference:
 
+```text
 carrier_code
+```
 
 Boundary:
 
+```text
 Carrier catalog remains owned by Universal PUDO Engine.
+```
 
 ---
 
@@ -1278,17 +1460,101 @@ Carrier catalog remains owned by Universal PUDO Engine.
 
 Status:
 
+```text
 Implemented
 Persisted
 Persistence Validated
+```
 
 Purpose:
 
+```text
 Stores carrier authentication values attached to a CarrierAccount.
+```
 
 Security boundary:
 
-Encryption is not part of this phase.
+```text
+Encryption hardening remains future work.
+```
+
+---
+
+# SEARCH ARCHITECTURE
+
+Search is a primary platform capability.
+
+The goal is to expose an organisation-facing search capability without duplicating Engine search responsibilities.
+
+Validated Phase 15 chain:
+
+```text
+MultiCarrierSearchService
+        ↓
+OrganisationSearchService
+        ↓
+CarrierCatalogService
+        ↓
+EngineSearchService
+        ↓
+Universal PUDO Engine
+```
+
+Future Phase 16 chain:
+
+```text
+SearchPlatformService
+        ↓
+MultiCarrierSearchService
+        ↓
+OrganisationSearchService
+        ↓
+CarrierCatalogService
+        ↓
+EngineSearchService
+        ↓
+Universal PUDO Engine
+```
+
+Phase 16 is non-persistent.
+
+Search persistence is deferred.
+
+---
+
+# PHASE 16 SEARCH PLATFORM ARCHITECTURE
+
+Phase 16 introduces the Search Platform foundation.
+
+Sub-phases:
+
+```text
+16.1 Search Domain Design
+16.2 Search Platform Models Foundation
+16.3 Search Platform Service Foundation
+16.4 Search Result Enrichment Foundation
+16.5 Search Platform Validation
+16.6 Search Platform Closure
+```
+
+Phase 16 may introduce:
+
+```text
+SearchRequest
+SearchResult
+SearchPlatformService
+```
+
+Phase 16 must not introduce:
+
+```text
+Search SQLAlchemy model
+SearchResult table
+SearchHistory table
+Alembic migration
+Search persistence
+Search retention policy
+```
 
 ---
 
@@ -1296,83 +1562,70 @@ Encryption is not part of this phase.
 
 Completed:
 
+```text
 Documentation Foundation
-
 Repository Foundation
-
 Architecture Foundation
-
 ADR Foundation
-
 Domain Model Design
-
 Database Model Design
-
 Persistence Decisions
-
 Backend Foundation
-
 Database Configuration Foundation
-
 Alembic Foundation
-
 Organisation Foundation
-
 Users Foundation
-
 Membership Foundation
-
 Authentication Model Foundation
-
 Password Hashing Foundation
-
 JWT Foundation
-
 Authentication Service Foundation
-
 Authentication API Foundation
-
 Persistence Test Foundation
+Tenant Access Foundation
+Role Persistence Foundation
+Carrier Account Management
+Carrier Account SQLAlchemy Foundation
+Carrier Credential Foundation
+Carrier Account Repository Foundation
+Carrier Credential Repository Foundation
+Carrier Account Service Foundation
+Carrier Credential Service Foundation
+Carrier Account API Foundation
+Carrier Credential API Foundation
+Engine Catalog Foundation
+Carrier Catalog Integration Service
+Engine Search Foundation
+Organisation Search Foundation
+Multi-Carrier Execution Foundation
+Universal PUDO Engine Integration Closure
+```
 
 Current:
 
-Carrier Account Management
-
-Carrier Repository Foundation Completed
-
-Carrier Account Service Foundation Planned
+```text
+Phase 16.1 Search Domain Design
+```
 
 Future:
 
-Carrier Account Service Foundation
-
-Carrier Credential Service Foundation
-
-Carrier Account API Foundation
-
-Carrier Credential API Foundation
-
-Permission Enforcement Foundation
-
-Search Platform
-
-Exports
-
-Administration
-
-Public API
-
-Frontend
-
-Search Platform
-
-Exports
-
-Administration
-
-Public API
-
-Frontend
+```text
+16.2 Search Platform Models Foundation
+16.3 Search Platform Service Foundation
+16.4 Search Result Enrichment Foundation
+16.5 Search Platform Validation
+16.6 Search Platform Closure
+17 Map Experience
+18 Export Platform
+19 Administration Portal
+20 Public API Foundation
+21 Observability And Audit
+22 Security Hardening
+23 Frontend Foundation
+24 Core Upgrade Strategy
+25 Release Preparation
+26 Universal PUDO SaaS v1.0.0
+```
 
 ---
 
@@ -1380,69 +1633,98 @@ Frontend
 
 Architecture Status:
 
-Stable
+```text
+Stable after Phase 15
+```
 
 Database Status:
 
+```text
 Stable
+```
 
 Authentication Status:
 
+```text
 Completed
+```
 
 Persistence Status:
 
-Completed
+```text
+Completed for current entities
+```
 
 Access Model Status:
 
+```text
 Documented
+Partially implemented
+```
 
 Role Storage Strategy:
 
+```text
 Approved
+```
+
+Engine Integration Status:
+
+```text
+Completed
+```
+
+Search Platform Status:
+
+```text
+Planned
+Phase 16.1 next
+```
 
 Testing Status:
 
-77 passed
-
+```text
+136 passed
 0 failed
+```
 
 Documentation Status:
 
-In Progress
+```text
+Being realigned for Phase 16
+```
 
 ---
 
 # NEXT ARCHITECTURAL MILESTONE
 
-Carrier Account Service Foundation
+```text
+Phase 16.1 Search Domain Design
+```
 
 Deliverables:
 
-carrier_accounts/service.py
-
-carrier_credentials/service.py
-
-Business validation rules
-
-Service tests
+```text
+docs/search-domain.md
+Search Platform domain definition
+SearchRequest business definition
+SearchResult business definition
+Search Platform scope boundaries
+Persistence boundary confirmation
+Map and Export preparation boundaries
+```
 
 Success Criteria:
 
-Carrier Account service created
-
-Carrier Credential service created
-
-Business validation rules implemented
-
-Service tests passing
-
-Services ready for API layer
-
-No dynamic RBAC tables introduced
-
-Automated tests passing
+```text
+Search domain vocabulary defined
+Search Platform responsibilities defined
+SearchRequest and SearchResult concepts clarified
+No SQL persistence introduced
+No Engine modification required
+Phase 16.2 ready to start
+Documentation synchronized
+```
 
 ---
 
@@ -1454,7 +1736,9 @@ SaaS Administrator storage
 
 Decision:
 
+```text
 users.is_platform_admin
+```
 
 Reason:
 
@@ -1468,7 +1752,9 @@ Owner and Viewer storage
 
 Decision:
 
+```text
 memberships.role
+```
 
 Reason:
 
@@ -1482,7 +1768,9 @@ No dynamic RBAC for V1
 
 Decision:
 
+```text
 No role table, permission table, or role-permission table for V1.
+```
 
 Reason:
 
@@ -1492,15 +1780,18 @@ The platform currently supports fixed business roles.
 
 ## AD-004
 
-Carrier Integration and Carrier Account separation
+Engine-owned carrier catalog
 
 Decision:
 
-CarrierIntegration and CarrierAccount remain separate entities.
+```text
+Universal PUDO Engine owns carrier catalog.
+Universal PUDO SaaS does not persist carrier definitions.
+```
 
 Reason:
 
-Platform carrier availability and customer carrier configuration are different business concepts.
+The Engine is the single source of truth for carrier functionality.
 
 ---
 
@@ -1510,11 +1801,29 @@ PUDO scope guardrail
 
 Decision:
 
+```text
 The SaaS only models carrier concepts required for PUDO access and consumption.
+```
 
 Reason:
 
 Avoid drifting toward a generic shipping, OMS, WMS, TMS, or carrier capability platform.
+
+---
+
+## AD-006
+
+Phase 16 non-persistent search foundation
+
+Decision:
+
+```text
+Phase 16 introduces Search Platform models and services without SQL persistence.
+```
+
+Reason:
+
+Search persistence must be decided after the Search Platform domain contract is stable.
 
 ---
 
@@ -1526,17 +1835,19 @@ Authentication API Foundation completed.
 
 Implemented:
 
+```text
 POST /auth/login
-
 GET /auth/me
-
 JWT Authentication Flow
-
 User Lookup Foundation
-
 Repository-Based Authentication
+```
 
+Result:
+
+```text
 42 automated tests passing.
+```
 
 ---
 
@@ -1546,61 +1857,32 @@ Persistence Test Foundation completed.
 
 Implemented:
 
+```text
 test_organisation_persistence.py
-
 test_user_persistence.py
-
 test_membership_persistence.py
+```
 
 Validated:
 
+```text
 session.add()
-
 session.commit()
-
 session.refresh()
-
 session.get()
-
 session.delete()
-
 PostgreSQL reads
-
 PostgreSQL writes
-
 Foreign key persistence
+```
 
+Result:
+
+```text
 52 automated tests passing.
+```
 
 ---
-
-2026-07-25
-
-Tenant Access Foundation started.
-
-Validated documents:
-
-product-vision.md
-
-access-model.md
-
-permission-matrix.md
-
-carrier-integration-model.md
-
-role-strategy.md
-
-Validated decisions:
-
-SAAS_ADMIN -> users.is_platform_admin
-
-OWNER -> memberships.role
-
-VIEWER -> memberships.role
-
-CarrierIntegration != CarrierAccount
-
-Universal PUDO SaaS remains PUDO-focused
 
 2026-07-25
 
@@ -1608,21 +1890,29 @@ Carrier Account Persistence Foundation completed.
 
 Implemented:
 
-- carrier_accounts/models.py
-- carrier_credentials/models.py
-- carrier_accounts table
-- carrier_credentials table
-- Carrier Account persistence tests
-- Carrier Credential persistence tests
+```text
+carrier_accounts/models.py
+carrier_credentials/models.py
+carrier_accounts table
+carrier_credentials table
+Carrier Account persistence tests
+Carrier Credential persistence tests
+```
 
 Validated:
 
-- carrier_code strategy
-- Engine-owned Carrier Catalog
-- SaaS-owned Carrier Accounts
-- SaaS-owned Carrier Credentials
+```text
+carrier_code strategy
+Engine-owned Carrier Catalog
+SaaS-owned Carrier Accounts
+SaaS-owned Carrier Credentials
+```
 
+Result:
+
+```text
 73 automated tests passing.
+```
 
 ---
 
@@ -1632,19 +1922,24 @@ Carrier Account Repository Foundation completed.
 
 Implemented:
 
-- carrier_accounts/repository.py
-- test_carrier_account_repository.py
+```text
+carrier_accounts/repository.py
+test_carrier_account_repository.py
+```
 
 Validated:
 
-- get_carrier_account()
-- list_carrier_accounts_by_organisation()
+```text
+get_carrier_account()
+list_carrier_accounts_by_organisation()
+```
 
 Result:
 
+```text
 75 passed
-
 0 failed
+```
 
 ---
 
@@ -1654,16 +1949,43 @@ Carrier Credential Repository Foundation completed.
 
 Implemented:
 
-- carrier_credentials/repository.py
-- test_carrier_credential_repository.py
+```text
+carrier_credentials/repository.py
+test_carrier_credential_repository.py
+```
 
 Validated:
 
-- get_carrier_credential()
-- list_credentials_by_carrier_account()
+```text
+get_carrier_credential()
+list_credentials_by_carrier_account()
+```
 
 Result:
 
+```text
 77 passed
-
 0 failed
+```
+
+---
+
+2026-07-27
+
+Architecture updated after Universal PUDO Engine Integration.
+
+Updated decisions:
+
+- Universal PUDO Engine owns carrier catalog
+- Universal PUDO SaaS does not persist carrier definitions
+- CarrierIntegration is no longer an active SaaS persistence model
+- Phase 15 Engine integration chain documented
+- Search Platform Phase 16 structure documented
+- Search persistence deferred
+
+Current validated result:
+
+```text
+136 passed
+0 failed
+```
