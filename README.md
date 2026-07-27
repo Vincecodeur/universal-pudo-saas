@@ -1,9 +1,7 @@
 # Universal PUDO SaaS
 
-Version: 1.7.0
-
-Status: Search Domain Design In Progress
-
+Version: 1.8.0
+Status: Search Platform Models Foundation Completed
 Last Updated: 2026-07-27
 
 ---
@@ -76,14 +74,17 @@ Universal PUDO SaaS stores carrier_code as a logical reference to carriers expos
 
 Current Phase:
 
-Phase 16.1
-Search Domain Design
+Phase 16.2
+Search Platform Models Foundation
 
 Status:
-
-In Progress
+Completed ✅
 
 Completed Milestones:
+
+✅ Phase 16.1 Search Domain Design
+
+✅ Phase 16.2 Search Platform Models Foundation
 
 ✅ Phase 15.1 Engine Catalog Foundation
 
@@ -170,6 +171,12 @@ Backend
 ✅ Organisation Search Service
 
 ✅ Engine Search Models
+
+✅ Search Platform Models
+
+✅ SearchRequest
+
+✅ SearchResult
 
 ✅ Engine Search Client
 
@@ -315,9 +322,11 @@ Testing
 
 ✅ test_user_platform_admin.py
 
+✅ test_search_platform_models.py
+
 Result:
 
-136 passed
+142 passed
 
 0 failed
 
@@ -407,6 +416,17 @@ EngineSearchService
 
 Universal PUDO Engine Search API
 
+SearchPlatformService
+│
+├── SearchRequest
+└── SearchResult
+
+Status:
+
+✅ DTO Implemented
+
+🔜 Service Planned
+
 Status:
 
 ✅ Implemented
@@ -452,6 +472,10 @@ UNIVERSAL-PUDO-SAAS/
 │ │ │ ├── models.py
 │ │ │ ├── client.py
 │ │ │ └── service.py
+
+│ │ ├── search_platform/
+│ │ │ ├── **init**.py
+│ │ │ └── models.py
 
 │ │ ├── carrier_catalog/
 │ │ │ ├── **init**.py
@@ -778,24 +802,25 @@ Frontend
 
 # NEXT MILESTONE
 
-Phase 16.1
+Phase 16.3
 
-Search Domain Design
+Search Platform Service Foundation
 
 Objectives:
 
-- Define Search Platform scope
-- Define SearchRequest concept
-- Define SearchResult concept
-- Define Search Platform boundaries
-- Confirm persistence boundaries
-- Prepare Phase 16.2
+Objectives:
+
+- create SearchPlatformService
+- consume SearchRequest
+- produce SearchResult
+- orchestrate search workflow
+- prepare future API layer
 
 ---
 
 # FUTURE ROADMAP
 
-Search Platform
+Search Platform Service
 ↓
 Map Experience
 ↓
@@ -868,7 +893,7 @@ Migrations:
 
 Tests:
 
-✅ 136 passed
+✅ 142 passed
 
 Documentation:
 

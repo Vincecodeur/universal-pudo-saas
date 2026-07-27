@@ -238,7 +238,8 @@ The SaaS owns:
 - authentication
 - permissions
 - carrier credential management
-- carrier integration catalog
+- carrier account management
+- carrier activation workflows
 - dashboard administration
 - exports
 - administration
@@ -342,9 +343,9 @@ Responsibilities:
 - manage quotas
 - manage billing
 - manage platform operations
-- manage carrier integration catalog
-- publish carrier integrations
-- expose carrier integrations to Owners
+- publish carriers
+- manage carrier visibility
+- manage carrier availability for organisations
 
 ---
 
@@ -407,7 +408,15 @@ Examples:
 - GLS
 - UPS
 
-The SaaS Administrator manages the Carrier Integration Catalog.
+The Carrier Catalog is owned by Universal PUDO Engine.
+
+The SaaS Administrator controls:
+
+- carrier publication
+- carrier visibility
+- carrier availability for organisations
+
+without owning carrier definitions.
 
 The SaaS Administrator decides which integrations are available to Owners.
 
@@ -649,15 +658,15 @@ without custom carrier development.
 
 Current Phase:
 
-Phase 13
+Phase 16.3
 
 Status:
 
-Access Model Foundation
+Search Platform Service Foundation
 
-Next Major Objective:
+Current Focus:
 
-Validate Access Model and Permission Matrix before RBAC implementation.
+Search Platform implementation
 
 ---
 
@@ -709,3 +718,33 @@ Validated separation:
 Confirmed product focus:
 
 PUDO information access, search, visualization and consumption.
+
+---
+
+2026-07-26
+
+Carrier Catalog ownership realigned.
+
+Validated:
+
+- Universal PUDO Engine owns carrier catalog definitions.
+- Universal PUDO SaaS consumes carrier catalog data.
+- SaaS stores carrier accounts only.
+- SaaS stores carrier credentials only.
+
+---
+
+2026-07-27
+
+Search Platform introduced.
+
+Validated:
+
+- SearchRequest
+- SearchResult
+- SaaS-owned search abstraction layer
+- Search Platform responsibility boundary
+
+Result:
+
+142 automated tests passing.
