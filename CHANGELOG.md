@@ -8,6 +8,24 @@ The format follows a milestone-based approach.
 
 ## [1.8.0-draft] - 2026-07-27
 
+## Phase 15.4 - Organisation Search Foundation
+
+Added:
+
+- organisation_search/service.py
+- test_organisation_search_service.py
+
+Implemented:
+
+- organisation-based pickup point search
+- carrier filtering based on organisation activation
+- PickupPoint aggregation across organisation carriers
+
+Validation:
+
+133 passed
+0 failed
+
 ### Documentation
 
 Phase 15 roadmap finalized.

@@ -76,9 +76,9 @@ Universal PUDO SaaS stores carrier_code as a logical reference to carriers expos
 
 Current Phase:
 
-Phase 15.4
+Phase 15.5
 
-Organisation Search Foundation
+Multi-Carrier Execution Foundation
 
 Status:
 
@@ -91,6 +91,8 @@ Completed Milestones:
 ✅ Phase 15.2 Carrier Catalog Integration Service
 
 ✅ Phase 15.3 Engine Search Foundation
+
+✅ Phase 15.4 Organisation Search Foundation
 
 ✅ Documentation Foundation
 
@@ -157,6 +159,10 @@ Completed Milestones:
 # IMPLEMENTED FOUNDATIONS
 
 Backend
+
+✅ Organisation Search Foundation
+
+✅ Organisation Search Service
 
 ✅ Engine Search Models
 
@@ -242,6 +248,8 @@ Universal PUDO SaaS database
 
 Testing
 
+✅ test_organisation_search_service.py
+
 ✅ test_engine_search_models.py
 
 ✅ test_engine_search_client.py
@@ -302,7 +310,7 @@ Testing
 
 Result:
 
-130 passed
+133 passed
 
 0 failed
 
@@ -439,6 +447,10 @@ UNIVERSAL-PUDO-SAAS/
 │ │ │ └── service.py
 
 │ │ ├── carrier_catalog/
+│ │ │ ├── **init**.py
+│ │ │ └── service.py
+
+│ │ ├── organisation_search/
 │ │ │ ├── **init**.py
 │ │ │ └── service.py
 
@@ -755,15 +767,17 @@ Frontend
 
 # NEXT MILESTONE
 
-Phase 15.4
+Phase 15.5
 
-Organisation Search Foundation
+Multi-Carrier Execution Foundation
 
 Objectives:
 
-- Connect organisation carrier accounts with Engine Search
-- Search only through activated organisation carriers
-- Prepare Multi-Carrier Execution
+- Execute searches across multiple activated carriers
+- Aggregate pickup point results
+- Preserve SaaS ownership of orchestration
+- Preserve Engine ownership of carrier integrations
+- Prepare Search Platform
 
 ---
 
@@ -771,15 +785,11 @@ Objectives:
 
 Universal PUDO Engine Integration
 ↓
-Organisation Search Foundation
-↓
 Multi-Carrier Execution Foundation
 ↓
+Universal PUDO Engine Integration Closure
+↓
 Search Platform
-↓
-Map Experience
-↓
-Export Platform
 ↓
 Map Experience
 ↓
@@ -852,7 +862,7 @@ Migrations:
 
 Tests:
 
-✅ 130 passed
+✅ 133 passed
 
 Documentation:
 

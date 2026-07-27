@@ -192,10 +192,10 @@ Completed:
 ✅ Phase 15.1 Engine Catalog Foundation
 ✅ Phase 15.2 Carrier Catalog Integration Service
 ✅ Phase 15.3 Engine Search Foundation
+✅ Phase 15.4 Organisation Search Foundation
 
 Planned:
 
-⏳ Phase 15.4 Organisation Search Foundation
 ⏳ Phase 15.5 Multi-Carrier Execution Foundation
 ⏳ Phase 15.6 Universal PUDO Engine Integration Closure
 
@@ -330,6 +330,10 @@ Authentication Columns
 ---
 
 # IMPLEMENTED FOUNDATIONS
+
+✅ Organisation Search Foundation
+
+✅ Organisation Search Service
 
 ✅ Engine Search Foundation
 
@@ -609,6 +613,22 @@ Validated:
 
 Validated Test Suites
 
+✅ test_engine_catalog_models.py
+
+✅ test_engine_catalog_client.py
+
+✅ test_engine_catalog_service.py
+
+✅ test_engine_search_models.py
+
+✅ test_engine_search_client.py
+
+✅ test_engine_search_service.py
+
+✅ test_carrier_catalog_service.py
+
+✅ test_organisation_search_service.py
+
 ✅ test_main.py
 
 ✅ test_settings.py
@@ -657,7 +677,7 @@ Validated Test Suites
 
 Current Result
 
-130 passed
+133 passed
 
 0 failed
 
@@ -666,6 +686,10 @@ Current Result
 # CURRENT CODE STATUS
 
 Implemented
+
+✅ Organisation Search Service
+
+✅ organisation_search/service.py
 
 ✅ Engine Search Models
 
@@ -907,9 +931,19 @@ Lesson 022
 
 Engine Search Foundation must remain read-only and must not introduce search persistence, SaaS-side search orchestration, or Engine modifications.
 
+Lesson 023
+
+Before starting any new phase, all sub-phases, objectives, deliverables, validation criteria and exit criteria must be frozen.
+
+No phase implementation may start until phase planning is completed.
+
+This rule exists to prevent roadmap zig-zagging and architectural redefinition during implementation.
+
 ---
 
 # CURRENT PROJECT WORKFLOW
+
+0. Phase Planning Freeze
 
 1. Development
 
@@ -934,6 +968,10 @@ Engine Search Foundation must remain read-only and must not introduce search per
 # CURRENT PROJECT STATE
 
 Completed
+
+✅ Engine Search Foundation
+
+✅ Organisation Search Foundation
 
 ✅ Documentation Foundation
 
@@ -993,36 +1031,29 @@ Completed
 
 Current Focus
 
-Phase 15.4
+Phase 15.5
 
-Organisation Search Foundation
+Multi-Carrier Execution Foundation
 
 ---
 
 # NEXT MILESTONE
 
-Phase 15.4
+Phase 15.5
 
-Organisation Search Foundation
+Multi-Carrier Execution Foundation
 
 Objectives:
 
-- Connect Organisation
-- CarrierAccount
-- CarrierCatalogService
-- EngineSearchService
-
-Goal:
-
-Allow organisations to search pickup points only through activated carriers.
-``
+- Execute searches across multiple activated carriers
+- Aggregate pickup point results
+- Preserve SaaS ownership of orchestration
+- Preserve Engine ownership of carrier integrations
 
 ---
 
 # FUTURE MILESTONES
 
-Phase 15.4 Organisation Search Foundation
-↓
 Phase 15.5 Multi-Carrier Execution Foundation
 ↓
 Phase 15.6 Universal PUDO Engine Integration Closure
@@ -1301,9 +1332,12 @@ Phase 15 expanded.
 
 Added:
 
-- Phase 15.4 Adapter Layer Foundation
-- Phase 15.5 Multi-Carrier Execution Foundation
-- Phase 15.6 Universal PUDO Engine Integration Closure
+✅ Phase 15.1 Engine Catalog Foundation
+✅ Phase 15.2 Carrier Catalog Integration Service
+✅ Phase 15.3 Engine Search Foundation
+✅ Phase 15.4 Organisation Search Foundation
+⏳ Phase 15.5 Multi-Carrier Execution Foundation
+⏳ Phase 15.6 Universal PUDO Engine Integration Closure
 
 Reason:
 
@@ -1316,3 +1350,25 @@ Original Phase 15 objectives included:
 After completing Engine Search Foundation, remaining objectives were still outstanding.
 
 Roadmap updated to explicitly represent remaining Universal PUDO Engine integration work before Phase 16 Search Platform.
+
+---
+
+2026-07-27
+
+Organisation Search Foundation completed.
+
+Implemented:
+
+- organisation_search/service.py
+- test_organisation_search_service.py
+
+Validated:
+
+- organisation-based pickup point search
+- organisation carrier filtering
+- aggregation of organisation carrier results
+
+Result:
+
+133 passed
+0 failed

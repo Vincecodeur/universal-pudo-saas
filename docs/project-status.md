@@ -2,7 +2,7 @@
 
 Version: 1.7.0
 
-Status: Organisation Search Foundation Planned
+Status: Multi-Carrier Execution Foundation Planned
 
 Last Updated: 2026-07-27
 
@@ -28,7 +28,7 @@ universal-pudo-saas
 
 Lifecycle Stage:
 
-Phase 15.4 Organisation Search Foundation
+Phase 15.5 Multi-Carrier Execution Foundation
 
 Planned
 
@@ -41,10 +41,10 @@ Application Layer built on top of Universal PUDO Engine.
 # CURRENT PHASE
 
 Phase:
-15.4
+15.5
 
 Name:
-Organisation Search Foundation
+Multi-Carrier Execution Foundation
 
 Status:
 Planned
@@ -52,6 +52,12 @@ Planned
 ---
 
 # COMPLETED MILESTONES
+
+✅ Organisation Search Foundation
+
+✅ Organisation Search Service
+
+✅ Organisation Search Tests
 
 ✅ Engine Search Foundation
 
@@ -302,21 +308,23 @@ Validated:
 # CURRENT TEST STATUS
 
 Tests:
-130
+133
 
 Passing:
-130
+133
 
 Failing:
 0
 
 Result:
-130 passed
+133 passed
 0 failed
 
 ---
 
 # VALIDATED TESTS
+
+✅ test_organisation_search_service.py
 
 ✅ test_engine_search_models.py
 
@@ -517,7 +525,25 @@ Architecture Rules:
 ✅ No SQLAlchemy model
 ✅ No Alembic migration
 ✅ No Engine modification
-✅ No SaaS-side search orchestration
+✅ No multi-carrier orchestration
+
+Organisation Search Foundation
+
+✅ OrganisationSearchService
+
+Validated Responsibilities:
+
+✅ Search only through organisation carriers
+✅ Use CarrierCatalogService
+✅ Use EngineSearchService
+✅ Aggregate organisation carrier search results
+
+Architecture Rules:
+
+✅ No search persistence
+✅ No Alembic migration
+✅ No Engine modification
+✅ No advanced multi-carrier orchestration
 
 ---
 
@@ -541,7 +567,7 @@ Business Tables:
 
 Passing Tests:
 
-130
+133
 
 Failing Tests:
 
@@ -707,7 +733,7 @@ Carrier Account API tests validated.
 
 Carrier Credential API tests validated.
 
-130 automated tests passing.
+133 automated tests passing.
 
 Carrier catalog is not persisted by the SaaS.
 
@@ -727,16 +753,17 @@ Engine Catalog tests validated.
 
 # Next Milestone:
 
-Phase 15.4
+Phase 15.5
 
-Organisation Search Foundation
+Multi-Carrier Execution Foundation
 
 Objectives:
 
-- Connect organisation carrier accounts with Engine Search
-- Search only through activated organisation carriers
-- Use CarrierAccount.carrier_code as the organisation carrier boundary
-- Prepare Multi-Carrier Execution
+- Execute searches across multiple activated carriers
+- Aggregate pickup point results
+- Preserve SaaS ownership of orchestration
+- Preserve Engine ownership of carrier integrations
+- Prepare Search Platform
 
 ---
 
@@ -752,6 +779,12 @@ Completed:
 ✅ 15.1 Engine Catalog Foundation
 ✅ 15.2 Carrier Catalog Integration Service
 ✅ 15.3 Engine Search Foundation
+✅ 15.4 Organisation Search Foundation
+
+Remaining:
+
+⏳ 15.5 Multi-Carrier Execution Foundation
+⏳ 15.6 Universal PUDO Engine Integration Closure
 
 ---
 
@@ -1067,4 +1100,26 @@ Validated:
 
 Result:
 130 passed
+0 failed
+
+---
+
+2026-07-27
+
+Organisation Search Foundation completed.
+
+Implemented:
+
+- organisation_search/service.py
+- test_organisation_search_service.py
+
+Validated:
+
+- organisation-based pickup point search
+- carrier filtering through organisation carriers
+- pickup point result aggregation
+
+Result:
+
+133 passed
 0 failed
