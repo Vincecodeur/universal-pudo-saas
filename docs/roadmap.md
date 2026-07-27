@@ -1132,18 +1132,82 @@ Planned
 
 Objectives:
 
-- Execute searches across multiple activated carriers
-- Aggregate pickup point results
-- Preserve SaaS ownership of orchestration
-- Preserve Engine ownership of carrier integrations
-- Prepare Search Platform
+- Create a dedicated SaaS orchestration layer for multi-carrier search execution
+- Provide a single entry point for future Search Platform features
+- Delegate organisation-based carrier filtering to OrganisationSearchService
+- Preserve SaaS ownership of multi-carrier orchestration
+- Preserve Universal PUDO Engine ownership of carrier integrations
+- Prepare Phase 16 Search Platform
+
+Responsibilities:
+
+✅ Expose a MultiCarrierSearchService
+
+✅ Use OrganisationSearchService as the organisation search execution dependency
+
+✅ Return pickup point results through a dedicated multi-carrier service boundary
+
+✅ Prepare future execution strategies without implementing them yet
+
+Out of Scope:
+
+❌ FastAPI routes
+
+❌ Frontend
+
+❌ Map rendering
+
+❌ Export
+
+❌ Search persistence
+
+❌ Cache
+
+❌ Ranking
+
+❌ Distance calculation
+
+❌ Advanced deduplication
+
+❌ Provider timeout handling
+
+❌ Parallel execution
 
 Deliverables:
 
+- multi_carrier_search/
 - MultiCarrierSearchService
-- carrier execution strategy
-- aggregation layer
-- dedicated tests
+- test_multi_carrier_search_service.py
+
+Validation:
+
+✅ MultiCarrierSearchService created
+
+✅ MultiCarrierSearchService uses OrganisationSearchService
+
+✅ PickupPoint results are returned
+
+✅ No Engine modification
+
+✅ No SQLAlchemy model
+
+✅ No Alembic migration
+
+✅ Dedicated tests passing
+
+Exit Criteria:
+
+✅ Multi-carrier orchestration boundary exists
+
+✅ Future Search Platform has a single search execution entry point
+
+✅ Tests passing
+
+✅ Documentation updated
+
+✅ Commit created
+
+✅ Push completed
 
 ---
 
