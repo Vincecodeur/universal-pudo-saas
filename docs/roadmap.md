@@ -1,10 +1,10 @@
 # Universal PUDO SaaS - Roadmap
 
-Version: 1.5.0
+Version: 1.7.0
 
-Status: Engine Catalog Foundation Completed
+Status: Universal PUDO Engine Integration In Progress
 
-Last Updated: 2026-07-26
+Last Updated: 2026-07-27
 
 ---
 
@@ -1047,6 +1047,139 @@ Result:
 
 ---
 
+## Phase 15.3
+
+Engine Search Foundation
+
+Status:
+
+Completed
+
+Objectives:
+
+- Consume Universal PUDO Engine pickup point search capabilities
+- Create SaaS-side search DTOs
+- Create EngineSearchClient contract
+- Create InMemoryEngineSearchClient for tests
+- Create EngineSearchService
+- Avoid search persistence
+- Avoid SaaS-side search orchestration
+- Avoid Engine modification
+
+Deliverables:
+
+✅ engine_search/**init**.py
+✅ engine_search/models.py
+✅ engine_search/client.py
+✅ engine_search/service.py
+✅ test_engine_search_models.py
+✅ test_engine_search_client.py
+✅ test_engine_search_service.py
+
+Validated:
+
+✅ PickupPoint SaaS read model
+✅ Address SaaS projection
+✅ GeoLocation SaaS projection
+✅ PickupType SaaS enum
+✅ EngineSearchClient
+✅ InMemoryEngineSearchClient
+✅ EngineSearchService
+✅ search_pickup_points()
+✅ search_pickup_points_by_radius()
+✅ get_pickup_point()
+✅ list_carrier_pickup_points()
+
+Result:
+
+130 passed
+0 failed
+
+---
+
+## Phase 15.4
+
+Adapter Layer Foundation
+
+Status:
+
+Planned
+
+Objectives:
+
+- Decouple SaaS from Engine contracts
+- Centralize Engine-to-SaaS conversions
+- Prepare future Engine versions
+- Prepare Multi-Carrier Execution
+
+Deliverables:
+
+✅ engine_catalog adapters
+✅ engine_search adapters
+
+Planned Files:
+
+src/universal_pudo_saas/adapters/
+├── carrier_adapter.py
+├── pickup_point_adapter.py
+└── **init**.py
+
+Tests:
+
+tests/test_carrier_adapter.py
+tests/test_pickup_point_adapter.py
+
+---
+
+## Phase 15.5
+
+Multi-Carrier Execution Foundation
+
+Status:
+
+Planned
+
+Objectives:
+
+- Execute searches across multiple activated carriers
+- Aggregate results
+- Standardize result ordering
+- Prepare Search Platform
+
+Deliverables:
+
+- MultiCarrierSearchService
+- Carrier execution strategy
+- Aggregation layer
+- Dedicated tests
+
+---
+
+## Phase 15.6
+
+Universal PUDO Engine Integration Closure
+
+Status:
+
+Planned
+
+Objectives:
+
+- End-to-end validation
+- Documentation synchronization
+- Architecture validation
+- Completion review
+
+Exit Criteria:
+
+✅ Adapter Layer
+✅ Search Integration
+✅ Multi-Carrier Execution
+✅ Documentation Updated
+✅ Tests Passing
+
+---
+
 # PHASE 16
 
 Search Platform
@@ -1270,11 +1403,15 @@ Completed:
 
 ✅ Carrier Catalog Integration Service
 
+✅ Engine Search Foundation
+
 ---
 
 Current Focus:
 
-Carrier Catalog Integration Service
+Phase 15.4
+
+Adapter Layer Foundation
 
 ---
 
@@ -1316,7 +1453,7 @@ Validated:
 
 ✅ User Lookup Foundation
 
-✅ 118 Automated Tests
+✅ 130 Automated Tests
 
 ✅ Organisation Persistence Tests
 
@@ -1361,6 +1498,14 @@ Validated:
 ✅ Carrier Catalog Service
 
 ✅ Carrier Catalog Service Tests
+
+✅ Engine Search Models
+
+✅ Engine Search Client
+
+✅ Engine Search Service
+
+✅ Engine Search Tests
 
 ---
 
@@ -1654,4 +1799,39 @@ Validated:
 Result:
 
 118 passed
+0 failed
+
+---
+
+2026-07-27
+
+Engine Search Foundation completed.
+
+Implemented:
+
+- engine_search/**init**.py
+- engine_search/models.py
+- engine_search/client.py
+- engine_search/service.py
+- test_engine_search_models.py
+- test_engine_search_client.py
+- test_engine_search_service.py
+
+Validated:
+
+- PickupPoint SaaS projection
+- Address SaaS projection
+- GeoLocation SaaS projection
+- PickupType SaaS enum
+- EngineSearchClient
+- InMemoryEngineSearchClient
+- EngineSearchService
+- pickup point search
+- pickup point radius search
+- pickup point detail retrieval
+- carrier pickup point listing
+
+Result:
+
+130 passed
 0 failed

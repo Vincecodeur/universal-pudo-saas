@@ -1,10 +1,10 @@
 # Universal PUDO SaaS
 
-Version: 1.6.0
+Version: 1.7.0
 
 Status: Universal PUDO Engine Integration In Progress
 
-Last Updated: 2026-07-26
+Last Updated: 2026-07-27
 
 ---
 
@@ -76,19 +76,21 @@ Universal PUDO SaaS stores carrier_code as a logical reference to carriers expos
 
 Current Phase:
 
-Phase 15
+Phase 15.4
 
-Universal PUDO Engine Integration
+Adapter Layer Foundation
 
 Status:
 
-In Progress
+Planned
 
 Completed Milestones:
 
 ✅ Phase 15.1 Engine Catalog Foundation
 
 ✅ Phase 15.2 Carrier Catalog Integration Service
+
+✅ Phase 15.3 Engine Search Foundation
 
 ✅ Documentation Foundation
 
@@ -155,6 +157,12 @@ Completed Milestones:
 # IMPLEMENTED FOUNDATIONS
 
 Backend
+
+✅ Engine Search Models
+
+✅ Engine Search Client
+
+✅ Engine Search Service
 
 ✅ FastAPI
 
@@ -234,6 +242,12 @@ Universal PUDO SaaS database
 
 Testing
 
+✅ test_engine_search_models.py
+
+✅ test_engine_search_client.py
+
+✅ test_engine_search_service.py
+
 ✅ test_main.py
 
 ✅ test_settings.py
@@ -288,7 +302,7 @@ Testing
 
 Result:
 
-118 passed
+130 passed
 
 0 failed
 
@@ -367,6 +381,17 @@ carrier_code
 ▼
 Universal PUDO Engine Carrier Catalog
 
+EngineSearchService
+│
+├── search_pickup_points()
+├── search_pickup_points_by_radius()
+├── get_pickup_point()
+└── list_carrier_pickup_points()
+
+▼
+
+Universal PUDO Engine Search API
+
 Status:
 
 ✅ Implemented
@@ -407,6 +432,11 @@ UNIVERSAL-PUDO-SAAS/
 │ │ │ ├── client.py
 │ │ │ ├── models.py
 │ │ │ └── service.py
+│ │ ├── engine_search/
+│ │ │ ├── **init**.py
+│ │ │ ├── models.py
+│ │ │ ├── client.py
+│ │ │ └── service.py
 
 │ │ ├── carrier_catalog/
 │ │ │ ├── **init**.py
@@ -435,7 +465,9 @@ UNIVERSAL-PUDO-SAAS/
 │ ├── test_main.py
 
 │ ├── test_settings.py
-
+│ ├── test_engine_search_models.py
+│ ├── test_engine_search_client.py
+│ └── test_engine_search_service.py
 │ ├── test_entities.py
 
 │ ├── test_organisation.py
@@ -723,48 +755,43 @@ Frontend
 
 # NEXT MILESTONE
 
-Universal PUDO Engine Integration
+Phase 15.4
+
+Adapter Layer Foundation
 
 Objectives:
 
-- Continue Engine integration
-- Prepare Search Platform foundation
-- Preserve Engine ownership of carrier metadata
-- Preserve carrier_code mapping strategy
-- Avoid carrier catalog persistence
+- Decouple SaaS from Engine contracts
+- Centralize Engine-to-SaaS conversions
+- Prepare future Engine versions
+- Prepare Multi-Carrier Execution
 
 ---
 
 # FUTURE ROADMAP
 
 Universal PUDO Engine Integration
-
 ↓
-
+Adapter Layer Foundation
+↓
+Multi-Carrier Execution Foundation
+↓
 Search Platform
-
 ↓
-
 Map Experience
-
 ↓
-
 Export Platform
-
 ↓
-
+Map Experience
+↓
+Export Platform
+↓
 Administration Portal
-
 ↓
-
 Public API
-
 ↓
-
 Frontend
-
 ↓
-
 Universal PUDO SaaS v1.0.0
 
 ---
@@ -826,7 +853,7 @@ Migrations:
 
 Tests:
 
-✅ 118 passed
+✅ 130 passed
 
 Documentation:
 

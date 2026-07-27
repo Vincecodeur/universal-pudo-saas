@@ -177,6 +177,46 @@ Validated during Phase 14.
 
 ---
 
+---
+
+## D008
+
+Universal PUDO Engine Integration Strategy
+
+Decision:
+
+Phase 15 remains open until all original objectives are completed.
+
+Original objectives:
+
+- Adapter Layer
+- Search Integration
+- Multi-Carrier Execution
+
+Completed:
+
+✅ Phase 15.1 Engine Catalog Foundation
+✅ Phase 15.2 Carrier Catalog Integration Service
+✅ Phase 15.3 Engine Search Foundation
+
+Planned:
+
+⏳ Phase 15.4 Adapter Layer Foundation
+⏳ Phase 15.5 Multi-Carrier Execution Foundation
+⏳ Phase 15.6 Universal PUDO Engine Integration Closure
+
+Reason:
+
+Search integration alone does not complete Universal PUDO Engine Integration.
+
+SaaS must support abstraction and multi-carrier execution before Search Platform begins.
+
+Status:
+
+Validated during Phase 15.
+
+---
+
 # VALIDATED TECHNOLOGY STACK
 
 Backend
@@ -298,6 +338,14 @@ Authentication Columns
 ---
 
 # IMPLEMENTED FOUNDATIONS
+
+✅ Engine Search Foundation
+
+✅ Engine Search Models
+
+✅ Engine Search Client
+
+✅ Engine Search Service
 
 ✅ Documentation Foundation
 
@@ -617,7 +665,7 @@ Validated Test Suites
 
 Current Result
 
-118 passed
+130 passed
 
 0 failed
 
@@ -626,6 +674,16 @@ Current Result
 # CURRENT CODE STATUS
 
 Implemented
+
+✅ Engine Search Models
+
+✅ Engine Search Client
+
+✅ Engine Search Service
+
+✅ InMemory Engine Search Client
+
+✅ Engine Search Tests
 
 ✅ FastAPI Startup
 
@@ -849,6 +907,14 @@ Lesson 020
 
 Carrier catalogue integration must use Carrier.code and CarrierAccount.carrier_code as the mapping boundary.
 
+Lesson 021
+
+The SaaS should consume Engine search capabilities through a dedicated client and service layer instead of recreating Engine search use cases.
+
+Lesson 022
+
+Engine Search Foundation must remain read-only and must not introduce search persistence, SaaS-side search orchestration, or Engine modifications.
+
 ---
 
 # CURRENT PROJECT WORKFLOW
@@ -935,50 +1001,62 @@ Completed
 
 Current Focus
 
-Universal PUDO Engine Integration Foundation
+Phase 15.4
+
+Adapter Layer Foundation
 
 ---
 
 # NEXT MILESTONE
 
-Universal PUDO Engine Integration Foundation
+Phase 15.4
+
+Adapter Layer Foundation
 
 Objectives:
 
-- Define Engine integration contract
-- Discover carrier catalog from Universal PUDO Engine
-- Preserve ADR-0007 ownership model
-- Avoid local carrier catalog persistence
-- Prepare carrier synchronization layer
-- Define SaaS ↔ Engine communication strategy
+- Decouple SaaS from Engine contracts
+- Centralize Engine-to-SaaS conversions
+- Prepare future Engine versions
+- Prepare Multi-Carrier Execution
+
+Deliverables:
+
+- adapters/
+- Engine contract mappers
+- Engine DTO translation layer
 
 ---
 
 # FUTURE MILESTONES
 
-Carrier Account Service Foundation
+Phase 15.4 Adapter Layer Foundation
 ↓
-Carrier Credential Service Foundation
+Phase 15.5 Multi-Carrier Execution Foundation
 ↓
-Carrier Account API Foundation
+Phase 15.6 Universal PUDO Engine Integration Closure
 ↓
-Carrier Credential API Foundation
+Phase 16 Search Platform
 ↓
-Universal PUDO Engine Integration
+Phase 17 Map Experience
 ↓
-Search Platform
+Phase 18 Export Platform
 ↓
-Map Experience
+Phase 19 Administration Portal
 ↓
-Export Platform
+Phase 20 Public API Foundation
 ↓
-Administration Portal
+Phase 21 Observability And Audit
 ↓
-Public API
+Phase 22 Security Hardening
 ↓
-Frontend
+Phase 23 Frontend Foundation
 ↓
-Universal PUDO SaaS v1.0.0
+Phase 24 Core Upgrade Strategy
+↓
+Phase 25 Release Preparation
+↓
+Phase 26 Universal PUDO SaaS v1.0.0
 
 ---
 
@@ -1195,3 +1273,55 @@ Validated:
 Result:
 118 passed
 0 failed
+
+---
+
+2026-07-27
+
+Engine Search Foundation completed.
+
+Implemented:
+
+- engine_search/**init**.py
+- engine_search/models.py
+- engine_search/client.py
+- engine_search/service.py
+- test_engine_search_models.py
+- test_engine_search_client.py
+- test_engine_search_service.py
+
+Validated:
+
+- PickupPoint SaaS projection
+- EngineSearchClient
+- InMemoryEngineSearchClient
+- EngineSearchService
+- pickup point search methods
+
+Result:
+130 passed
+0 failed
+
+---
+
+2026-07-27
+
+Phase 15 expanded.
+
+Added:
+
+- Phase 15.4 Adapter Layer Foundation
+- Phase 15.5 Multi-Carrier Execution Foundation
+- Phase 15.6 Universal PUDO Engine Integration Closure
+
+Reason:
+
+Original Phase 15 objectives included:
+
+- Adapter Layer
+- Search Integration
+- Multi-Carrier Execution
+
+After completing Engine Search Foundation, remaining objectives were still outstanding.
+
+Roadmap updated to explicitly represent remaining Universal PUDO Engine integration work before Phase 16 Search Platform.

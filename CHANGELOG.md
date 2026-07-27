@@ -6,6 +6,72 @@ The format follows a milestone-based approach.
 
 ---
 
+## [1.8.0-draft] - 2026-07-27
+
+### Documentation
+
+Roadmap refined.
+
+Added:
+
+- Phase 15.4 Adapter Layer Foundation
+- Phase 15.5 Multi-Carrier Execution Foundation
+- Phase 15.6 Universal PUDO Engine Integration Closure
+
+Purpose:
+
+Align roadmap structure with original Phase 15 objectives and make remaining Engine integration work explicit.
+
+### Added
+
+Engine Search Foundation.
+
+Created:
+
+- src/universal_pudo_saas/engine_search/**init**.py
+- src/universal_pudo_saas/engine_search/models.py
+- src/universal_pudo_saas/engine_search/client.py
+- src/universal_pudo_saas/engine_search/service.py
+- tests/test_engine_search_models.py
+- tests/test_engine_search_client.py
+- tests/test_engine_search_service.py
+
+### Validation
+
+Validated:
+
+- PickupPoint SaaS read model
+- Address SaaS projection
+- GeoLocation SaaS projection
+- PickupType SaaS enum
+- EngineSearchClient
+- InMemoryEngineSearchClient
+- EngineSearchService
+- search_pickup_points()
+- search_pickup_points_by_radius()
+- get_pickup_point()
+- list_carrier_pickup_points()
+
+Result:
+130 passed
+0 failed
+
+### Architecture
+
+Universal PUDO SaaS now has a read-only Engine Search Foundation for consuming pickup point search capabilities exposed by Universal PUDO Engine.
+
+No search persistence was introduced.
+
+No SQLAlchemy model was introduced.
+
+No Alembic migration was introduced.
+
+No Universal PUDO Engine modification was introduced.
+
+### Status
+
+Engine Search Foundation completed.
+
 ## [1.7.0-draft] - 2026-07-26
 
 ### Added
