@@ -10,17 +10,21 @@ The format follows a milestone-based approach.
 
 ### Documentation
 
-Roadmap refined.
+Phase 15 roadmap finalized.
 
-Added:
+Updated:
 
-- Phase 15.4 Adapter Layer Foundation
+- Phase 15.4 Organisation Search Foundation
 - Phase 15.5 Multi-Carrier Execution Foundation
 - Phase 15.6 Universal PUDO Engine Integration Closure
 
-Purpose:
+Decision:
 
-Align roadmap structure with original Phase 15 objectives and make remaining Engine integration work explicit.
+The primary SaaS use case is organisation-based pickup point search using activated carriers.
+
+The SaaS owns orchestration.
+
+Universal PUDO Engine owns carrier integrations.
 
 ### Added
 

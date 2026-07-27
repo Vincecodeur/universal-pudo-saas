@@ -2,7 +2,7 @@
 
 Version: 1.7.0
 
-Status: Adapter Layer Foundation Planned
+Status: Organisation Search Foundation Planned
 
 Last Updated: 2026-07-27
 
@@ -28,7 +28,9 @@ universal-pudo-saas
 
 Lifecycle Stage:
 
-Phase 15.4 Adapter Layer Foundation Planned
+Phase 15.4 Organisation Search Foundation
+
+Planned
 
 Repository Role:
 
@@ -42,7 +44,7 @@ Phase:
 15.4
 
 Name:
-Adapter Layer Foundation
+Organisation Search Foundation
 
 Status:
 Planned
@@ -727,13 +729,13 @@ Engine Catalog tests validated.
 
 Phase 15.4
 
-Adapter Layer Foundation
+Organisation Search Foundation
 
 Objectives:
 
-- Decouple SaaS from Engine contracts
-- Centralize Engine-to-SaaS conversions
-- Prepare future Engine versions
+- Connect organisation carrier accounts with Engine Search
+- Search only through activated organisation carriers
+- Use CarrierAccount.carrier_code as the organisation carrier boundary
 - Prepare Multi-Carrier Execution
 
 ---

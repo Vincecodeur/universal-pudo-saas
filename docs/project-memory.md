@@ -185,13 +185,7 @@ Universal PUDO Engine Integration Strategy
 
 Decision:
 
-Phase 15 remains open until all original objectives are completed.
-
-Original objectives:
-
-- Adapter Layer
-- Search Integration
-- Multi-Carrier Execution
+Phase 15 remains open until organisation-based search and multi-carrier execution are implemented.
 
 Completed:
 
@@ -201,19 +195,17 @@ Completed:
 
 Planned:
 
-⏳ Phase 15.4 Adapter Layer Foundation
+⏳ Phase 15.4 Organisation Search Foundation
 ⏳ Phase 15.5 Multi-Carrier Execution Foundation
 ⏳ Phase 15.6 Universal PUDO Engine Integration Closure
 
 Reason:
 
-Search integration alone does not complete Universal PUDO Engine Integration.
+The primary SaaS use case is allowing an organisation to locate pickup points using only its activated carriers.
 
-SaaS must support abstraction and multi-carrier execution before Search Platform begins.
+The SaaS owns orchestration.
 
-Status:
-
-Validated during Phase 15.
+Universal PUDO Engine owns carrier integrations.
 
 ---
 
@@ -1003,7 +995,7 @@ Current Focus
 
 Phase 15.4
 
-Adapter Layer Foundation
+Organisation Search Foundation
 
 ---
 
@@ -1011,26 +1003,25 @@ Adapter Layer Foundation
 
 Phase 15.4
 
-Adapter Layer Foundation
+Organisation Search Foundation
 
 Objectives:
 
-- Decouple SaaS from Engine contracts
-- Centralize Engine-to-SaaS conversions
-- Prepare future Engine versions
-- Prepare Multi-Carrier Execution
+- Connect Organisation
+- CarrierAccount
+- CarrierCatalogService
+- EngineSearchService
 
-Deliverables:
+Goal:
 
-- adapters/
-- Engine contract mappers
-- Engine DTO translation layer
+Allow organisations to search pickup points only through activated carriers.
+``
 
 ---
 
 # FUTURE MILESTONES
 
-Phase 15.4 Adapter Layer Foundation
+Phase 15.4 Organisation Search Foundation
 ↓
 Phase 15.5 Multi-Carrier Execution Foundation
 ↓

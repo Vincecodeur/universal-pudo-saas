@@ -78,7 +78,7 @@ Current Phase:
 
 Phase 15.4
 
-Adapter Layer Foundation
+Organisation Search Foundation
 
 Status:
 
@@ -757,13 +757,12 @@ Frontend
 
 Phase 15.4
 
-Adapter Layer Foundation
+Organisation Search Foundation
 
 Objectives:
 
-- Decouple SaaS from Engine contracts
-- Centralize Engine-to-SaaS conversions
-- Prepare future Engine versions
+- Connect organisation carrier accounts with Engine Search
+- Search only through activated organisation carriers
 - Prepare Multi-Carrier Execution
 
 ---
@@ -772,7 +771,7 @@ Objectives:
 
 Universal PUDO Engine Integration
 ↓
-Adapter Layer Foundation
+Organisation Search Foundation
 ↓
 Multi-Carrier Execution Foundation
 ↓

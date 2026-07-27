@@ -1099,7 +1099,7 @@ Result:
 
 ## Phase 15.4
 
-Adapter Layer Foundation
+Organisation Search Foundation
 
 Status:
 
@@ -1107,27 +1107,18 @@ Planned
 
 Objectives:
 
-- Decouple SaaS from Engine contracts
-- Centralize Engine-to-SaaS conversions
-- Prepare future Engine versions
+- Connect organisation carrier accounts with Engine Search
+- Search only through activated organisation carriers
+- Use CarrierAccount.carrier_code as the organisation carrier boundary
+- Use EngineSearchService as the Engine search entry point
+- Avoid search persistence
 - Prepare Multi-Carrier Execution
 
 Deliverables:
 
-✅ engine_catalog adapters
-✅ engine_search adapters
-
-Planned Files:
-
-src/universal_pudo_saas/adapters/
-├── carrier_adapter.py
-├── pickup_point_adapter.py
-└── **init**.py
-
-Tests:
-
-tests/test_carrier_adapter.py
-tests/test_pickup_point_adapter.py
+- organisation_search/
+- OrganisationSearchService
+- dedicated tests
 
 ---
 
@@ -1142,16 +1133,17 @@ Planned
 Objectives:
 
 - Execute searches across multiple activated carriers
-- Aggregate results
-- Standardize result ordering
+- Aggregate pickup point results
+- Preserve SaaS ownership of orchestration
+- Preserve Engine ownership of carrier integrations
 - Prepare Search Platform
 
 Deliverables:
 
 - MultiCarrierSearchService
-- Carrier execution strategy
-- Aggregation layer
-- Dedicated tests
+- carrier execution strategy
+- aggregation layer
+- dedicated tests
 
 ---
 
@@ -1411,7 +1403,7 @@ Current Focus:
 
 Phase 15.4
 
-Adapter Layer Foundation
+Organisation Search Foundation
 
 ---
 
