@@ -8,6 +8,24 @@ The format follows a milestone-based approach.
 
 ## [1.8.0-draft] - 2026-07-27
 
+## Phase 15.5 - Multi-Carrier Execution Foundation
+
+Added:
+
+- multi_carrier_search/service.py
+- test_multi_carrier_search_service.py
+
+Implemented:
+
+- MultiCarrierSearchService
+- OrganisationSearchService integration
+- Dedicated SaaS search orchestration boundary
+
+Validation:
+
+136 passed
+0 failed
+
 ## Phase 15.4 - Organisation Search Foundation
 
 Added:
