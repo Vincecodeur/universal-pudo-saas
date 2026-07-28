@@ -1185,8 +1185,6 @@ Search Platform Validation
 
 Objectives:
 
-Objectives:
-
 - validate SearchRequest lifecycle
 - validate SearchResult lifecycle
 - validate SearchExecutionMetadata
