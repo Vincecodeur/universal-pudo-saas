@@ -1,6 +1,8 @@
-from uuid import uuid4
+from datetime import timezone
+from uuid import UUID, uuid4
 
 from universal_pudo_saas.search_platform.models import (
+    SearchExecutionMetadata,
     SearchRequest,
     SearchResult,
 )
@@ -46,25 +48,72 @@ def test_search_request_defaults() -> None:
     assert request.latitude is None
     assert request.longitude is None
     assert request.radius_km is None
-
     assert request.carrier_codes == []
     assert request.limit == 100
 
 
+def test_search_execution_metadata_defaults() -> None:
+    metadata = SearchExecutionMetadata()
+
+    assert isinstance(metadata.search_id, UUID)
+    assert metadata.executed_at.tzinfo == timezone.utc
+    assert metadata.duration_ms == 0
+    assert metadata.source == "search_platform"
+    assert metadata.applied_filters == []
+
+
+def test_search_execution_metadata_creation() -> None:
+    search_id = uuid4()
+
+    metadata = SearchExecutionMetadata(
+        search_id=search_id,
+        duration_ms=42,
+        source="unit_test",
+        applied_filters=[
+            "country_code",
+            "postal_code",
+        ],
+    )
+
+    assert metadata.search_id == search_id
+    assert metadata.duration_ms == 42
+    assert metadata.source == "unit_test"
+    assert metadata.applied_filters == [
+        "country_code",
+        "postal_code",
+    ]
+
+
 def test_search_result_creation() -> None:
+    metadata = SearchExecutionMetadata(
+        duration_ms=15,
+        applied_filters=[
+            "country_code",
+            "postal_code",
+        ],
+    )
+
     result = SearchResult(
         pickup_points=[],
         total_results=2,
-        executed_carriers=["MONDIAL_RELAY", "COLISSIMO"],
-        failed_carriers=["UPS"],
+        executed_carriers=[
+            "MONDIAL_RELAY",
+            "COLISSIMO",
+        ],
+        failed_carriers=[
+            "UPS",
+        ],
+        metadata=metadata,
     )
 
+    assert result.pickup_points == []
     assert result.total_results == 2
     assert result.executed_carriers == [
         "MONDIAL_RELAY",
         "COLISSIMO",
     ]
     assert result.failed_carriers == ["UPS"]
+    assert result.metadata == metadata
 
 
 def test_search_result_defaults() -> None:
@@ -75,9 +124,9 @@ def test_search_result_defaults() -> None:
 
     assert result.pickup_points == []
     assert result.total_results == 0
-
     assert result.executed_carriers == []
     assert result.failed_carriers == []
+    assert isinstance(result.metadata, SearchExecutionMetadata)
 
 
 def test_search_request_lists_are_independent() -> None:
@@ -111,6 +160,15 @@ def test_search_result_lists_are_independent() -> None:
 
     assert result_a.executed_carriers == ["COLISSIMO"]
     assert result_a.failed_carriers == ["UPS"]
-
     assert result_b.executed_carriers == []
     assert result_b.failed_carriers == []
+
+
+def test_search_execution_metadata_lists_are_independent() -> None:
+    metadata_a = SearchExecutionMetadata()
+    metadata_b = SearchExecutionMetadata()
+
+    metadata_a.applied_filters.append("city")
+
+    assert metadata_a.applied_filters == ["city"]
+    assert metadata_b.applied_filters == []

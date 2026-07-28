@@ -36,6 +36,7 @@ class FakeMultiCarrierSearchService:
         pickup_type=None,
     ):
         self.called = True
+
         return self.pickup_points
 
 
@@ -89,6 +90,14 @@ def test_search_returns_search_result() -> None:
 
     assert result.failed_carriers == []
 
+    assert result.metadata.source == "search_platform"
+    assert result.metadata.duration_ms >= 0
+    assert result.metadata.applied_filters == [
+        "country_code",
+        "postal_code",
+        "carrier_codes",
+    ]
+
     assert multi_carrier_service.called is True
 
 
@@ -111,6 +120,10 @@ def test_search_returns_empty_result() -> None:
     assert result.total_results == 0
     assert result.executed_carriers == []
     assert result.failed_carriers == []
+
+    assert result.metadata.source == "search_platform"
+    assert result.metadata.duration_ms >= 0
+    assert result.metadata.applied_filters == []
 
     assert multi_carrier_service.called is True
 
@@ -142,3 +155,76 @@ def test_search_copies_executed_carriers() -> None:
         "COLISSIMO",
         "MONDIAL_RELAY",
     ]
+
+
+def test_search_enriches_result_with_metadata() -> None:
+    multi_carrier_service = FakeMultiCarrierSearchService(
+        pickup_points=[],
+    )
+
+    service = SearchPlatformService(
+        multi_carrier_search_service=multi_carrier_service,
+    )
+
+    request = SearchRequest(
+        organisation_id=uuid4(),
+        query="Paris",
+        country_code="FR",
+        postal_code="75001",
+        city="Paris",
+        latitude=48.8566,
+        longitude=2.3522,
+        radius_km=10,
+        carrier_codes=[
+            "COLISSIMO",
+        ],
+        limit=25,
+    )
+
+    result = service.search(request)
+
+    assert result.metadata.source == "search_platform"
+    assert result.metadata.duration_ms >= 0
+
+    assert result.metadata.applied_filters == [
+        "query",
+        "country_code",
+        "postal_code",
+        "city",
+        "latitude",
+        "longitude",
+        "radius_km",
+        "carrier_codes",
+        "limit",
+    ]
+
+
+def test_search_metadata_filters_are_independent() -> None:
+    multi_carrier_service = FakeMultiCarrierSearchService(
+        pickup_points=[],
+    )
+
+    service = SearchPlatformService(
+        multi_carrier_search_service=multi_carrier_service,
+    )
+
+    first_request = SearchRequest(
+        organisation_id=uuid4(),
+        city="Paris",
+    )
+
+    second_request = SearchRequest(
+        organisation_id=uuid4(),
+    )
+
+    first_result = service.search(first_request)
+    second_result = service.search(second_request)
+
+    first_result.metadata.applied_filters.append("manual")
+
+    assert first_result.metadata.applied_filters == [
+        "city",
+        "manual",
+    ]
+
+    assert second_result.metadata.applied_filters == []
