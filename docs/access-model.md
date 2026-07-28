@@ -4,7 +4,7 @@ Version: 1.0.0
 
 Status: Approved
 
-Last Updated: 2026-07-25
+Last Updated: 2026-07-28
 
 ---
 
@@ -137,7 +137,15 @@ Can:
 
 ## Carrier Integration Catalog Ownership
 
-The SaaS Administrator owns the platform-level carrier integration catalog.
+The platform-level carrier catalog is owned by Universal PUDO Engine.
+
+The SaaS Administrator controls:
+
+- carrier publication
+- carrier visibility
+- carrier availability
+
+for SaaS organisations.
 
 This means the SaaS Administrator decides which carrier integrations are available on the platform.
 
@@ -349,8 +357,8 @@ Cannot:
 
 | Capability                                    | SaaS Admin | Owner | Viewer |
 | --------------------------------------------- | ---------- | ----- | ------ |
-| Manage Carrier Integration Catalog            | ✅         | ❌    | ❌     |
-| Publish Carrier Integrations                  | ✅         | ❌    | ❌     |
+| Manage Carrier                                | ✅         | ❌    | ❌     |
+| Publish Available Engine Carriers             | ✅         | ❌    | ❌     |
 | Make Carrier Integrations Available to Owners | ✅         | ❌    | ❌     |
 | Connect Organisation Carrier Accounts         | ❌         | ✅    | ❌     |
 | Modify Organisation Carrier Credentials       | ❌         | ✅    | ❌     |

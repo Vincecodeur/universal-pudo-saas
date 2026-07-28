@@ -45,12 +45,12 @@ The platform currently supports:
 
 ---
 
-# CARRIER INTEGRATION CATALOG
+# CARRIER PUBLICATION MANAGEMENT
 
 | Permission                           | SaaS Admin | Owner | Viewer |
 | ------------------------------------ | ---------- | ----- | ------ |
-| Publish Carrier Integration          | ✅         | ❌    | ❌     |
-| Remove Carrier Integration           | ✅         | ❌    | ❌     |
+| Publish Engine Carrier               | ✅         | ❌    | ❌     |
+| Unpublish Engine Carrier             | ✅         | ❌    | ❌     |
 | Enable Carrier Integration Globally  | ✅         | ❌    | ❌     |
 | Disable Carrier Integration Globally | ✅         | ❌    | ❌     |
 | Make Integration Available To Owners | ✅         | ❌    | ❌     |
@@ -135,9 +135,14 @@ The platform currently supports:
 
 Carrier integration ownership:
 
-SaaS Administrator owns:
+SaaS Administrator controls:
 
-- carrier integration catalog
+- carrier publication
+- carrier visibility
+- carrier availability
+
+Carrier catalog ownership remains inside Universal PUDO Engine.
+
 - platform availability
 
 Owner owns:

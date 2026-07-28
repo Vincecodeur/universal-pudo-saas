@@ -393,32 +393,19 @@ The platform distinguishes between:
 
 ---
 
-## Carrier Integration
+## Carrier Publication
 
-Platform-level entity.
+Platform-level capability.
 
-Owned by the SaaS Administrator.
-
-Examples:
-
-- Colissimo
-- Mondial Relay
-- Chronopost
-- DPD
-- GLS
-- UPS
-
-The Carrier Catalog is owned by Universal PUDO Engine.
+Carrier definitions remain owned by Universal PUDO Engine.
 
 The SaaS Administrator controls:
 
 - carrier publication
 - carrier visibility
-- carrier availability for organisations
+- carrier availability
 
-without owning carrier definitions.
-
-The SaaS Administrator decides which integrations are available to Owners.
+without owning carrier implementations or carrier definitions.
 
 ---
 
@@ -642,13 +629,15 @@ No future capability should compromise the PUDO-focused scope of the platform.
 
 Universal PUDO SaaS V1 is successful when an organisation can:
 
-- create an account
-- create an organisation
-- connect carrier accounts
-- perform pickup point searches
-- visualize results
-- export results
+- authenticate
 - manage users
+- manage memberships
+- manage roles
+- manage carrier accounts
+- search pickup points
+- visualize pickup points
+- export pickup point data
+- administer the platform
 
 without custom carrier development.
 
@@ -658,17 +647,21 @@ without custom carrier development.
 
 Current Phase:
 
-Phase 16.5
+Phase 16.6
 
 Status:
 
-Search Platform Validation
+Search Platform Closure
 
 Current Focus:
 
-Validation of SearchRequest, SearchResult,
-SearchExecutionMetadata and SearchPlatformService
-before Phase 16.6 closure.
+Search Platform Closure
+
+- freeze Search Platform contract
+- validate architecture boundaries
+- confirm non-persistence strategy
+- synchronize documentation
+- prepare Phase 17 planning
 
 ---
 
@@ -778,6 +771,24 @@ Validated:
 - SearchExecutionMetadata
 - Result metadata enrichment
 - Search execution metadata
+
+Result:
+
+150 automated tests passing.
+
+---
+
+2026-07-28
+
+Search Platform Validation completed.
+
+Validated:
+
+- SearchRequest lifecycle
+- SearchResult lifecycle
+- SearchExecutionMetadata
+- SearchPlatformService
+- Search Platform boundaries
 
 Result:
 

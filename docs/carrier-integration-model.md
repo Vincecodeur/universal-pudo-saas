@@ -41,6 +41,8 @@ Organisations do not directly manage carrier integrations.
 
 Organisations connect carrier accounts that reference carriers exposed by Universal PUDO Engine.
 
+Organisation Owners can only activate carriers that have been published and made available through SaaS carrier publication rules.
+
 The business model is based on three distinct concepts:
 
 1. Engine Carrier Catalog
