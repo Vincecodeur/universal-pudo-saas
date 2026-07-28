@@ -1392,7 +1392,7 @@ Search Platform Closure
 
 Status:
 
-In Progress
+Current
 
 Objectives:
 
@@ -1411,12 +1411,48 @@ Map Experience
 
 Status:
 
-Planned
+Planning Freeze Completed
 
-Technology:
+Objective
 
-- Leaflet
-- OpenStreetMap
+Allow users to visualize, explore and select PickupPoints from SearchResult through an interactive map experience.
+
+Scope
+
+- Leaflet integration
+- OpenStreetMap integration
+- Marker rendering
+- Carrier logo display
+- Carrier name display
+- Carrier color display
+- Popup display
+- PickupPoint selection
+- SearchResult visualization
+- Clustering
+- User geolocation
+- Auto fit bounds
+- Search filtering
+
+Out of Scope
+
+- Search persistence
+- Search history
+- Carrier branding administration
+- Carrier publication management
+- Engine modifications
+- Search contract modifications
+
+## 17.1 Map Domain Design
+
+## 17.2 Map Models Foundation
+
+## 17.3 Map Service Foundation
+
+## 17.4 Leaflet Integration Foundation
+
+## 17.5 Map Validation
+
+## 17.6 Map Experience Closure
 
 ---
 
@@ -1645,6 +1681,10 @@ Completed:
 ✅ Phase 16.3 Search Platform Service Foundation
 
 ✅ Phase 16.4 Search Result Enrichment Foundation
+
+✅ Phase 16.5 Search Platform Validation
+
+⏳ Phase 16.6 Search Platform Closure
 
 ---
 

@@ -92,6 +92,8 @@ Completed Milestones:
 
 ✅ Phase 16.4 Search Result Enrichment Foundation
 
+✅ Phase 16.5 Search Platform Validation
+
 ✅ Phase 15.1 Engine Catalog Foundation
 
 ✅ Phase 15.2 Carrier Catalog Integration Service
@@ -101,6 +103,8 @@ Completed Milestones:
 ✅ Phase 15.4 Organisation Search Foundation
 
 ✅ Phase 15.5 Multi-Carrier Execution Foundation
+
+✅ Phase 15.6 Universal PUDO Engine Integration Closure
 
 ✅ Documentation Foundation
 
@@ -167,8 +171,6 @@ Completed Milestones:
 # IMPLEMENTED FOUNDATIONS
 
 Backend
-
-✅ SearchExecutionMetadata
 
 ✅ Search Result Enrichment Foundation
 
@@ -474,6 +476,10 @@ Status:
 ✅ Non-Persistent
 ✅ Metadata Enriched
 ✅ Validated
+
+SearchResult is the unique search business contract.
+
+Map Experience consumes SearchResult without introducing new search models.
 
 ---
 
@@ -852,6 +858,60 @@ Objectives:
 
 ---
 
+---
+
+# PHASE 17 PREVIEW
+
+Phase 17
+
+Map Experience
+
+Status:
+
+Planning Freeze Completed
+
+Objective:
+
+Allow users to visualize, explore and select PickupPoints from SearchResult through an interactive map experience.
+
+Scope:
+
+- Leaflet integration
+- OpenStreetMap integration
+- Marker rendering
+- Carrier logo display
+- Carrier name display
+- Carrier color display
+- Popup display
+- PickupPoint selection
+- SearchResult visualization
+- Clustering
+- User geolocation
+- Auto fit bounds
+- Search filtering
+
+Architectural Rules:
+
+✅ SearchResult remains the unique business contract
+
+✅ Map Experience is a presentation layer
+
+✅ No MapSearchResult model
+
+✅ No MapPickupPoint model
+
+✅ No Engine modification
+
+✅ Carrier branding is consumed only
+
+✅ Carrier branding administration belongs to Phase 19 Administration Portal
+
+Next Execution Step:
+
+Phase 17.1 Map Domain Design
+
+---
+
 # FUTURE ROADMAP
 
 Search Platform
@@ -928,6 +988,7 @@ Migrations:
 Tests:
 
 ✅ 150 passed
+✅ 0 failed
 
 Documentation:
 
@@ -945,4 +1006,6 @@ GitHub:
 
 # LICENSE
 
-To Be Defined.
+Not selected yet.
+
+No distribution license has been officially adopted.

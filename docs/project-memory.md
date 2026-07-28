@@ -68,9 +68,9 @@ Universal PUDO Engine owns:
 - normalization
 - carrier intelligence
 
-The SaaS consumes the Core.
+The SaaS consumes the Universal PUDO Engine.
 
-The SaaS must never duplicate Core responsibilities.
+The SaaS must never duplicate Universal PUDO Engine responsibilities.
 
 ---
 
@@ -124,7 +124,7 @@ Decision:
 
 Credentials are managed by the SaaS.
 
-The Core consumes credentials.
+The Universal PUDO Engine consumes credentials.
 
 ADR-0003
 
@@ -172,7 +172,7 @@ Universal PUDO SaaS owns carrier accounts and carrier credentials.
 
 Reason:
 
-Avoid duplicating Core responsibilities inside the SaaS.
+Avoid duplicating Universal PUDO Engine responsibilities inside the SaaS.
 
 Status:
 
@@ -209,7 +209,7 @@ Universal PUDO Engine owns carrier integrations.
 
 ---
 
-D009
+## D009
 
 Search Platform Strategy
 
@@ -255,6 +255,34 @@ Phase 16 must not introduce:
 Reason:
 
 Search Platform domain boundaries must be stabilised before persistence decisions.
+
+---
+
+## D011
+
+Map Experience Strategy
+
+Decision:
+
+Phase 17 Map Experience was frozen before implementation.
+
+SearchResult remains the unique business contract.
+
+Map Experience is a presentation layer.
+
+Map Experience consumes SearchResult without introducing new search models.
+
+Carrier branding is consumed by Map Experience.
+
+Carrier branding administration belongs to Phase 19 Administration Portal.
+
+Status:
+
+Planning Freeze Completed
+
+Reason:
+
+Prevent duplication of business contracts and preserve Search Platform boundaries.
 
 ---
 
@@ -324,7 +352,7 @@ Architectural Rule:
 
 One database per product.
 
-Core and SaaS remain independent.
+Universal PUDO Engine and SaaS remain independent.
 
 ---
 
@@ -380,7 +408,7 @@ Authentication Columns
 
 # IMPLEMENTED FOUNDATIONS
 
-✅ Search Platform Validation Preparation
+✅ Search Platform Validation
 
 ✅ Search Result Enrichment Foundation
 
@@ -503,6 +531,10 @@ Search Platform
 ✅ Non-persistent
 
 ✅ Validated
+
+✅ MultiCarrierSearchService
+
+✅ OrganisationSearchService
 
 ---
 
@@ -961,7 +993,7 @@ Documentation must be updated before Forward.
 
 Lesson 007
 
-Core and SaaS boundaries must remain explicit.
+Universal PUDO Engine and SaaS boundaries must remain explicit.
 
 ---
 
@@ -1056,6 +1088,14 @@ Before starting any new phase, all sub-phases, objectives, deliverables, validat
 No phase implementation may start until phase planning is completed.
 
 This rule exists to prevent roadmap zig-zagging and architectural redefinition during implementation.
+
+Lesson 024
+
+Business contracts must be reused across presentation layers.
+
+SearchResult remains the unique search contract.
+
+Map-specific contracts should not be introduced unless business requirements differ.
 
 ---
 
@@ -1183,13 +1223,15 @@ Objectives:
 - confirm non-persistence strategy
 - synchronize documentation
 - prepare Phase 16 completion
-- prepare Phase 17 Planning Freeze
+- confirm Phase 17 Planning Freeze documentation
 
 ---
 
 # FUTURE MILESTONES
 
 Phase 17 Map Experience
+Status: Planning Freeze Completed
+Next: Phase 17.1 Map Domain Design
 ↓
 Phase 18 Export Platform
 ↓
@@ -1203,7 +1245,7 @@ Phase 22 Security Hardening
 ↓
 Phase 23 Frontend Foundation
 ↓
-Phase 24 Core Upgrade Strategy
+Phase 24 Universal PUDO Engine Upgrade Strategy
 ↓
 Phase 25 Release Preparation
 ↓
@@ -1621,3 +1663,42 @@ Result:
 
 150 passed
 0 failed
+
+---
+
+2026-07-28
+
+Search Platform Validation completed.
+
+Validated:
+
+- SearchRequest lifecycle
+- SearchResult lifecycle
+- SearchExecutionMetadata
+- SearchPlatformService
+- Search Platform boundaries
+- MultiCarrierSearchService integration
+
+Result:
+
+150 passed
+0 failed
+
+---
+
+2026-07-28
+
+Phase 17 Map Experience Planning Freeze completed.
+
+Validated:
+
+- SearchResult remains the unique business contract
+- Map Experience is a presentation layer
+- No MapSearchResult model
+- No MapPickupPoint model
+- Carrier branding is consumed by Map Experience
+- Carrier branding administration belongs to Phase 19 Administration Portal
+
+Next execution step:
+
+Phase 17.1 Map Domain Design

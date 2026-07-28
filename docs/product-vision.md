@@ -16,7 +16,7 @@ The platform is built on top of:
 
 Universal PUDO Engine
 
-which acts as the Core carrier intelligence layer.
+which acts as the carrier intelligence layer.
 
 Universal PUDO SaaS acts as the application and customer-facing layer.
 
@@ -283,17 +283,17 @@ The platform must not evolve into a generic OMS, WMS, TMS, shipping or carrier e
 
 # RELATIONSHIP WITH UNIVERSAL PUDO ENGINE
 
-Universal PUDO Engine remains the Core.
+Universal PUDO Engine remains the carrier intelligence layer.
 
 Repository:
 
-[Universal PUDO Engine Repository](https://github.com/Vincecodeur/universal-pudo-engine)
+[Universal PUDO Engine Repository] (https://github.com/Vincecodeur/universal-pudo-engine)
 
-The SaaS consumes the Core.
+The SaaS consumes the Universal PUDO Engine.
 
-The Core must remain reusable independently of the SaaS.
+The Universal PUDO Engine must remain reusable independently of the SaaS.
 
-The SaaS must never duplicate Core responsibilities.
+The SaaS must never duplicate Universal PUDO Engine responsibilities.
 
 ---
 
@@ -338,13 +338,14 @@ Entire platform
 
 Responsibilities:
 
+- manage carrier visibility
+- manage carrier availability
+- manage carrier exposure to organisations
 - manage organisations
 - manage subscriptions
 - manage quotas
 - manage billing
 - manage platform operations
-- publish carriers
-- manage carrier visibility
 - manage carrier availability for organisations
 
 ---
@@ -401,9 +402,9 @@ Carrier definitions remain owned by Universal PUDO Engine.
 
 The SaaS Administrator controls:
 
-- carrier publication
 - carrier visibility
 - carrier availability
+- carrier exposure to organisations
 
 without owning carrier implementations or carrier definitions.
 
@@ -452,12 +453,12 @@ Carrier credentials belong to the customer.
 
 The SaaS stores and manages credentials.
 
-The Core consumes credentials.
+The Universal PUDO Engine consumes credentials.
 
 Benefits:
 
 - clear responsibility separation
-- reusable Core
+- reusable Universal PUDO Engine
 - customer ownership
 
 ---
@@ -494,6 +495,18 @@ Objectives:
 - pickup point exploration
 - pickup point comparison
 - operational visibility
+
+Architectural Principles:
+
+SearchResult remains the unique business contract.
+
+Map Experience is a presentation layer.
+
+Map Experience must not introduce:
+
+- MapSearchResult
+- MapPickupPoint
+- duplicated search contracts
 
 ---
 
@@ -619,7 +632,7 @@ Potential future capabilities may include:
 
 These capabilities must be evaluated individually.
 
-No future capability should compromise Core/SaaS separation.
+No future capability should compromise Universal PUDO Engine/SaaS separation.
 
 No future capability should compromise the PUDO-focused scope of the platform.
 

@@ -480,6 +480,8 @@ Search Result Enrichment
 ## Future Domains
 
 ```text
+Map Experience
+Carrier Branding Consumption
 Roles and Permissions Enforcement
 Exports
 Administration
@@ -497,6 +499,30 @@ Frontend
 16.5 Search Platform Validation
 16.6 Search Platform Closure
 ```
+
+# PHASE 17 MAP EXPERIENCE ARCHITECTURE
+
+SearchResult remains the business contract.
+
+Map Experience is a presentation layer.
+
+Map Experience must not introduce:
+
+- MapSearchResult
+- MapPickupPoint
+- duplicated search contracts
+
+Carrier branding is consumed by Map Experience.
+
+Branding includes:
+
+- logo
+- display_name
+- color
+
+Carrier branding administration belongs to Administration Portal.
+
+Map Experience is read-only regarding branding configuration.
 
 ---
 
@@ -1634,14 +1660,12 @@ Universal PUDO Engine Integration Closure
 
 Current:
 
-```text
-Phase 16.6 Search Platform Closure
-```
+Phase 16.6
+
+Status :
+In Progress
 
 Future:
-
-```text
-
 
 17 Map Experience
 18 Export Platform
@@ -1653,7 +1677,8 @@ Future:
 24 Core Upgrade Strategy
 25 Release Preparation
 26 Universal PUDO SaaS v1.0.0
-```
+
+````
 
 ---
 
@@ -1663,7 +1688,7 @@ Architecture Status:
 
 ```text
 Stable after Phase 15
-```
+````
 
 Database Status:
 

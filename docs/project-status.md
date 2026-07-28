@@ -55,7 +55,7 @@ In Progress
 
 # COMPLETED MILESTONES
 
-✅ Search Platform Validation Preparation
+✅ Search Platform Validation
 
 ✅ Search Result Enrichment Foundation
 
@@ -939,22 +939,35 @@ Out of Scope:
 
 # FUTURE PHASES
 
-Phase 16
-Search Platform
+Phase 17
+
+Map Experience
 
 Status:
-In Progress
 
-Sub-phases:
+Planning Freeze Completed
 
-✅ 16.1 Search Domain Design
-✅ 16.2 Search Platform Models Foundation
-✅ 16.3 Search Platform Service Foundation
-✅ 16.4 Search Result Enrichment Foundation
-✅ 16.5 Search Platform Validation
-⏳ 16.6 Search Platform Closure
+Objective:
 
----
+Allow users to visualize, explore and select PickupPoints from SearchResult through an interactive map experience.
+
+Architectural Decisions:
+
+✅ SearchResult remains the unique business contract
+
+✅ Map Experience is a presentation layer
+
+✅ No MapSearchResult model
+
+✅ No MapPickupPoint model
+
+✅ Carrier branding is consumed only
+
+✅ Carrier branding administration belongs to Phase 19 Administration Portal
+
+Next Execution Step:
+
+## Phase 17.1 Map Domain Design
 
 # CHANGE HISTORY
 
