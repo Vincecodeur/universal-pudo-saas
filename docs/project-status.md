@@ -2,7 +2,7 @@
 
 Version: 2.1.0
 
-Status: Phase 17.1 Map Domain Design Completed
+Status: Phase 17.2 Map Models Foundation Completed
 
 Last Updated: 2026-07-30
 
@@ -28,7 +28,7 @@ universal-pudo-saas
 
 Lifecycle Stage:
 
-17.1 Map Domain Design
+17.2 Map Models Foundation
 
 Status:
 
@@ -43,10 +43,10 @@ Application Layer built on top of Universal PUDO Engine.
 # CURRENT PHASE
 
 Phase:
-17.1
+17.2
 
 Name:
-Map Domain Design
+Map Models Foundation
 
 Status:
 Completed
@@ -912,22 +912,25 @@ Phase 16.6 Search Platform Closure completed.
 
 Phase 17.1 Map Domain Design completed.
 
+Phase 17.2 Map Models Foundation completed.
+
+docs/map-models-foundation.md created.
+
 docs/map-experience-design.md created.
 
 ---
 
 # Next Milestone:
 
-Phase 17.2
-Map Models Foundation
+Phase 17.3
+Map Service Foundation
 
 Objectives:
 
-- define presentation-oriented map structures if required
-- preserve SearchResult as the unique business contract
-- preserve Map Experience as a presentation layer
+- transform SearchResult into map-ready projections
+- prepare frontend consumption
+- preserve SearchResult
 - avoid persistence
-- avoid SQLAlchemy models
 - avoid Engine modifications
 
 Out of Scope:
@@ -970,9 +973,11 @@ Architectural Decisions:
 
 ✅ Phase 17.1 Map Domain Design Completed
 
+✅ Phase 17.2 Map Models Foundation Completed
+
 Next Execution Step:
 
-### Phase 17.2 Map Models Foundation
+Phase 17.3 Map Service Foundation
 
 # CHANGE HISTORY
 
@@ -1436,3 +1441,34 @@ Validated:
 Next milestone:
 
 Phase 17.2 Map Models Foundation
+
+---
+
+2026-07-30
+
+Phase 17.2 Map Models Foundation completed.
+
+Implemented:
+
+- docs/map-models-foundation.md
+
+Validated:
+
+- Map state model defined
+- Marker projection model defined
+- Popup projection model defined
+- Carrier visibility model defined
+- Pickup point selection model defined
+- SearchResult reset strategy defined
+- Analytics boundary defined
+- SearchResult remains unchanged
+- No MapSearchResult introduced
+- No MapPickupPoint introduced
+- No persistence introduced
+- No SQLAlchemy model introduced
+- No migration introduced
+- No Engine modification introduced
+
+Next milestone:
+
+Phase 17.3 Map Service Foundation

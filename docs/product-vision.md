@@ -670,20 +670,20 @@ without custom carrier development.
 
 Current Phase:
 
-Phase 17.1
+Phase 17.2
 
 Status:
 
-Map Domain Design Completed
+Map Models Foundation Completed
 
 Current Focus:
 
-Phase 17.2 Map Models Foundation
+Phase 17.3 Map Service Foundation
 
-- preserve SearchResult as the unique business contract
-- preserve Map Experience as a presentation layer
+- transform SearchResult into map-ready projections
+- prepare frontend consumption
+- preserve SearchResult
 - avoid persistence
-- avoid SQLAlchemy models
 - avoid Engine modifications
 
 ---
@@ -851,3 +851,23 @@ Validated:
 Next milestone:
 
 Phase 17.2 Map Models Foundation
+
+---
+
+2026-07-30
+
+Map Models Foundation completed.
+
+Validated:
+
+- Map state model
+- Marker projection model
+- Popup projection model
+- Carrier visibility model
+- Pickup point selection model
+- SearchResult reset strategy
+- Analytics boundary
+
+Next milestone:
+
+Phase 17.3 Map Service Foundation

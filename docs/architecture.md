@@ -2,7 +2,7 @@
 
 Version: 2.3.0
 
-Status: Phase 17.1 Map Domain Design Completed
+Status: Phase 17.2 Map Models Foundation Completed
 
 Last Updated: 2026-07-30
 
@@ -539,6 +539,23 @@ Validated Decisions:
 - Carrier visibility separated from carrier availability.
 - Carrier branding owned by SaaS Administration.
 - Future analytics enabled without introducing persistence.
+
+Phase 17.2 Map Models Foundation:
+
+docs/map-models-foundation.md
+
+Validated Decisions:
+
+- Map state is UI state.
+- Marker projection is derived from SearchResult.
+- Popup projection is derived from SearchResult.
+- Carrier visibility is a user preference.
+- Pickup point selection is UI state.
+- New SearchResult resets current selection.
+- Analytics boundary is documented without persistence.
+- No MapSearchResult introduced.
+- No MapPickupPoint introduced.
+- No persistence introduced.
 
 ---
 
@@ -1680,7 +1697,7 @@ Universal PUDO Engine Integration Closure
 
 Current:
 
-Phase 17.1
+Phase 17.2
 
 Status :
 Completed
@@ -1755,7 +1772,7 @@ Phase 16 Completed
 ✅ SearchPlatformService
 
 Current Phase:
-17.1 Map Domain Design Completed
+17.2 Map Models Foundation Completed
 
 Testing Status:
 150 passed
@@ -1771,24 +1788,26 @@ Realigned through Phase 17.1
 
 # NEXT ARCHITECTURAL MILESTONE
 
-Phase 16.6 Search Platform Closure
+Phase 17.3 Map Service Foundation
 
-Deliverables:
+Objectives:
 
-Search Platform closure review
-Architecture closure review
-Final service boundary validation
-Documentation synchronization
-Phase 17 planning preparation
+- transform SearchResult into map-ready projections
+- prepare frontend consumption
+- preserve SearchResult
+- avoid persistence
+- avoid Engine modifications
 
 Success Criteria:
 
-SearchResult enriched without persistence
-No SQLAlchemy model introduced
-No Alembic migration introduced
-No Engine modification required
-150 tests passing
-Documentation synchronized
+- Map service boundary defined
+- SearchResult remains unchanged
+- Map projections generated from SearchResult
+- No persistence introduced
+- No SQLAlchemy model introduced
+- No migration introduced
+- No Engine modification introduced
+- Documentation synchronized
 
 ---
 

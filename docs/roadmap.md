@@ -2,7 +2,7 @@
 
 Version: 2.0.0
 
-Status: Phase 17.1 Completed
+Status: Phase 17.2 Completed
 
 Last Updated: 2026-07-30
 
@@ -1411,7 +1411,7 @@ Map Experience
 
 Status:
 
-17.1 Completed
+17.2 Completed
 
 Objective
 
@@ -1465,6 +1465,31 @@ Validated:
 ✅ No persistence introduced
 
 ## 17.2 Map Models Foundation
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ docs/map-models-foundation.md
+
+Validated:
+
+✅ Map state model defined
+✅ Marker projection model defined
+✅ Popup projection model defined
+✅ Carrier visibility model defined
+✅ Pickup point selection model defined
+✅ SearchResult reset strategy defined
+✅ Analytics boundary defined
+✅ SearchResult remains unchanged
+✅ No MapSearchResult introduced
+✅ No MapPickupPoint introduced
+✅ No persistence introduced
+✅ No SQLAlchemy model introduced
+✅ No migration introduced
+✅ No Engine modification introduced
 
 ## 17.3 Map Service Foundation
 
@@ -1708,13 +1733,15 @@ Completed:
 
 ✅ Phase 17.1 Map Domain Design
 
+✅ Phase 17.2 Map Models Foundation
+
 ---
 
 Current Focus:
 
-Phase 17.2
+Phase 17.3
 
-Map Models Foundation
+Map Service Foundation
 
 Status:
 
@@ -1724,7 +1751,7 @@ Next
 
 Future Validation Gate:
 
-Phase 17.2 Map Models Foundation
+Phase 17.3 Map Service Foundation
 
 ---
 

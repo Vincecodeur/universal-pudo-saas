@@ -76,8 +76,8 @@ Universal PUDO SaaS stores carrier_code as a logical reference to carriers expos
 
 Current Phase
 
-Phase 17.1
-Map Domain Design
+Phase 17.2
+Map Models Foundation
 
 Status:
 Completed
@@ -97,6 +97,8 @@ Completed Milestones:
 ✅ Phase 16.6 Search Platform Closure
 
 ✅ Phase 17.1 Map Domain Design
+
+✅ Phase 17.2 Map Models Foundation
 
 ✅ Phase 15.1 Engine Catalog Foundation
 
@@ -495,6 +497,18 @@ Validated Phase 17.1 decisions:
 ✅ Carrier branding owned by SaaS Administration
 ✅ Analytics-ready architecture
 
+Validated Phase 17.2 decisions:
+
+✅ Map state model defined
+✅ Marker projection model defined
+✅ Popup projection model defined
+✅ Carrier visibility model defined
+✅ Pickup point selection model defined
+✅ SearchResult reset strategy defined
+✅ Analytics boundary defined
+✅ SearchResult remains unchanged
+✅ No persistence introduced
+
 ---
 
 # CURRENT PROJECT STRUCTURE
@@ -857,17 +871,16 @@ Frontend
 
 # NEXT MILESTONE
 
-Phase 17.2
+Phase 17.3
 
-Map Models Foundation
+Map Service Foundation
 
 Objectives:
 
-- define presentation-oriented map structures if required
-- preserve SearchResult as the unique business contract
-- preserve Map Experience as a presentation layer
+- transform SearchResult into map-ready projections
+- prepare frontend consumption
+- preserve SearchResult
 - avoid persistence
-- avoid SQLAlchemy models
 - avoid Engine modifications
 
 ---
@@ -880,9 +893,9 @@ Map Experience
 
 Status:
 
-17.1 Completed
+Status:
 
-Objective:
+17.2 Completed
 
 Allow users to visualize, explore and select PickupPoints from SearchResult through an interactive map experience.
 
@@ -920,7 +933,7 @@ Architectural Rules:
 
 Next Execution Step:
 
-Phase 17.2 Map Models Foundation
+Phase 17.3 Map Service Foundation
 
 ---
 

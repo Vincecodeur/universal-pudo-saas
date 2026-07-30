@@ -973,7 +973,9 @@ Implemented
 
 ✅ Map Domain Design
 
-✅ docs/map-experience-design.md
+✅ Map Models Foundation
+
+✅ docs/map-models-foundation.md
 
 ---
 
@@ -1238,28 +1240,29 @@ Completed
 
 ✅ Phase 17.1 Map Domain Design
 
+✅ Phase 17.2 Map Models Foundation
+
 ---
 
 Current Focus
 
-Phase 17.2
-Map Models Foundation
+Phase 17.3
+Map Service Foundation
 
 ---
 
 # NEXT MILESTONE
 
-Phase 17.2
+Phase 17.3
 
-Map Models Foundation
+Map Service Foundation
 
 Objectives:
 
-- define presentation-oriented map structures if required
-- preserve SearchResult as the unique business contract
-- preserve Map Experience as a presentation layer
+- transform SearchResult into map-ready projections
+- prepare frontend consumption
+- preserve SearchResult
 - avoid persistence
-- avoid SQLAlchemy models
 - avoid Engine modifications
 
 ---
@@ -1267,8 +1270,8 @@ Objectives:
 # FUTURE MILESTONES
 
 Phase 17 Map Experience
-Status: Phase 17.1 Completed
-Next: Phase 17.2 Map Models Foundation
+Status: Phase 17.2 Completed
+Next: Phase 17.3 Map Service Foundation
 ↓
 Phase 18 Export Platform
 ↓
@@ -1766,3 +1769,34 @@ Result:
 
 Phase 17.1 completed.
 Phase 17.2 designated as next milestone.
+
+---
+
+2026-07-30
+
+Phase 17.2 Map Models Foundation completed.
+
+Implemented:
+
+- docs/map-models-foundation.md
+
+Validated:
+
+- Map state model
+- Marker projection model
+- Popup projection model
+- Carrier visibility model
+- Pickup point selection model
+- SearchResult reset strategy
+- Analytics boundary
+- No MapSearchResult
+- No MapPickupPoint
+- No persistence
+- No SQLAlchemy model
+- No migration
+- No Engine modification
+
+Result:
+
+Phase 17.2 completed.
+Phase 17.3 designated as next milestone.

@@ -6,6 +6,51 @@ The format follows a milestone-based approach.
 
 ---
 
+## [2.2.0] - 2026-07-30
+
+### Phase 17.2 - Map Models Foundation
+
+Added:
+
+- docs/map-models-foundation.md
+
+Implemented:
+
+- Map state model
+- Marker projection model
+- Popup projection model
+- Carrier visibility model
+- Pickup point selection model
+- SearchResult reset strategy
+- Analytics boundary
+
+Validation:
+
+- SearchResult remains the unique business contract
+- No MapSearchResult introduced
+- No MapPickupPoint introduced
+- No persistence introduced
+- No SQLAlchemy model introduced
+- No Alembic migration introduced
+- No Universal PUDO Engine modification introduced
+
+Architecture:
+
+- Map Experience remains a presentation layer
+- Marker projections are derived from SearchResult
+- Popup projections are derived from SearchResult
+- Carrier visibility is separated from carrier availability
+- Selection lifecycle documented
+- Analytics boundary documented without persistence
+
+Status:
+Map Models Foundation completed.
+
+Next milestone:
+Phase 17.3 Map Service Foundation.
+
+---
+
 ## [2.1.0] - 2026-07-28
 
 ## Phase 16.5 - Search Platform Validation
