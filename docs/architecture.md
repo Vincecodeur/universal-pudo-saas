@@ -2,7 +2,7 @@
 
 Version: 2.3.0
 
-Status: Phase 17.2 Map Models Foundation Completed
+Status: Phase 17.3 Map Service Foundation Completed
 
 Last Updated: 2026-07-30
 
@@ -474,6 +474,8 @@ Multi-Carrier Search
 Search Platform Models
 Search Platform Service
 Search Result Enrichment
+Map Service
+Map Projection Models
 
 ```
 
@@ -556,6 +558,20 @@ Validated Decisions:
 - No MapSearchResult introduced.
 - No MapPickupPoint introduced.
 - No persistence introduced.
+
+Phase 17.3 Map Service Foundation
+
+Validated:
+
+- MapService implemented
+- SearchResult remains the business contract
+- Marker projection implemented
+- Popup projection implemented
+- Carrier visibility filtering implemented
+- Branding projection implemented
+- No persistence introduced
+- No SQLAlchemy model introduced
+- No migration introduced
 
 ---
 
@@ -1063,6 +1079,10 @@ src/universal_pudo_saas/
 │   ├── models.py
 │   └── __init__.py
 │   └── service.py
+├── map_service/
+│   ├── __init__.py
+│   ├── models.py
+│   └── service.py
 └── main.py
 
 Implemented structure:
@@ -1208,7 +1228,7 @@ search platform service tests
 Current latest known result:
 
 ```text
-150 passed
+166 passed
 0 failed
 ```
 
@@ -1697,7 +1717,7 @@ Universal PUDO Engine Integration Closure
 
 Current:
 
-Phase 17.2
+Phase 17.3
 
 Status :
 Completed
@@ -1772,31 +1792,26 @@ Phase 16 Completed
 ✅ SearchPlatformService
 
 Current Phase:
-17.2 Map Models Foundation Completed
+17.3 Map Models Foundation Completed
 
 Testing Status:
-150 passed
+166 passed
 0 failed
 
 Documentation Status:
 
 ```text
-Realigned through Phase 17.1
+Realigned through Phase 17.3
 ```
 
 ---
 
 # NEXT ARCHITECTURAL MILESTONE
 
-Phase 17.3 Map Service Foundation
+Phase 17.4 Leaflet Integration Foundation
 
 Objectives:
-
-- transform SearchResult into map-ready projections
-- prepare frontend consumption
-- preserve SearchResult
-- avoid persistence
-- avoid Engine modifications
+TBD during Phase 17.4 Planning Freeze
 
 Success Criteria:
 
@@ -2069,7 +2084,7 @@ Updated decisions:
 Current validated result:
 
 ```text
-136 passed
+166 passed
 0 failed
 ```
 

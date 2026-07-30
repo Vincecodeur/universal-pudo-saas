@@ -315,6 +315,29 @@ Phase 17 remains non-persistent.
 
 Future analytics may reuse pickup point selections without introducing persistence during Map Experience foundations.
 
+### D014
+
+Map Service Strategy
+
+Decision:
+
+Map Experience consumes SearchResult
+through MapService projections.
+
+MapService produces:
+
+- MapMarker
+- MapPopup
+- MapProjectionResult
+
+MapService remains non-persistent.
+
+Reason:
+
+Preserve SearchResult as the unique
+search business contract while preparing
+frontend map consumption.
+
 ---
 
 # VALIDATED TECHNOLOGY STACK
@@ -438,6 +461,18 @@ Authentication Columns
 ---
 
 # IMPLEMENTED FOUNDATIONS
+
+✅ Map Service Foundation
+
+✅ MapService
+
+✅ MapProjectionResult
+
+✅ MapMarker
+
+✅ MapPopup
+
+✅ MapViewState
 
 ✅ Search Platform Validation
 
@@ -831,7 +866,7 @@ Validated Test Suites
 
 Current Result
 
-150 passed
+166 passed
 
 0 failed
 
@@ -1246,16 +1281,15 @@ Completed
 
 Current Focus
 
-Phase 17.3
-Map Service Foundation
+Phase 17.4
+Leaflet Integration Foundation
 
 ---
 
 # NEXT MILESTONE
 
-Phase 17.3
-
-Map Service Foundation
+Phase 17.4
+Leaflet Integration Foundation
 
 Objectives:
 
@@ -1270,8 +1304,8 @@ Objectives:
 # FUTURE MILESTONES
 
 Phase 17 Map Experience
-Status: Phase 17.2 Completed
-Next: Phase 17.3 Map Service Foundation
+Status: Phase 17.3 Completed
+Next: Phase 17.4 Leaflet Integration Foundation
 ↓
 Phase 18 Export Platform
 ↓
@@ -1800,3 +1834,33 @@ Result:
 
 Phase 17.2 completed.
 Phase 17.3 designated as next milestone.
+
+---
+
+2026-07-30
+Phase 17.3 Map Service Foundation completed.
+
+Implemented:
+
+- map_service/**init**.py
+- map_service/models.py
+- map_service/service.py
+- test_map_models.py
+- test_map_service.py
+
+Validated:
+
+- MapService
+- MapProjectionResult
+- MapMarker projection
+- MapPopup projection
+- Carrier visibility filtering
+- Pickup point selection validation
+- Branding projection support
+
+Result:
+166 passed
+0 failed
+
+Next milestone:
+Phase 17.4 Leaflet Integration Foundation

@@ -6,6 +6,48 @@ The format follows a milestone-based approach.
 
 ---
 
+### [2.3.0] - 2026-07-30
+
+#### Phase 17.3 - Map Service Foundation
+
+Added:
+
+- src/universal_pudo_saas/map_service/**init**.py
+- src/universal_pudo_saas/map_service/models.py
+- src/universal_pudo_saas/map_service/service.py
+- tests/test_map_models.py
+- tests/test_map_service.py
+
+Implemented:
+
+- MapService
+- MapProjectionResult
+- MapMarker projection
+- MapPopup projection
+- Carrier visibility filtering
+- Pickup point selection validation
+- Branding projection support
+
+Validation:
+
+- SearchResult remains unchanged
+- No persistence introduced
+- No SQLAlchemy model introduced
+- No Alembic migration introduced
+- No Universal PUDO Engine modification introduced
+
+Result:
+166 passed
+0 failed
+
+Status:
+Map Service Foundation completed
+
+Next milestone:
+Phase 17.4 Leaflet Integration Foundation
+
+---
+
 ## [2.2.0] - 2026-07-30
 
 ### Phase 17.2 - Map Models Foundation

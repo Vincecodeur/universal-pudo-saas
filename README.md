@@ -1,8 +1,7 @@
 # Universal PUDO SaaS
 
-Version: 2.0.0
-
-Status: Phase 17.1 Map Domain Design Completed
+Version: 2.1.0
+Status: Phase 17.3 Map Service Foundation Completed
 
 Last Updated: 2026-07-30
 
@@ -76,8 +75,8 @@ Universal PUDO SaaS stores carrier_code as a logical reference to carriers expos
 
 Current Phase
 
-Phase 17.2
-Map Models Foundation
+Phase 17.3
+Map Service Foundation
 
 Status:
 Completed
@@ -99,6 +98,8 @@ Completed Milestones:
 ✅ Phase 17.1 Map Domain Design
 
 ✅ Phase 17.2 Map Models Foundation
+
+✅ Phase 17.3 Map Service Foundation
 
 ✅ Phase 15.1 Engine Catalog Foundation
 
@@ -177,6 +178,24 @@ Completed Milestones:
 # IMPLEMENTED FOUNDATIONS
 
 Backend
+
+✅ Map Service Foundation
+
+✅ MapService
+
+✅ MapCenter
+
+✅ MapMarker
+
+✅ MapPopup
+
+✅ MapProjectionResult
+
+✅ MapViewState
+
+✅ test_map_models.py
+
+✅ test_map_service.py
 
 ✅ Search Result Enrichment Foundation
 
@@ -358,7 +377,7 @@ Testing
 
 Result:
 
-150 passed
+166 passed
 
 0 failed
 
@@ -469,6 +488,24 @@ SearchExecutionMetadata
 ├── duration_ms
 ├── source
 └── applied_filters
+
+MapService
+│
+├── create_marker_projection()
+├── create_popup_projection()
+└── build_map_projection()
+│
+▼
+MapProjectionResult
+
+MapProjectionResult
+│
+├── markers
+├── popups
+├── view_state
+├── total_markers
+├── executed_carriers
+└── failed_carriers
 
 Status:
 
@@ -871,17 +908,11 @@ Frontend
 
 # NEXT MILESTONE
 
-Phase 17.3
-
-Map Service Foundation
+Phase 17.4
+Leaflet Integration Foundation
 
 Objectives:
-
-- transform SearchResult into map-ready projections
-- prepare frontend consumption
-- preserve SearchResult
-- avoid persistence
-- avoid Engine modifications
+TBD during Phase 17.4 Planning Freeze
 
 ---
 
@@ -895,7 +926,7 @@ Status:
 
 Status:
 
-17.2 Completed
+17.3 Completed
 
 Allow users to visualize, explore and select PickupPoints from SearchResult through an interactive map experience.
 
@@ -933,7 +964,7 @@ Architectural Rules:
 
 Next Execution Step:
 
-Phase 17.3 Map Service Foundation
+Phase 17.4 Leaflet Integration Foundation
 
 ---
 
@@ -1014,7 +1045,7 @@ Migrations:
 
 Tests:
 
-✅ 150 passed
+✅ 166 passed
 ✅ 0 failed
 
 Documentation:

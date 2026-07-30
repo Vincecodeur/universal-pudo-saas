@@ -669,22 +669,13 @@ without custom carrier development.
 # CURRENT STATUS
 
 Current Phase:
-
-Phase 17.2
+Phase 17.3
 
 Status:
-
-Map Models Foundation Completed
+Map Service Foundation Completed
 
 Current Focus:
-
-Phase 17.3 Map Service Foundation
-
-- transform SearchResult into map-ready projections
-- prepare frontend consumption
-- preserve SearchResult
-- avoid persistence
-- avoid Engine modifications
+Phase 17.4 Leaflet Integration Foundation
 
 ---
 
@@ -871,3 +862,24 @@ Validated:
 Next milestone:
 
 Phase 17.3 Map Service Foundation
+
+---
+
+2026-07-30
+Map Service Foundation completed.
+
+Validated:
+
+- MapService
+- MapProjectionResult
+- MapMarker projection
+- MapPopup projection
+- Carrier visibility filtering
+- Pickup point selection validation
+- Branding projection support
+
+Result:
+166 automated tests passing.
+
+Next milestone:
+Phase 17.4 Leaflet Integration Foundation
