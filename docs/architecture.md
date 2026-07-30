@@ -2,7 +2,7 @@
 
 Version: 2.3.0
 
-Status: Phase 17.3 Map Service Foundation Completed
+Status: Phase 17.4 Planning Freeze Completed
 
 Last Updated: 2026-07-30
 
@@ -572,6 +572,31 @@ Validated:
 - No persistence introduced
 - No SQLAlchemy model introduced
 - No migration introduced
+
+Phase 17.4 Leaflet Integration Foundation
+
+Design Reference:
+docs/leaflet-integration-design.md
+
+Validated:
+
+- Leaflet consumes MapProjectionResult
+- Leaflet does not consume SearchResult directly
+- Leaflet does not consume Universal PUDO Engine directly
+- Marker lifecycle defined
+- Popup lifecycle defined
+- Carrier logo strategy defined
+- Carrier color strategy defined
+- Map refresh strategy defined
+- Selection strategy defined
+- Frontend boundary defined
+- Backend boundary preserved
+- Out-of-scope implementation rules documented
+- No persistence introduced
+- No SQLAlchemy model introduced
+- No migration introduced
+- No Engine modification introduced
+- No frontend implementation introduced
 
 ---
 
@@ -1712,15 +1737,18 @@ Universal PUDO Engine Integration Closure
 16.5 Search Platform Validation
 16.6 Search Platform Closure
 17.1 Map Domain Design
+17.2 Map Models Foundation
+17.3 Map Service Foundation
+17.4 Leaflet Integration Planning Freeze
 
 ```
 
 Current:
 
-Phase 17.3
+Phase 17.4
 
 Status :
-Completed
+Planning Freeze Completed
 
 Future:
 
@@ -1792,7 +1820,7 @@ Phase 16 Completed
 ✅ SearchPlatformService
 
 Current Phase:
-17.3 Map Models Foundation Completed
+17.4 Leaflet Integration Planning Freeze Completed
 
 Testing Status:
 166 passed
@@ -1801,28 +1829,39 @@ Testing Status:
 Documentation Status:
 
 ```text
-Realigned through Phase 17.3
+Realigned through Phase 17.4
 ```
 
 ---
 
 # NEXT ARCHITECTURAL MILESTONE
 
-Phase 17.4 Leaflet Integration Foundation
+Phase 17.5 Leaflet Component Foundation
 
 Objectives:
-TBD during Phase 17.4 Planning Freeze
+
+- create the first frontend-facing Leaflet integration artifacts
+- consume MapProjectionResult
+- render markers
+- render popups
+- preserve SearchResult boundary
+- preserve MapService boundary
+- avoid persistence
+- avoid Engine modifications
 
 Success Criteria:
 
-- Map service boundary defined
+- frontend Leaflet component foundation defined
+- MapProjectionResult consumed
+- markers rendered from MapMarker
+- popups rendered from MapPopup
 - SearchResult remains unchanged
-- Map projections generated from SearchResult
-- No persistence introduced
-- No SQLAlchemy model introduced
-- No migration introduced
-- No Engine modification introduced
-- Documentation synchronized
+- MapService boundary preserved
+- no persistence introduced
+- no SQLAlchemy model introduced
+- no migration introduced
+- no Engine modification introduced
+- documentation synchronized
 
 ---
 

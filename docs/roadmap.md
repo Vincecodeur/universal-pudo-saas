@@ -2,7 +2,7 @@
 
 Version: 2.1.0
 
-Status: Phase 17.3 Completed
+Status: Phase 17.4 Planning Freeze Completed
 
 Last Updated: 2026-07-30
 
@@ -1409,9 +1409,8 @@ Objectives:
 
 Map Experience
 
-Status:
-
-17.3 Completed
+Status:  
+17.4 Planning Freeze Completed
 
 Objective
 
@@ -1520,10 +1519,31 @@ Result:
 166 passed
 0 failed
 
-## 17.4 Leaflet Integration Foundation
+### 17.4 Leaflet Integration Foundation
 
 Status:
-Planned
+Planning Freeze Completed
+
+Deliverables:
+✅ docs/leaflet-integration-design.md
+
+Validated:
+✅ Leaflet architectural position defined
+✅ MapProjectionResult consumption rule defined
+✅ Marker lifecycle defined
+✅ Popup lifecycle defined
+✅ Carrier logo strategy defined
+✅ Carrier color strategy defined
+✅ Map refresh strategy defined
+✅ Selection strategy defined
+✅ Frontend boundary defined
+✅ Backend boundary preserved
+✅ Out-of-scope rules documented
+✅ No persistence introduced
+✅ No SQLAlchemy model introduced
+✅ No migration introduced
+✅ No Engine modification introduced
+✅ Phase 17.5 identified
 
 ## 17.5 Map Validation
 
@@ -1767,23 +1787,23 @@ Completed:
 
 ✅ Phase 17.3 Map Service Foundation
 
+✅ Phase 17.4 Leaflet Integration Planning Freeze
+
 ---
 
-Current Focus:
+Current Focus:  
+Phase 17.5
 
-Phase 17.4
+Leaflet Component Foundation
 
-Leaflet Integration Foundation
-
-Status:
-
+Status:  
 Next
 
 ---
 
 Future Validation Gate:
 
-Leaflet Integration Foundation
+Leaflet Component Foundation
 
 ---
 
@@ -2270,8 +2290,6 @@ Result:
 
 ---
 
----
-
 2026-07-27
 
 Search Platform Models Foundation completed.
@@ -2345,3 +2363,34 @@ Result:
 
 150 passed
 0 failed
+
+---
+
+2026-07-30
+
+Phase 17.4 Leaflet Integration Planning Freeze completed.
+
+Implemented:
+
+- docs/leaflet-integration-design.md
+
+Validated:
+
+- Leaflet architectural position
+- MapProjectionResult consumption rule
+- Marker lifecycle
+- Popup lifecycle
+- Carrier logo strategy
+- Carrier color strategy
+- Map refresh strategy
+- Selection strategy
+- Frontend boundary
+- Backend boundary
+- Out-of-scope implementation rules
+- No persistence
+- No SQLAlchemy model
+- No migration
+- No Engine modification
+
+Next milestone:
+Phase 17.5 Leaflet Component Foundation

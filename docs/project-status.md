@@ -1,7 +1,7 @@
 # Universal PUDO SaaS - Project Status
 
-Version: 2.2.0
-Status: Phase 17.3 Map Service Foundation Completed
+Version: 2.3.0
+Status: Phase 17.4 Planning Freeze Completed
 
 Last Updated: 2026-07-30
 
@@ -27,11 +27,10 @@ universal-pudo-saas
 
 Lifecycle Stage:
 
-17.3 Map Service Foundation
-
+17.4 Leaflet Integration Foundation
 Status:
 
-Completed
+Planning Freeze Completed
 
 Repository Role:
 
@@ -42,13 +41,13 @@ Application Layer built on top of Universal PUDO Engine.
 # CURRENT PHASE
 
 Phase:
-17.3
+17.4
 
 Name:
-Map Service Foundation
+Leaflet Integration Foundation
 
 Status:
-Completed
+Planning Freeze Completed
 
 ---
 
@@ -929,20 +928,54 @@ MapMarker projection implemented.
 
 MapPopup projection implemented.
 
+Phase 17.4 Leaflet Integration Planning Freeze completed.
+
+docs/leaflet-integration-design.md created.
+
+Leaflet architectural position documented.
+
+MapProjectionResult consumption rule documented.
+
+Marker lifecycle documented.
+
+Popup lifecycle documented.
+
+Carrier logo strategy documented.
+
+Carrier color strategy documented.
+
+Map refresh strategy documented.
+
+Selection strategy documented.
+
+Frontend boundary documented.
+
+Backend boundary preserved.
+
+No persistence introduced.
+
+No SQLAlchemy model introduced.
+
+No migration introduced.
+
+No Universal PUDO Engine modification introduced.
+
 166 automated tests passing.
 
 ---
 
 # Next Milestone:
 
-Phase 17.4
-Leaflet Integration Foundation
-
+Phase 17.5
+Leaflet Component Foundation  
 Objectives:
 
-- transform SearchResult into map-ready projections
-- prepare frontend consumption
-- preserve SearchResult
+- create the first frontend-facing Leaflet integration artifacts
+- consume MapProjectionResult
+- render markers
+- render popups
+- preserve SearchResult boundary
+- preserve MapService boundary
 - avoid persistence
 - avoid Engine modifications
 
@@ -988,9 +1021,13 @@ Architectural Decisions:
 
 ✅ Phase 17.2 Map Models Foundation Completed
 
+✅ Phase 17.3 Map Service Foundation Completed
+
+✅ Phase 17.4 Leaflet Integration Planning Freeze Completed
+
 Next Execution Step:
 
-Phase 17.4 Leaflet Integration Foundation
+Phase 17.5 Leaflet Component Foundation
 
 # CHANGE HISTORY
 
@@ -1515,3 +1552,41 @@ Result:
 
 Next milestone:
 Phase 17.4 Leaflet Integration Foundation
+
+---
+
+2026-07-30
+
+Phase 17.4 Leaflet Integration Planning Freeze completed.
+
+Implemented:
+
+- docs/leaflet-integration-design.md
+
+Defined:
+
+- Leaflet architectural position
+- MapProjectionResult consumption rule
+- Marker lifecycle
+- Popup lifecycle
+- Carrier logo strategy
+- Carrier color strategy
+- Map refresh strategy
+- Selection strategy
+- Frontend boundary
+- Backend boundary
+- Out-of-scope implementation rules
+
+Validated:
+
+- Leaflet consumes MapProjectionResult
+- Leaflet does not consume SearchResult directly
+- Leaflet does not consume Universal PUDO Engine directly
+- No persistence introduced
+- No SQLAlchemy model introduced
+- No migration introduced
+- No Engine modification introduced
+- No frontend implementation introduced
+
+Next milestone:
+Phase 17.5 Leaflet Component Foundation

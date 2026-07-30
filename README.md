@@ -1,7 +1,7 @@
 # Universal PUDO SaaS
 
-Version: 2.1.0
-Status: Phase 17.3 Map Service Foundation Completed
+Version: 2.2.0
+Status: Phase 17.4 Planning Freeze Completed
 
 Last Updated: 2026-07-30
 
@@ -75,11 +75,11 @@ Universal PUDO SaaS stores carrier_code as a logical reference to carriers expos
 
 Current Phase
 
-Phase 17.3
-Map Service Foundation
+Phase 17.4
+Leaflet Integration Foundation
 
 Status:
-Completed
+Planning Freeze Completed
 
 Completed Milestones:
 
@@ -100,6 +100,8 @@ Completed Milestones:
 ✅ Phase 17.2 Map Models Foundation
 
 ✅ Phase 17.3 Map Service Foundation
+
+✅ Phase 17.4 Leaflet Integration Planning Freeze
 
 ✅ Phase 15.1 Engine Catalog Foundation
 
@@ -908,11 +910,19 @@ Frontend
 
 # NEXT MILESTONE
 
-Phase 17.4
-Leaflet Integration Foundation
+Phase 17.5
+Leaflet Component Foundation
 
 Objectives:
-TBD during Phase 17.4 Planning Freeze
+
+- create the first frontend-facing Leaflet integration artifacts
+- consume MapProjectionResult
+- render markers
+- render popups
+- preserve SearchResult boundary
+- preserve MapService boundary
+- avoid persistence
+- avoid Engine modifications
 
 ---
 
@@ -924,9 +934,7 @@ Map Experience
 
 Status:
 
-Status:
-
-17.3 Completed
+17.4 Planning Freeze Completed
 
 Allow users to visualize, explore and select PickupPoints from SearchResult through an interactive map experience.
 
@@ -964,7 +972,7 @@ Architectural Rules:
 
 Next Execution Step:
 
-Phase 17.4 Leaflet Integration Foundation
+Phase 17.5 Leaflet Component Foundation
 
 ---
 
@@ -1026,6 +1034,9 @@ Main Documents:
 - domain-model.md
 - database-model.md
 - persistence-decisions.md
+- map-experience-design.md
+- map-models-foundation.md
+- leaflet-integration-design.md
 
 ---
 

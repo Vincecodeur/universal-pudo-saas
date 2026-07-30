@@ -669,13 +669,13 @@ without custom carrier development.
 # CURRENT STATUS
 
 Current Phase:
-Phase 17.3
+Phase 17.4
 
 Status:
-Map Service Foundation Completed
+Leaflet Integration Planning Freeze Completed
 
 Current Focus:
-Phase 17.4 Leaflet Integration Foundation
+Phase 17.5 Leaflet Component Foundation
 
 ---
 
@@ -883,3 +883,26 @@ Result:
 
 Next milestone:
 Phase 17.4 Leaflet Integration Foundation
+
+---
+
+2026-07-30
+
+Leaflet Integration Planning Freeze completed.
+
+Validated:
+
+- MapProjectionResult consumption rule
+- Leaflet architectural position
+- Marker lifecycle
+- Popup lifecycle
+- Carrier logo strategy
+- Carrier color strategy
+- Map refresh strategy
+- Selection strategy
+- Frontend boundary
+- Backend boundary
+- Out-of-scope implementation rules
+
+Next milestone:
+Phase 17.5 Leaflet Component Foundation

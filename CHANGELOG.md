@@ -6,6 +6,47 @@ The format follows a milestone-based approach.
 
 ---
 
+#### [2.4.0] - 2026-07-30
+
+##### Phase 17.4 - Leaflet Integration Foundation
+
+Added:
+
+- docs/leaflet-integration-design.md
+
+Defined:
+
+- Leaflet architectural position
+- MapProjectionResult consumption rule
+- Marker lifecycle
+- Popup lifecycle
+- Carrier logo strategy
+- Carrier color strategy
+- Map refresh strategy
+- Selection strategy
+- Frontend boundary
+- Backend boundary
+- Out-of-scope implementation rules
+
+Validation:
+
+- Leaflet consumes MapProjectionResult
+- Leaflet does not consume SearchResult directly
+- Leaflet does not consume Universal PUDO Engine directly
+- No persistence introduced
+- No SQLAlchemy model introduced
+- No Alembic migration introduced
+- No Universal PUDO Engine modification introduced
+- No frontend implementation introduced
+
+Status:
+Phase 17.4 Planning Freeze completed
+
+Next milestone:
+Phase 17.5 Leaflet Component Foundation
+
+---
+
 ### [2.3.0] - 2026-07-30
 
 #### Phase 17.3 - Map Service Foundation
