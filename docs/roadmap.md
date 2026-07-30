@@ -2,9 +2,9 @@
 
 Version: 2.0.0
 
-Status: Search Platform Closure In Progress
+Status: Phase 17.1 Completed
 
-Last Updated: 2026-07-28
+Last Updated: 2026-07-30
 
 ---
 
@@ -1248,7 +1248,7 @@ Exit Criteria:
 Search Platform
 
 Status:
-In Progress
+Completed
 
 ## Phase 16.1
 
@@ -1392,7 +1392,7 @@ Search Platform Closure
 
 Status:
 
-Current
+Completed
 
 Objectives:
 
@@ -1411,7 +1411,7 @@ Map Experience
 
 Status:
 
-Planning Freeze Completed
+17.1 Completed
 
 Objective
 
@@ -1443,6 +1443,26 @@ Out of Scope
 - Search contract modifications
 
 ## 17.1 Map Domain Design
+
+Status:
+
+Completed
+
+Deliverables:
+
+✅ docs/map-experience-design.md
+
+Validated:
+
+✅ SearchResult remains the unique business contract
+✅ No MapSearchResult
+✅ No MapPickupPoint
+✅ Single pickup point selection
+✅ Selection reset on new SearchResult
+✅ Carrier visibility strategy
+✅ Carrier branding ownership
+✅ Analytics-ready map design
+✅ No persistence introduced
 
 ## 17.2 Map Models Foundation
 
@@ -1684,25 +1704,27 @@ Completed:
 
 ✅ Phase 16.5 Search Platform Validation
 
-⏳ Phase 16.6 Search Platform Closure
+✅ Phase 16.6 Search Platform Closure
+
+✅ Phase 17.1 Map Domain Design
 
 ---
 
 Current Focus:
 
-Phase 16.6
+Phase 17.2
 
-Search Platform Closure
+Map Models Foundation
 
 Status:
 
-Current
+Next
 
 ---
 
 Future Validation Gate:
 
-Phase 16 Search Platform Closure
+Phase 17.2 Map Models Foundation
 
 ---
 

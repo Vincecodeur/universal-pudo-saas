@@ -2,9 +2,9 @@
 
 Version: 2.0.0
 
-Status: Search Platform Closure In Progress
+Status: Phase 17.1 Map Domain Design Completed
 
-Last Updated: 2026-07-28
+Last Updated: 2026-07-30
 
 ---
 
@@ -76,11 +76,11 @@ Universal PUDO SaaS stores carrier_code as a logical reference to carriers expos
 
 Current Phase
 
-Phase 16.6
-Search Platform Closure
+Phase 17.1
+Map Domain Design
 
 Status:
-In Progress
+Completed
 
 Completed Milestones:
 
@@ -93,6 +93,10 @@ Completed Milestones:
 ✅ Phase 16.4 Search Result Enrichment Foundation
 
 ✅ Phase 16.5 Search Platform Validation
+
+✅ Phase 16.6 Search Platform Closure
+
+✅ Phase 17.1 Map Domain Design
 
 ✅ Phase 15.1 Engine Catalog Foundation
 
@@ -481,6 +485,16 @@ SearchResult is the unique search business contract.
 
 Map Experience consumes SearchResult without introducing new search models.
 
+Validated Phase 17.1 decisions:
+
+✅ No MapSearchResult
+✅ No MapPickupPoint
+✅ Single pickup point selection
+✅ Selection reset on new SearchResult
+✅ Carrier visibility separated from carrier availability
+✅ Carrier branding owned by SaaS Administration
+✅ Analytics-ready architecture
+
 ---
 
 # CURRENT PROJECT STRUCTURE
@@ -843,20 +857,18 @@ Frontend
 
 # NEXT MILESTONE
 
-Phase 16.6
+Phase 17.2
 
-Search Platform Closure
+Map Models Foundation
 
 Objectives:
 
-- freeze Search Platform contract
-- validate final architecture boundaries
-- confirm non-persistence strategy
-- synchronize documentation
-- prepare Phase 16 completion
-- prepare Phase 17 Planning Freeze
-
----
+- define presentation-oriented map structures if required
+- preserve SearchResult as the unique business contract
+- preserve Map Experience as a presentation layer
+- avoid persistence
+- avoid SQLAlchemy models
+- avoid Engine modifications
 
 ---
 
@@ -868,7 +880,7 @@ Map Experience
 
 Status:
 
-Planning Freeze Completed
+17.1 Completed
 
 Objective:
 
@@ -908,23 +920,25 @@ Architectural Rules:
 
 Next Execution Step:
 
-Phase 17.1 Map Domain Design
+Phase 17.2 Map Models Foundation
 
 ---
 
 # FUTURE ROADMAP
 
-Search Platform
+Phase 17 Map Experience
 ↓
-Map Experience
+Phase 18 Export Platform
 ↓
-Export Platform
+Phase 19 Administration Portal
 ↓
-Administration Portal
+Phase 20 Public API
 ↓
-Public API
+Phase 21 Observability And Audit
 ↓
-Frontend
+Phase 22 Security Hardening
+↓
+Phase 23 Frontend
 ↓
 Universal PUDO SaaS v1.0.0
 

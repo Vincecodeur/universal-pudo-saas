@@ -2,9 +2,9 @@
 
 Version: 2.3.0
 
-Status: Search Platform Closure In Progress
+Status: Phase 17.1 Map Domain Design Completed
 
-Last Updated: 2026-07-28
+Last Updated: 2026-07-30
 
 ---
 
@@ -479,15 +479,13 @@ Search Result Enrichment
 
 ## Future Domains
 
-```text
-Map Experience
+Map Experience (Design Completed)
 Carrier Branding Consumption
 Roles and Permissions Enforcement
 Exports
 Administration
 Public API
 Frontend
-```
 
 ## Phase 16 Search Platform Sub-Phases
 
@@ -523,6 +521,24 @@ Branding includes:
 Carrier branding administration belongs to Administration Portal.
 
 Map Experience is read-only regarding branding configuration.
+
+Design Reference:
+
+docs/map-experience-design.md
+
+Status:
+Phase 17.1 Completed
+
+Validated Decisions:
+
+- SearchResult remains the unique business contract.
+- No MapSearchResult model.
+- No MapPickupPoint model.
+- Single pickup point selection.
+- Selection reset on new SearchResult.
+- Carrier visibility separated from carrier availability.
+- Carrier branding owned by SaaS Administration.
+- Future analytics enabled without introducing persistence.
 
 ---
 
@@ -1656,14 +1672,18 @@ Universal PUDO Engine Integration Closure
 16.2 Search Platform Models Foundation
 16.3 Search Platform Service Foundation
 16.4 Search Result Enrichment Foundation
+16.5 Search Platform Validation
+16.6 Search Platform Closure
+17.1 Map Domain Design
+
 ```
 
 Current:
 
-Phase 16.6
+Phase 17.1
 
 Status :
-In Progress
+Completed
 
 Future:
 
@@ -1728,14 +1748,14 @@ Completed
 ```
 
 Search Platform Status:
-Search Result Enrichment Foundation Completed
+Phase 16 Completed
 
 ✅ SearchRequest
 ✅ SearchResult
 ✅ SearchPlatformService
 
 Current Phase:
-16.6 Search Platform Closure
+17.1 Map Domain Design Completed
 
 Testing Status:
 150 passed
@@ -1744,7 +1764,7 @@ Testing Status:
 Documentation Status:
 
 ```text
-Being realigned for Phase 16
+Realigned through Phase 17.1
 ```
 
 ---

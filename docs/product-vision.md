@@ -4,7 +4,7 @@ Version: 1.0.0
 
 Status: Approved
 
-Last Updated: 2026-07-28
+Last Updated: 2026-07-30
 
 ---
 
@@ -236,7 +236,8 @@ The SaaS owns:
 - users
 - organisations
 - authentication
-- permissions
+- access control model
+- future permission enforcement
 - carrier credential management
 - carrier account management
 - carrier activation workflows
@@ -508,6 +509,15 @@ Map Experience must not introduce:
 - MapPickupPoint
 - duplicated search contracts
 
+Validated Phase 17.1 decisions:
+
+- SearchResult remains the unique business contract
+- Single pickup point selection
+- Selection reset on new SearchResult
+- Carrier visibility separated from carrier availability
+- Carrier branding owned by SaaS Administration
+- Analytics-ready architecture
+
 ---
 
 # EXPORT EXPERIENCE
@@ -660,21 +670,21 @@ without custom carrier development.
 
 Current Phase:
 
-Phase 16.6
+Phase 17.1
 
 Status:
 
-Search Platform Closure
+Map Domain Design Completed
 
 Current Focus:
 
-Search Platform Closure
+Phase 17.2 Map Models Foundation
 
-- freeze Search Platform contract
-- validate architecture boundaries
-- confirm non-persistence strategy
-- synchronize documentation
-- prepare Phase 17 planning
+- preserve SearchResult as the unique business contract
+- preserve Map Experience as a presentation layer
+- avoid persistence
+- avoid SQLAlchemy models
+- avoid Engine modifications
 
 ---
 
@@ -806,3 +816,38 @@ Validated:
 Result:
 
 150 automated tests passing.
+
+---
+
+2026-07-30
+
+Search Platform Closure completed.
+
+Validated:
+
+- Search Platform contract frozen
+- Search Platform boundaries validated
+- Non-persistence strategy confirmed
+
+Result:
+
+150 automated tests passing.
+
+---
+
+2026-07-30
+
+Map Domain Design completed.
+
+Validated:
+
+- SearchResult remains the unique business contract
+- No MapSearchResult model
+- No MapPickupPoint model
+- Carrier branding ownership strategy
+- Carrier visibility strategy
+- Analytics-ready map architecture
+
+Next milestone:
+
+Phase 17.2 Map Models Foundation

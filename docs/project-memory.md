@@ -4,7 +4,7 @@ Version: 1.2.0
 
 Status: Active
 
-Last Updated: 2026-07-28
+Last Updated: 2026-07-30
 
 ---
 
@@ -283,6 +283,37 @@ Planning Freeze Completed
 Reason:
 
 Prevent duplication of business contracts and preserve Search Platform boundaries.
+
+### D012
+
+Carrier Visibility Strategy
+
+Decision:
+
+Carrier availability and carrier visibility are separate concepts.
+
+Carrier availability:
+
+- Engine published carrier
+- Active organisation CarrierAccount
+
+Carrier visibility:
+
+- User display preference
+
+Users may only display carriers available to their organisation.
+
+### D013
+
+Analytics Ready Map Strategy
+
+Decision:
+
+PickupPoint selection is considered a future business event.
+
+Phase 17 remains non-persistent.
+
+Future analytics may reuse pickup point selections without introducing persistence during Map Experience foundations.
 
 ---
 
@@ -938,7 +969,11 @@ Implemented
 
 ✅ Search Platform Validation
 
-⏳ Search Platform Closure
+✅ Search Platform Closure
+
+✅ Map Domain Design
+
+✅ docs/map-experience-design.md
 
 ---
 
@@ -1199,39 +1234,41 @@ Completed
 
 ✅ Phase 16.5 Search Platform Validation
 
-⏳ Phase 16.6 Search Platform Closure
+✅ Phase 16.6 Search Platform Closure
+
+✅ Phase 17.1 Map Domain Design
 
 ---
 
 Current Focus
 
-Phase 16.6
-Search Platform Closure
+Phase 17.2
+Map Models Foundation
 
 ---
 
 # NEXT MILESTONE
 
-Phase 16.6
+Phase 17.2
 
-Search Platform Closure
+Map Models Foundation
 
 Objectives:
 
-- freeze Search Platform contract
-- validate final architecture boundaries
-- confirm non-persistence strategy
-- synchronize documentation
-- prepare Phase 16 completion
-- confirm Phase 17 Planning Freeze documentation
+- define presentation-oriented map structures if required
+- preserve SearchResult as the unique business contract
+- preserve Map Experience as a presentation layer
+- avoid persistence
+- avoid SQLAlchemy models
+- avoid Engine modifications
 
 ---
 
 # FUTURE MILESTONES
 
 Phase 17 Map Experience
-Status: Planning Freeze Completed
-Next: Phase 17.1 Map Domain Design
+Status: Phase 17.1 Completed
+Next: Phase 17.2 Map Models Foundation
 ↓
 Phase 18 Export Platform
 ↓
@@ -1702,3 +1739,30 @@ Validated:
 Next execution step:
 
 Phase 17.1 Map Domain Design
+
+---
+
+2026-07-30
+
+Phase 17.1 Map Domain Design completed.
+
+Implemented:
+
+- docs/map-experience-design.md
+
+Validated:
+
+- SearchResult remains the unique business contract
+- No MapSearchResult model
+- No MapPickupPoint model
+- Single pickup point selection
+- Selection reset on new SearchResult
+- Carrier visibility strategy
+- Carrier branding ownership strategy
+- Analytics-ready map design
+- No persistence introduced
+
+Result:
+
+Phase 17.1 completed.
+Phase 17.2 designated as next milestone.
