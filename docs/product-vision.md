@@ -518,6 +518,16 @@ Validated Phase 17.1 decisions:
 - Carrier branding owned by SaaS Administration
 - Analytics-ready architecture
 
+Validated Phase 17.6 decisions:
+
+- SearchResult boundary validated
+- MapService boundary validated
+- MapProjectionResult presentation contract validated
+- frontend responsibility boundary validated
+- carrier branding boundary validated
+- persistence boundary validated
+- Engine boundary validated
+
 ---
 
 # EXPORT EXPERIENCE
@@ -669,13 +679,13 @@ without custom carrier development.
 # CURRENT STATUS
 
 Current Phase:
-Phase 17.5
+Phase 17.7
 
 Status:
-Leaflet Component Foundation Completed
+Map Experience Validation Completed
 
 Current Focus:
-Phase 17.6 Map Experience Validation
+Phase 17.7 Map Experience Closure
 
 ---
 
@@ -924,3 +934,21 @@ Validated:
 
 Next milestone:
 Phase 17.6 Map Experience Validation
+
+---
+
+2026-08-02
+
+Map Experience Validation completed.
+
+Validated:
+
+- SearchResult boundary
+- MapProjectionResult presentation contract
+- MapService boundary
+- frontend responsibility boundary
+- carrier branding boundary
+- persistence boundary
+
+Next milestone:
+Phase 17.7 Map Experience Closure

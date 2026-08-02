@@ -6,6 +6,29 @@ The format follows a milestone-based approach.
 
 ---
 
+### [2.6.0] - 2026-08-02
+
+#### Phase 17.6 - Map Experience Validation
+
+Validated:
+
+- SearchResult boundary
+- MapService boundary
+- MapProjectionResult consumption
+- marker lifecycle
+- popup lifecycle
+- selection lifecycle
+- frontend responsibility boundary
+- Engine boundary
+- carrier branding boundary
+- persistence boundary
+
+Result:
+Architecture validated
+
+Next milestone:
+Phase 17.7 Map Experience Closure
+
 ## [2.5.0] - 2026-08-02
 
 ### Phase 17.5 - Leaflet Component Foundation
