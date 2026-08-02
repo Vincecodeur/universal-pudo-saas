@@ -6,6 +6,42 @@ The format follows a milestone-based approach.
 
 ---
 
+### [2.7.0] - 2026-08-02
+
+#### Phase 17.7 - Map Experience Closure
+
+Confirmed:
+
+- Phase 17 completion
+- architecture stability
+- documentation synchronization
+- SearchResult boundary preservation
+- MapService boundary preservation
+- MapProjectionResult presentation contract preservation
+- carrier branding ownership preservation
+- persistence boundary preservation
+
+Frozen Decisions:
+
+- SearchResult remains the unique business contract
+- MapProjectionResult remains the presentation contract
+- Leaflet consumes MapProjectionResult only
+- Carrier branding remains owned by SaaS Administration
+- No MapSearchResult
+- No MapPickupPoint
+- No map persistence
+- No Engine modification
+- Single pickup point selection
+- Selection reset on new SearchResult
+
+Result:
+Phase 17 completed
+
+Next milestone:
+Phase 18 Export Platform
+
+---
+
 ### [2.6.0] - 2026-08-02
 
 #### Phase 17.6 - Map Experience Validation

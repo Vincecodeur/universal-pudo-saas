@@ -682,7 +682,7 @@ Current Phase:
 Phase 17.7
 
 Status:
-Map Experience Validation Completed
+Map Experience Closure In Progress
 
 Current Focus:
 Phase 17.7 Map Experience Closure
