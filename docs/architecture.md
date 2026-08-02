@@ -2,9 +2,9 @@
 
 Version: 2.3.0
 
-Status: Phase 17.4 Planning Freeze Completed
+Status: Phase 17.5 Planning Freeze Completed
 
-Last Updated: 2026-07-30
+Last Updated: 2026-08-02
 
 ---
 
@@ -597,6 +597,28 @@ Validated:
 - No migration introduced
 - No Engine modification introduced
 - No frontend implementation introduced
+
+Phase 17.5 Leaflet Component Foundation
+
+Design Reference:
+docs/leaflet-component-foundation.md
+
+Validated:
+
+- Leaflet component responsibility defined
+- Leaflet adapter responsibility defined
+- Marker rendering strategy defined
+- Popup rendering strategy defined
+- Selection strategy defined
+- Empty state strategy defined
+- Branding rendering strategy defined
+- Map refresh strategy defined
+- SearchResult boundary preserved
+- MapProjectionResult boundary preserved
+- No persistence introduced
+- No SQLAlchemy model introduced
+- No migration introduced
+- No Engine modification introduced
 
 ---
 
@@ -1740,15 +1762,16 @@ Universal PUDO Engine Integration Closure
 17.2 Map Models Foundation
 17.3 Map Service Foundation
 17.4 Leaflet Integration Planning Freeze
+17.5 Leaflet Component Foundation
 
 ```
 
 Current:
 
-Phase 17.4
+Phase 17.6
 
 Status :
-Planning Freeze Completed
+Validation In Progress
 
 Future:
 
@@ -1819,8 +1842,8 @@ Phase 16 Completed
 ✅ SearchResult
 ✅ SearchPlatformService
 
-Current Phase:
-17.4 Leaflet Integration Planning Freeze Completed
+Phase 17.6
+Validation In Progress
 
 Testing Status:
 166 passed
@@ -1829,38 +1852,36 @@ Testing Status:
 Documentation Status:
 
 ```text
-Realigned through Phase 17.4
+Realigned through Phase 17.5
 ```
 
 ---
 
 # NEXT ARCHITECTURAL MILESTONE
 
-Phase 17.5 Leaflet Component Foundation
+Phase 17.6 Map Experience Validation
 
 Objectives:
 
-- create the first frontend-facing Leaflet integration artifacts
-- consume MapProjectionResult
-- render markers
-- render popups
+- validate Leaflet foundation
+- validate MapProjectionResult consumption
+- validate marker lifecycle
+- validate popup lifecycle
+- validate selection lifecycle
 - preserve SearchResult boundary
 - preserve MapService boundary
-- avoid persistence
-- avoid Engine modifications
+- confirm no persistence introduced
 
 Success Criteria:
 
-- frontend Leaflet component foundation defined
-- MapProjectionResult consumed
-- markers rendered from MapMarker
-- popups rendered from MapPopup
-- SearchResult remains unchanged
-- MapService boundary preserved
+- Leaflet foundation validated
+- MapProjectionResult consumption validated
+- marker lifecycle validated
+- popup lifecycle validated
+- selection lifecycle validated
+- SearchResult boundary validated
+- MapService boundary validated
 - no persistence introduced
-- no SQLAlchemy model introduced
-- no migration introduced
-- no Engine modification introduced
 - documentation synchronized
 
 ---
@@ -2212,3 +2233,36 @@ Result:
 
 150 passed
 0 failed
+
+---
+
+2026-08-02
+
+Phase 17.5 Leaflet Component Foundation completed.
+
+Implemented:
+
+- docs/leaflet-component-foundation.md
+
+Defined:
+
+- component responsibilities
+- Leaflet adapter boundary
+- marker rendering strategy
+- popup rendering strategy
+- selection strategy
+- empty state strategy
+- branding rendering strategy
+- map refresh strategy
+
+Validated:
+
+- SearchResult remains business contract
+- MapProjectionResult remains presentation contract
+- No persistence
+- No SQLAlchemy model
+- No migration
+- No Engine modification
+
+Next milestone:
+Phase 17.6 Map Experience Validation

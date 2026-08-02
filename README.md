@@ -1,9 +1,9 @@
 # Universal PUDO SaaS
 
 Version: 2.2.0
-Status: Phase 17.4 Planning Freeze Completed
+Status: Phase 17.5 Planning Freeze Completed
 
-Last Updated: 2026-07-30
+Last Updated: 2026-08-02
 
 ---
 
@@ -75,11 +75,11 @@ Universal PUDO SaaS stores carrier_code as a logical reference to carriers expos
 
 Current Phase
 
-Phase 17.4
-Leaflet Integration Foundation
+Phase 17.6
+Map Experience Validation
 
 Status:
-Planning Freeze Completed
+In Progress
 
 Completed Milestones:
 
@@ -102,6 +102,8 @@ Completed Milestones:
 ✅ Phase 17.3 Map Service Foundation
 
 ✅ Phase 17.4 Leaflet Integration Planning Freeze
+
+✅ Phase 17.5 Leaflet Component Foundation
 
 ✅ Phase 15.1 Engine Catalog Foundation
 
@@ -180,6 +182,10 @@ Completed Milestones:
 # IMPLEMENTED FOUNDATIONS
 
 Backend
+
+✅ Leaflet Component Foundation
+
+✅ docs/leaflet-component-foundation.md
 
 ✅ Map Service Foundation
 
@@ -910,19 +916,19 @@ Frontend
 
 # NEXT MILESTONE
 
-Phase 17.5
-Leaflet Component Foundation
+Phase 17.6
+Map Experience Validation
 
 Objectives:
 
-- create the first frontend-facing Leaflet integration artifacts
-- consume MapProjectionResult
-- render markers
-- render popups
+- validate Leaflet foundation
+- validate MapProjectionResult consumption
+- validate marker lifecycle
+- validate popup lifecycle
+- validate selection lifecycle
 - preserve SearchResult boundary
 - preserve MapService boundary
-- avoid persistence
-- avoid Engine modifications
+- confirm no persistence introduced
 
 ---
 
@@ -934,7 +940,7 @@ Map Experience
 
 Status:
 
-17.4 Planning Freeze Completed
+17.5 Planning Freeze Completed
 
 Allow users to visualize, explore and select PickupPoints from SearchResult through an interactive map experience.
 
@@ -972,7 +978,7 @@ Architectural Rules:
 
 Next Execution Step:
 
-Phase 17.5 Leaflet Component Foundation
+Phase 17.6 Map Experience Validation
 
 ---
 

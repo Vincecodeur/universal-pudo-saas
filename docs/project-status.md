@@ -1,9 +1,9 @@
 # Universal PUDO SaaS - Project Status
 
 Version: 2.3.0
-Status: Phase 17.4 Planning Freeze Completed
+Status: Phase 17.5 Planning Freeze Completed
 
-Last Updated: 2026-07-30
+Last Updated: 2026-08-02
 
 ---
 
@@ -26,8 +26,8 @@ Repository:
 universal-pudo-saas
 
 Lifecycle Stage:
+17.5 Leaflet Component Foundation
 
-17.4 Leaflet Integration Foundation
 Status:
 
 Planning Freeze Completed
@@ -41,10 +41,10 @@ Application Layer built on top of Universal PUDO Engine.
 # CURRENT PHASE
 
 Phase:
-17.4
+17.5
 
 Name:
-Leaflet Integration Foundation
+Leaflet Component Foundation
 
 Status:
 Planning Freeze Completed
@@ -960,24 +960,38 @@ No migration introduced.
 
 No Universal PUDO Engine modification introduced.
 
+Phase 17.5 Leaflet Component Foundation completed.
+
+docs/leaflet-component-foundation.md created.
+
+Leaflet component responsibilities documented.
+
+Leaflet adapter boundary documented.
+
+Marker rendering strategy documented.
+
+Popup rendering strategy documented.
+
+Selection lifecycle documented.
+
 166 automated tests passing.
 
 ---
 
 # Next Milestone:
 
-Phase 17.5
-Leaflet Component Foundation  
+Phase 17.6
+Map Experience Validation
 Objectives:
 
-- create the first frontend-facing Leaflet integration artifacts
-- consume MapProjectionResult
-- render markers
-- render popups
+- validate Leaflet foundation
+- validate MapProjectionResult consumption
+- validate marker lifecycle
+- validate popup lifecycle
+- validate selection lifecycle
 - preserve SearchResult boundary
 - preserve MapService boundary
-- avoid persistence
-- avoid Engine modifications
+- confirm no persistence introduced
 
 Out of Scope:
 
@@ -1026,8 +1040,7 @@ Architectural Decisions:
 ✅ Phase 17.4 Leaflet Integration Planning Freeze Completed
 
 Next Execution Step:
-
-Phase 17.5 Leaflet Component Foundation
+Phase 17.6 Map Experience Validation
 
 # CHANGE HISTORY
 
@@ -1590,3 +1603,36 @@ Validated:
 
 Next milestone:
 Phase 17.5 Leaflet Component Foundation
+
+---
+
+2026-08-02
+
+Phase 17.5 Leaflet Component Foundation completed.
+
+Implemented:
+
+- docs/leaflet-component-foundation.md
+
+Defined:
+
+- component responsibilities
+- Leaflet adapter boundary
+- marker rendering strategy
+- popup rendering strategy
+- selection strategy
+- empty state strategy
+- branding rendering strategy
+- map refresh strategy
+
+Validated:
+
+- SearchResult remains business contract
+- MapProjectionResult remains presentation contract
+- No persistence
+- No SQLAlchemy model
+- No migration
+- No Engine modification
+
+Next milestone:
+Phase 17.6 Map Experience Validation

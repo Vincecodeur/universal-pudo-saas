@@ -6,6 +6,22 @@ The format follows a milestone-based approach.
 
 ---
 
+## [2.5.0] - 2026-08-02
+
+### Phase 17.5 - Leaflet Component Foundation
+
+Validated:
+
+- frontend Leaflet foundation
+- MapProjectionResult presentation contract
+- marker rendering strategy
+- popup rendering strategy
+- selection lifecycle
+- empty state strategy
+
+Next milestone:
+Phase 17.6 Map Experience Validation
+
 #### [2.4.0] - 2026-07-30
 
 ##### Phase 17.4 - Leaflet Integration Foundation

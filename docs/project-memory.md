@@ -4,7 +4,7 @@ Version: 1.2.0
 
 Status: Active
 
-Last Updated: 2026-07-30
+Last Updated: 2026-08-02
 
 ---
 
@@ -367,6 +367,40 @@ Phase 17.4 defines:
 Reason:
 Preserve SearchResult as the business contract and MapProjectionResult as the presentation contract before frontend implementation starts.
 
+#### D016
+
+Leaflet Component Foundation Strategy
+
+Decision:
+
+Phase 17.5 defines the first frontend-facing Leaflet component foundation.
+
+Leaflet consumes MapProjectionResult.
+
+Leaflet component responsibilities:
+
+- marker rendering
+- popup rendering
+- selection handling
+- empty state rendering
+
+Leaflet does not own:
+
+- search execution
+- SearchResult interpretation
+- carrier administration
+- persistence
+
+Phase 17.5 preserves:
+
+- SearchResult business contract
+- MapProjectionResult presentation contract
+- MapService boundary
+
+Reason:
+
+Freeze frontend responsibilities before implementation starts.
+
 ---
 
 # VALIDATED TECHNOLOGY STACK
@@ -492,6 +526,10 @@ Authentication Columns
 # IMPLEMENTED FOUNDATIONS
 
 ✅ Leaflet Integration Planning Freeze
+
+✅ Leaflet Component Foundation
+
+✅ docs/leaflet-component-foundation.md
 
 ✅ docs/leaflet-integration-design.md
 
@@ -1316,38 +1354,40 @@ Completed
 
 ✅ Phase 17.4 Leaflet Integration Planning Freeze
 
+✅ Phase 17.5 Leaflet Component Foundation
+
 ---
 
 Current Focus
 
-Phase 17.5
-Leaflet Component Foundation
+Phase 17.6
+Map Experience Validation
 
 ---
 
 # NEXT MILESTONE
 
-Phase 17.5
-Leaflet Component Foundation
+Phase 17.6
+Map Experience Validation
 
 Objectives:
 
-- create the first frontend-facing Leaflet integration artifacts
-- consume MapProjectionResult
-- render markers
-- render popups
+- validate Leaflet foundation
+- validate MapProjectionResult consumption
+- validate marker lifecycle
+- validate popup lifecycle
+- validate selection lifecycle
 - preserve SearchResult boundary
 - preserve MapService boundary
-- avoid persistence
-- avoid Engine modifications
+- confirm no persistence introduced
 
 ---
 
 # FUTURE MILESTONES
 
 Phase 17 Map Experience
-Status: Phase 17.4 Planning Freeze Completed
-Next: Phase 17.5 Leaflet Component Foundation
+Status: Phase 17.5 Planning Freeze Completed
+Next: Phase 17.6 Map Experience Validation
 ↓
 Phase 18 Export Platform
 ↓
@@ -1947,3 +1987,36 @@ Phase 17.4 Planning Freeze completed.
 
 Next milestone:
 Phase 17.5 Leaflet Component Foundation
+
+---
+
+2026-08-02
+
+Phase 17.5 Leaflet Component Foundation completed.
+
+Implemented:
+
+- docs/leaflet-component-foundation.md
+
+Defined:
+
+- component responsibilities
+- Leaflet adapter boundary
+- marker rendering strategy
+- popup rendering strategy
+- selection strategy
+- empty state strategy
+- branding rendering strategy
+- map refresh strategy
+
+Validated:
+
+- SearchResult remains business contract
+- MapProjectionResult remains presentation contract
+- No persistence
+- No SQLAlchemy model
+- No migration
+- No Engine modification
+
+Next milestone:
+Phase 17.6 Map Experience Validation

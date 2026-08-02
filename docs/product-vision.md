@@ -4,7 +4,7 @@ Version: 1.0.0
 
 Status: Approved
 
-Last Updated: 2026-07-30
+Last Updated: 2026-08-02
 
 ---
 
@@ -669,13 +669,13 @@ without custom carrier development.
 # CURRENT STATUS
 
 Current Phase:
-Phase 17.4
+Phase 17.5
 
 Status:
-Leaflet Integration Planning Freeze Completed
+Leaflet Component Foundation Completed
 
 Current Focus:
-Phase 17.5 Leaflet Component Foundation
+Phase 17.6 Map Experience Validation
 
 ---
 
@@ -906,3 +906,21 @@ Validated:
 
 Next milestone:
 Phase 17.5 Leaflet Component Foundation
+
+---
+
+2026-08-02
+
+Leaflet Component Foundation completed.
+
+Validated:
+
+- frontend Leaflet foundation
+- MapProjectionResult presentation contract
+- marker rendering strategy
+- popup rendering strategy
+- selection lifecycle
+- empty state strategy
+
+Next milestone:
+Phase 17.6 Map Experience Validation

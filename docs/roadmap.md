@@ -2,9 +2,9 @@
 
 Version: 2.1.0
 
-Status: Phase 17.4 Planning Freeze Completed
+Status: Phase 17.5 Planning Freeze Completed
 
-Last Updated: 2026-07-30
+Last Updated: 2026-08-02
 
 ---
 
@@ -1410,7 +1410,7 @@ Objectives:
 Map Experience
 
 Status:  
-17.4 Planning Freeze Completed
+17.5 Planning Freeze Completed
 
 Objective
 
@@ -1545,9 +1545,28 @@ Validated:
 ✅ No Engine modification introduced
 ✅ Phase 17.5 identified
 
-## 17.5 Map Validation
+### 17.5 Leaflet Component Foundation
 
-## 17.6 Map Experience Closure
+Status: Completed
+
+Deliverables:
+✅ docs/leaflet-component-foundation.md
+
+Validated:
+✅ component responsibilities defined
+✅ adapter boundary defined
+✅ marker rendering strategy defined
+✅ popup rendering strategy defined
+✅ selection lifecycle defined
+✅ empty state strategy defined
+✅ branding rendering strategy defined
+✅ map refresh strategy defined
+
+### 17.6 Map Experience Validation
+
+Status: Next
+
+### 17.7 Map Experience Closure
 
 ---
 
@@ -1789,21 +1808,23 @@ Completed:
 
 ✅ Phase 17.4 Leaflet Integration Planning Freeze
 
+✅ Phase 17.5 Leaflet Component Foundation
+
 ---
 
-Current Focus:  
-Phase 17.5
+Current Focus:
+Phase 17.6
 
-Leaflet Component Foundation
+Map Experience Validation
 
-Status:  
+Status:
 Next
 
 ---
 
 Future Validation Gate:
 
-Leaflet Component Foundation
+Map Experience Validation
 
 ---
 
@@ -2394,3 +2415,36 @@ Validated:
 
 Next milestone:
 Phase 17.5 Leaflet Component Foundation
+
+---
+
+2026-08-02
+
+Phase 17.5 Leaflet Component Foundation completed.
+
+Implemented:
+
+- docs/leaflet-component-foundation.md
+
+Defined:
+
+- component responsibilities
+- Leaflet adapter boundary
+- marker rendering strategy
+- popup rendering strategy
+- selection strategy
+- empty state strategy
+- branding rendering strategy
+- map refresh strategy
+
+Validated:
+
+- SearchResult remains business contract
+- MapProjectionResult remains presentation contract
+- No persistence
+- No SQLAlchemy model
+- No migration
+- No Engine modification
+
+Next milestone:
+Phase 17.6 Map Experience Validation
