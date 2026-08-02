@@ -412,18 +412,31 @@ FROZEN
 
 Next phase:
 
-Phase 18 Export Platform
+Phase 18 Frontend MVP
 
 Expected focus:
 
-- export domain design
-- export models
-- export service layer
-- export contract definition
-- export persistence strategy
-- export architecture boundaries
+- frontend application foundation
+- authentication-aware frontend shell
+- pickup point search interface
+- MapProjectionResult consumption
+- map display foundation
+- marker rendering
+- popup rendering
+- selection interaction
+- frontend integration with existing backend boundaries
 
-Map Experience foundation becomes a completed dependency.
+Map Experience foundation becomes a completed dependency for Frontend MVP.
+
+Export Platform is deferred to Phase 22.
+
+Reason:
+
+Export Platform does not yet have a validated business use case.
+
+Frontend MVP provides immediate product value by allowing users to interact with the existing Search Platform and Map Experience foundation.
+
+Export Platform will become more relevant after Observability And Audit creates usage, search, dashboard or reporting data.
 
 ---
 

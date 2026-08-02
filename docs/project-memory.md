@@ -401,6 +401,37 @@ Reason:
 
 Freeze frontend responsibilities before implementation starts.
 
+#### D017
+
+Roadmap Reprioritization - Frontend Before Export Platform
+
+Decision:
+
+Frontend MVP is moved to Phase 18.
+
+Export Platform is moved to Phase 22.
+
+Reason:
+
+Export Platform does not yet have a validated business use case.
+
+No confirmed export consumer exists yet.
+
+The platform does not yet have frontend usage, observability data, audit data or dashboard data to justify export implementation.
+
+Frontend MVP provides immediate product value by enabling users to interact with the existing Search Platform and Map Experience foundations.
+
+Export Platform becomes more relevant after Observability And Audit.
+
+Accepted Roadmap:
+
+- Phase 18 Frontend MVP
+- Phase 19 Administration Portal
+- Phase 20 Public API
+- Phase 21 Observability And Audit
+- Phase 22 Export Platform
+- Phase 23 Security Hardening
+
 ---
 
 # VALIDATED TECHNOLOGY STACK
@@ -1368,42 +1399,46 @@ Completed
 
 Current Focus
 
-Phase 17.7
-Map Experience Closure
+Phase 18
+Frontend MVP
 
 Status:
-Closure In Progress
+Ready To Start
 
 ---
 
 # NEXT MILESTONE
 
-Phase 17.7
-Map Experience Closure
+Phase 18
+Frontend MVP
 
 Objectives:
 
-- confirm Phase 17 completion
-- confirm architecture stability
-- confirm documentation synchronization
-- prepare transition to Phase 18
-- freeze Map Experience foundation
+- create frontend application foundation
+- create authentication-aware frontend shell
+- prepare pickup point search UI
+- consume MapProjectionResult
+- render map data from existing Map Experience foundation
+- preserve SearchResult boundary
+- preserve MapService boundary
+- avoid backend persistence changes
+- avoid Universal PUDO Engine modifications
 
 ---
 
 # FUTURE MILESTONES
 
-Phase 18 Export Platform
+Phase 18 Frontend MVP
 ↓
 Phase 19 Administration Portal
 ↓
-Phase 20 Public API Foundation
+Phase 20 Public API
 ↓
 Phase 21 Observability And Audit
 ↓
-Phase 22 Security Hardening
+Phase 22 Export Platform
 ↓
-Phase 23 Frontend Foundation
+Phase 23 Security Hardening
 ↓
 Phase 24 Universal PUDO Engine Upgrade Strategy
 ↓
@@ -2067,3 +2102,27 @@ Objectives:
 - confirm documentation synchronization
 - prepare transition to Phase 18
 - freeze Map Experience foundation
+
+---
+
+2026-08-02
+
+Phase 17.7 Map Experience Closure completed.
+
+Validated:
+
+- architecture stability
+- documentation synchronization
+- SearchResult boundary preservation
+- MapService boundary preservation
+- MapProjectionResult boundary preservation
+- carrier branding boundary preservation
+- persistence boundary preservation
+
+Result:
+
+Phase 17 closed.
+
+Next milestone:
+
+Phase 18 Frontend MVP

@@ -481,13 +481,12 @@ Map Projection Models
 
 ## Future Domains
 
-Map Experience (Design Completed)
-Carrier Branding Consumption
-Roles and Permissions Enforcement
-Exports
+Frontend
 Administration
 Public API
-Frontend
+Observability And Audit
+Exports
+Security Hardening
 
 ## Phase 16 Search Platform Sub-Phases
 
@@ -1224,6 +1223,8 @@ api_credentials
 future_search_history
 future_exports
 future_audit_events
+future_observability_events
+future_usage_metrics
 ```
 
 ---
@@ -1803,13 +1804,12 @@ Closure In Progress
 
 Future:
 
-17 Map Experience
-18 Export Platform
+18 Frontend MVP
 19 Administration Portal
-20 Public API Foundation
+20 Public API
 21 Observability And Audit
-22 Security Hardening
-23 Frontend Foundation
+22 Export Platform
+23 Security Hardening
 24 Core Upgrade Strategy
 25 Release Preparation
 26 Universal PUDO SaaS v1.0.0
@@ -1887,23 +1887,30 @@ Realigned through Phase 17.7
 
 # NEXT ARCHITECTURAL MILESTONE
 
-Phase 17.7 Map Experience Closure
+Phase 18 Frontend MVP
 
 Objectives:
 
-- confirm Phase 17 completion
-- confirm architecture stability
-- confirm documentation synchronization
-- prepare transition to Phase 18
-- freeze Map Experience foundation
+- create frontend application foundation
+- create authentication-aware frontend shell
+- consume Search Platform through existing backend boundaries
+- consume MapProjectionResult through existing map boundaries
+- validate first user-facing product experience
+- preserve backend responsibilities
+- avoid Engine modifications
 
 Success Criteria:
 
-- Phase 17 completed
-- architecture validated
-- documentation synchronized
-- Map Experience foundation frozen
-- Phase 18 prepared
+- frontend foundation defined
+- app shell defined
+- authentication-aware navigation defined
+- pickup point search UI prepared
+- map view consumption prepared
+- SearchResult boundary preserved
+- MapService boundary preserved
+- MapProjectionResult boundary preserved
+- no database change introduced
+- no Engine modification introduced
 
 ---
 
@@ -2005,6 +2012,45 @@ Reason:
 Search persistence must be decided after the Search Platform domain contract is stable.
 
 ---
+
+# ROADMAP REPRIORITIZATION
+
+## ADR-0010 - Frontend Before Export Platform
+
+Decision:
+
+Frontend MVP is prioritized before Export Platform.
+
+Export Platform is deferred to Phase 22.
+
+Reason:
+
+Frontend MVP provides immediate user-facing value.
+
+Export Platform does not yet have a validated business use case.
+
+Export Platform becomes more relevant after Observability And Audit.
+
+Updated sequence:
+
+- Phase 18 Frontend MVP
+- Phase 19 Administration Portal
+- Phase 20 Public API
+- Phase 21 Observability And Audit
+- Phase 22 Export Platform
+- Phase 23 Security Hardening
+
+Architectural Impact:
+
+No backend boundary changes.
+
+No Engine boundary changes.
+
+No SearchResult change.
+
+No MapProjectionResult change.
+
+Export remains a SaaS-owned future capability.
 
 # CHANGE HISTORY
 

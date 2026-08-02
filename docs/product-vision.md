@@ -542,6 +542,11 @@ Possible formats:
 
 Exports remain focused on PUDO information.
 
+Status:
+Deferred until Phase 22.
+
+Export consumers and export datasets remain to be validated before implementation.
+
 ---
 
 # API FIRST STRATEGY
@@ -679,13 +684,13 @@ without custom carrier development.
 # CURRENT STATUS
 
 Current Phase:
-Phase 17.7
+Phase 18
 
 Status:
-Map Experience Closure In Progress
+Frontend MVP Ready To Start
 
 Current Focus:
-Phase 17.7 Map Experience Closure
+Phase 18 Frontend MVP
 
 ---
 
@@ -952,3 +957,23 @@ Validated:
 
 Next milestone:
 Phase 17.7 Map Experience Closure
+
+---
+
+2026-08-02
+
+Roadmap reprioritization completed.
+
+Decision:
+
+- Frontend MVP moved to Phase 18
+- Export Platform moved to Phase 22
+
+Reason:
+
+- Frontend MVP provides immediate user-facing value
+- Export Platform does not yet have a validated business use case
+- Export Platform becomes more relevant after Observability And Audit
+
+Next milestone:
+Phase 18 Frontend MVP

@@ -6,6 +6,44 @@ The format follows a milestone-based approach.
 
 ---
 
+### [2.8.0] - 2026-08-02
+
+#### Roadmap Reprioritization - Frontend Before Export Platform
+
+Decision:
+
+- Move Frontend MVP to Phase 18
+- Move Export Platform to Phase 22
+
+Reason:
+
+- Export Platform business value is not yet validated
+- No confirmed export consumer exists yet
+- Frontend MVP provides immediate product value
+- Frontend MVP enables UX validation
+- Frontend MVP enables product demonstration
+- Export Platform becomes more relevant after Observability And Audit
+
+Updated Roadmap:
+
+- Phase 18 Frontend MVP
+- Phase 19 Administration Portal
+- Phase 20 Public API
+- Phase 21 Observability And Audit
+- Phase 22 Export Platform
+- Phase 23 Security Hardening
+
+Added:
+
+- ADR-0010 - Frontend Prioritization Before Export Platform
+
+Reference:
+
+- ADR-0010 - Frontend Prioritization Before Export Platform
+
+Status:
+Roadmap decision accepted
+
 ### [2.7.0] - 2026-08-02
 
 #### Phase 17.7 - Map Experience Closure
@@ -38,7 +76,7 @@ Result:
 Phase 17 completed
 
 Next milestone:
-Phase 18 Export Platform
+Phase 18 Frontend MVP
 
 ---
 

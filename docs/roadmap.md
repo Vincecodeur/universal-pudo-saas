@@ -1,8 +1,8 @@
 # Universal PUDO SaaS - Roadmap
 
-Version: 2.2.0
+Version: 2.3.0
 
-Status: Phase 17.7 Closure In Progress
+Status: Phase 18 Frontend MVP Ready To Start
 
 Last Updated: 2026-08-02
 
@@ -1410,7 +1410,7 @@ Objectives:
 Map Experience
 
 Status:  
-17.7 Closure In Progress
+Completed
 
 Objective
 
@@ -1581,7 +1581,7 @@ Validated:
 ### 17.7 Map Experience Closure
 
 Status:
-In Progress
+Completed
 
 Objectives:
 
@@ -1591,15 +1591,51 @@ Objectives:
 - prepare transition to Phase 18
 - freeze Map Experience foundation
 
+Validated:
+✅ architecture stability
+✅ documentation synchronization
+✅ SearchResult boundary preservation
+✅ MapService boundary preservation
+✅ MapProjectionResult boundary preservation
+✅ carrier branding boundary preservation
+✅ persistence boundary preservation
+
+Result:
+Phase 17 completed.
+
 ---
 
 # PHASE 18
 
-Export Platform
+Frontend MVP
 
 Status:
+Next
 
-Planned
+Objectives:
+
+- create frontend application foundation
+- create authentication-aware frontend shell
+- prepare pickup point search interface
+- consume MapProjectionResult
+- prepare map display foundation
+- prepare marker rendering
+- prepare popup rendering
+- prepare pickup point selection interaction
+- preserve SearchResult boundary
+- preserve MapService boundary
+- avoid backend persistence changes
+- avoid Universal PUDO Engine modifications
+
+Expected Deliverables:
+
+- frontend application structure
+- frontend routing foundation
+- authentication-aware layout
+- search view foundation
+- map view foundation
+- frontend map consumption contract
+- documentation update
 
 ---
 
@@ -1639,6 +1675,34 @@ Planned
 
 # PHASE 22
 
+Export Platform
+
+Status:
+Deferred
+
+Reason:
+Export Platform is deferred until after Observability And Audit.
+
+Export Platform will be revisited when the platform has validated data sources for operational exports, such as:
+
+- usage metrics
+- search history
+- audit events
+- dashboard data
+- carrier performance data
+- reporting data
+
+Objectives:
+
+- define export use cases
+- define export consumers
+- define exportable data
+- define export formats
+- define export persistence strategy if required
+- preserve platform boundaries
+
+# PHASE 23
+
 Security Hardening
 
 Status:
@@ -1650,22 +1714,6 @@ Objectives:
 - Credential Encryption
 - MFA Preparation
 - Security Review
-
----
-
-# PHASE 23
-
-Frontend Foundation
-
-Status:
-
-Planned
-
-Technology:
-
-- Next.js
-- React
-- TypeScript
 
 ---
 
@@ -1841,17 +1889,17 @@ Completed:
 
 Current Focus:
 
-Phase 17.7
-Map Experience Closure
+Phase 18
+Frontend MVP
 
 Status:
-In Progress
+Ready To Start
 
 ---
 
-Future Validation Gate:
+Next Validation Gate:
 
-Phase 17 Completion Review
+Phase 18 Planning Freeze
 
 ---
 
@@ -2518,3 +2566,25 @@ Objectives:
 - confirm documentation synchronization
 - prepare transition to Phase 18
 - freeze Map Experience foundation
+
+2026-08-02
+
+Phase 17.7 Map Experience Closure completed.
+
+Validated:
+
+- architecture stability
+- documentation synchronization
+- SearchResult boundary preservation
+- MapService boundary preservation
+- MapProjectionResult boundary preservation
+- carrier branding boundary preservation
+- persistence boundary preservation
+
+Result:
+
+Phase 17 closed.
+
+Next milestone:
+
+Phase 18 Frontend MVP

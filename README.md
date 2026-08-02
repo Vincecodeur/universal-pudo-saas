@@ -20,7 +20,7 @@ The objective of the platform is to allow organisations to:
 - connect carrier accounts
 - search pickup points
 - visualize pickup points
-- export pickup point data
+- export pickup point data (planned future capability)
 - administer platform usage
 
 without implementing carrier-specific integrations.
@@ -56,7 +56,7 @@ Universal PUDO SaaS remains responsible for:
 - permissions
 - carrier accounts
 - carrier credentials
-- exports
+- exports (future export platform)
 - administration
 
 The SaaS must never duplicate Core responsibilities.
@@ -995,13 +995,26 @@ Current Execution Step:
 
 Phase 17.7 Map Experience Closure
 
+Phase 18
+Frontend MVP
+
+Objectives:
+
+- create frontend application foundation
+- create authentication-aware frontend shell
+- prepare pickup point search UI
+- consume MapProjectionResult
+- render map data from existing Map Experience foundation
+- preserve SearchResult boundary
+- preserve MapService boundary
+- avoid backend persistence changes
+- avoid Universal PUDO Engine modifications
+
 ---
 
 # FUTURE ROADMAP
 
-Phase 17 Map Experience
-↓
-Phase 18 Export Platform
+Phase 18 Frontend MVP
 ↓
 Phase 19 Administration Portal
 ↓
@@ -1009,9 +1022,9 @@ Phase 20 Public API
 ↓
 Phase 21 Observability And Audit
 ↓
-Phase 22 Security Hardening
+Phase 22 Export Platform
 ↓
-Phase 23 Frontend
+Phase 23 Security Hardening
 ↓
 Universal PUDO SaaS v1.0.0
 
