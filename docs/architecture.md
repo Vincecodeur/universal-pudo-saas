@@ -1,8 +1,8 @@
 # Universal PUDO SaaS - Architecture
 
-Version: 2.5.0
+Version: 2.6.0
 
-Status: Phase 17.7 Closure In Progress
+Status: Phase 18 Frontend MVP Ready To Start
 
 Last Updated: 2026-08-02
 
@@ -1797,10 +1797,9 @@ Universal PUDO Engine Integration Closure
 
 Current:
 
-Phase 17.7
-
-Status :
-Closure In Progress
+Phase 18
+Status:
+Frontend MVP Ready To Start
 
 Future:
 
@@ -1911,6 +1910,24 @@ Success Criteria:
 - MapProjectionResult boundary preserved
 - no database change introduced
 - no Engine modification introduced
+
+---
+
+## Frontend Planning Strategy
+
+Frontend responsibilities
+
+- UI rendering
+- API consumption
+- user interaction
+- map interaction
+
+Frontend does not own
+
+- business logic
+- search orchestration
+- persistence
+- carrier logic
 
 ---
 

@@ -1008,20 +1008,16 @@ Persistence boundary validated.
 
 # Next Milestone:
 
-Phase 18
-Frontend MVP
+18.1 Frontend Product Vision
 
 Objectives:
 
-- create frontend application foundation
-- create authentication-aware frontend shell
-- prepare pickup point search UI
-- consume MapProjectionResult
-- prepare map rendering foundation
-- preserve SearchResult boundary
-- preserve MapService boundary
-- avoid backend persistence changes
-- avoid Universal PUDO Engine modifications
+- define target users
+- define business goals
+- define MVP scope
+- define out-of-scope items
+- define success criteria
+- prepare UX work
 
 Out of Scope:
 
