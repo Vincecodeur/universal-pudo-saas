@@ -2,9 +2,9 @@
 
 Version: 2.5.0
 
-Status: Phase 18 Frontend MVP Ready To Start
+Status: Phase 18.3 Information Architecture Ready To Start
 
-Last Updated: 2026-08-02
+Last Updated: 2026-08-03
 
 ---
 
@@ -41,10 +41,10 @@ Application Layer built on top of Universal PUDO Engine.
 # CURRENT PHASE
 
 Phase:
-18
+18.3
 
 Name:
-Frontend MVP
+Information Architecture
 
 Status:
 Ready To Start
@@ -52,6 +52,14 @@ Ready To Start
 ---
 
 # COMPLETED MILESTONES
+
+✅ docs/user-personas-and-user-journeys.md
+
+✅ User Personas And User Journeys
+
+✅ docs/frontend-mvp-vision.md
+
+✅ Frontend MVP Vision
 
 ✅ docs/map-experience-validation.md
 
@@ -1002,30 +1010,78 @@ Carrier branding boundary validated.
 
 Persistence boundary validated.
 
+Phase 18.1 Frontend Product Vision completed.
+
+docs/frontend-mvp-vision.md created.
+
+Frontend MVP product vision documented.
+
+Search Driven and Map Enhanced direction validated.
+
+Search page confirmed as homepage after login.
+
+Desktop First and Tablet Supported device strategy validated.
+
+Pickup point selection defined as part of the MVP workflow.
+
+Phase 18.2 User Personas And User Journeys completed.
+
+docs/user-personas-and-user-journeys.md created.
+
+Technical roles documented.
+
+Business personas documented.
+
+Viewer mapped to Operations User.
+
+Owner mapped to Transport Configuration Manager.
+
+SaaS Administrator mapped to Platform Administrator.
+
+Search confirmed as independent from orders.
+
+Address confirmed as required.
+
+Carrier confirmed as optional.
+
+Default carrier value confirmed as All available carriers.
+
+Pickup point selection confirmed as final non-persistent MVP action.
+
+No reservation, shipment, label or carrier workflow is attached to selection.
+
+Address search nature documented as unresolved future decision.
+
 166 automated tests passing.
 
 ---
 
-# Next Milestone:
+## Next Milestone:
 
-18.1 Frontend Product Vision
+18.3 Information Architecture
 
 Objectives:
 
-- define target users
-- define business goals
-- define MVP scope
-- define out-of-scope items
-- define success criteria
-- prepare UX work
+- define page inventory
+- define navigation hierarchy
+- define frontend route structure
+- define Search page composition
+- define Carrier Accounts access relationship
+- define map and results layout relationship
+- define drawer placement
+- preserve personas and journeys defined in Phase 18.2
 
 Out of Scope:
 
-- Search contract modifications
-- Search persistence
-- Engine modifications
-- Carrier branding administration
-- Export generation
+- frontend implementation
+- final UI design
+- design system
+- data fetching implementation
+- state management implementation
+- address search implementation decision
+- backend redesign
+- database changes
+- Universal PUDO Engine modifications
 
 ---
 

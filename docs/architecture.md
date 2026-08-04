@@ -1,10 +1,8 @@
 # Universal PUDO SaaS - Architecture
 
-Version: 2.6.0
-
-Status: Phase 18 Frontend MVP Ready To Start
-
-Last Updated: 2026-08-02
+Version: 2.7.0
+Status: Phase 18.3 Information Architecture Ready To Start
+Last Updated: 2026-08-03
 
 ---
 
@@ -1797,9 +1795,10 @@ Universal PUDO Engine Integration Closure
 
 Current:
 
-Phase 18
+Phase 18.3
+
 Status:
-Frontend MVP Ready To Start
+Information Architecture Ready To Start
 
 Future:
 
@@ -1886,30 +1885,76 @@ Realigned through Phase 17.7
 
 # NEXT ARCHITECTURAL MILESTONE
 
-Phase 18 Frontend MVP
+Phase 18.2 defines the user-facing personas and journeys that guide the Frontend MVP.
 
-Objectives:
+Technical roles:
 
-- create frontend application foundation
-- create authentication-aware frontend shell
-- consume Search Platform through existing backend boundaries
-- consume MapProjectionResult through existing map boundaries
-- validate first user-facing product experience
-- preserve backend responsibilities
-- avoid Engine modifications
+- Viewer
+- Owner
+- SaaS Administrator
 
-Success Criteria:
+Business personas:
 
-- frontend foundation defined
-- app shell defined
-- authentication-aware navigation defined
-- pickup point search UI prepared
-- map view consumption prepared
-- SearchResult boundary preserved
-- MapService boundary preserved
-- MapProjectionResult boundary preserved
-- no database change introduced
-- no Engine modification introduced
+- Operations User
+- Transport Configuration Manager
+- Platform Administrator
+
+Role mapping:
+
+- Viewer maps primarily to Operations User
+- Owner maps primarily to Transport Configuration Manager
+- SaaS Administrator maps to Platform Administrator
+
+The primary MVP journey is:
+Login
+↓
+Search
+↓
+Results
+↓
+Map
+↓
+Pickup Point Details
+↓
+Select Pickup Point
+
+Architecture constraints:
+
+- search remains independent from orders
+- no OMS workflow is required
+- no WMS workflow is required
+- address is required
+- carrier is optional
+- default carrier value is All available carriers
+- pickup point selection is non-persistent
+- pickup point selection does not trigger a carrier workflow
+- pickup point selection does not create a shipment
+- pickup point selection does not create a label
+- pickup point selection does not modify backend persistence
+
+Selection remains frontend interaction state.
+
+Selection remains active until a new SearchResult is generated.
+
+A new SearchResult resets selection.
+
+Unresolved future decision:
+UX-D001 - Address Search Strategy
+
+This future decision may impact:
+
+- Information Architecture
+- UX Strategy
+- Frontend Architecture Design
+- Data Fetching And State Strategy
+
+Phase 18.2 introduces no backend architectural change.
+
+The following contracts remain unchanged:
+
+- SearchResult
+- MapProjectionResult
+- MapService
 
 ---
 
@@ -2379,3 +2424,31 @@ Architecture validated.
 
 Next milestone:
 Phase 17.7 Map Experience Closure
+
+---
+
+2026-08-03  
+Phase 18.2 User Personas And User Journeys completed.  
+Documented:
+
+- technical roles
+- business personas
+- role-to-persona mapping
+- primary frontend MVP journey
+- search independence from orders
+- optional carrier filter
+- All available carriers default behavior
+- pickup point selection as non-persistent final MVP action
+- address search nature as unresolved future decision
+
+Confirmed:
+
+- no backend redesign
+- no database change
+- no Universal PUDO Engine modification
+- SearchResult unchanged
+- MapProjectionResult unchanged
+- MapService unchanged
+
+Next architectural milestone:
+Phase 18.3 Information Architecture

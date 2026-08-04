@@ -1,10 +1,8 @@
 # Universal PUDO SaaS - Roadmap
 
-Version: 2.3.0
-
-Status: Phase 18 Frontend MVP Ready To Start
-
-Last Updated: 2026-08-02
+Version: 2.4.0
+Status: Phase 18.3 Information Architecture Ready To Start
+Last Updated: 2026-08-03
 
 ---
 
@@ -1609,8 +1607,11 @@ Phase 17 completed.
 
 Frontend MVP
 
+Current Active Subphase:
+18.3 Information Architecture
+
 Status:
-Next
+In Progress
 
 Objectives:
 
@@ -1639,9 +1640,85 @@ Expected Deliverables:
 
 ### 18.1 Frontend Product Vision
 
+Status:
+Completed
+
+Deliverables:
+✅ docs/frontend-mvp-vision.md
+
+Validated:
+✅ Search Driven strategy
+✅ Map Enhanced strategy
+✅ Desktop First approach
+✅ Carrier Accounts page identified
+✅ Search as primary entry point
+✅ Frontend MVP scope frozen
+
 ### 18.2 User Personas & User Journeys
 
+Status:
+Completed
+
+Objectives:
+
+- define technical roles
+- define business personas
+- map technical roles to business personas
+- define primary user journeys
+- define secondary user journeys
+- clarify pickup point selection meaning
+- clarify search independence from orders
+- clarify carrier filter optionality
+- document unresolved address search decision
+
+Deliverables:
+✅ docs/user-personas-and-user-journeys.md
+
+Validated:
+✅ Viewer mapped to Operations User
+✅ Owner mapped to Transport Configuration Manager
+✅ SaaS Administrator mapped to Platform Administrator
+✅ Search remains independent from orders
+✅ Address is required
+✅ Carrier is optional
+✅ Default carrier value is "All available carriers"
+✅ Pickup point selection is the final MVP action
+✅ Selection is non-persistent
+✅ Selection triggers no reservation, shipment, label or carrier workflow
+✅ Address search nature remains unresolved for later phases
+✅ Phase 18.3 Information Architecture identified as next phase
+
 ### 18.3 Information Architecture
+
+Status:
+Ready To Start
+
+Objectives:
+
+- define page inventory
+- define navigation hierarchy
+- define route structure
+- define Search page composition
+- define Carrier Accounts access relationship
+- define Search and Map relationship
+- define pickup point detail drawer placement
+- document information architecture decisions
+- preserve personas and journeys defined in Phase 18.2
+
+Known Open Decision:
+UX-D001 - Address Search Strategy
+
+Out Of Scope:
+
+- frontend implementation
+- final UI design
+- design system
+- frontend state management
+- frontend data fetching
+- address search implementation decision
+- backend redesign
+- database changes
+- Universal PUDO Engine modifications
 
 ### 18.4 UX Strategy
 
@@ -1703,7 +1780,7 @@ Planned
 
 Future ADR:
 
-ADR-0010 Public API Strategy
+ADR-0011 Public API Strategy
 
 ---
 
@@ -1933,17 +2010,16 @@ Completed:
 
 Current Focus:
 
-Phase 18
-Frontend MVP
+Phase 18.3
+Information Architecture
 
 Status:
 Ready To Start
 
 ---
 
-Next Validation Gate:
-
-Phase 18 Planning Freeze
+Next Validation Gate:  
+Phase 18.14 Frontend Planning Freeze
 
 ---
 

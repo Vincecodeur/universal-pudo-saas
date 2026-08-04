@@ -18,7 +18,7 @@ The objective of Phase 17.7 is to:
 - confirm architectural stability
 - confirm documentation synchronization
 - freeze Map Experience decisions
-- prepare the transition to Phase 18 Export Platform
+- prepare the transition to Phase 18 Frontend MVP
 
 Phase 17.7 introduces no new functionality.
 
@@ -462,4 +462,4 @@ Frozen:
 
 Prepared:
 
-- Phase 18 Export Platform
+- Phase 18 Frontend MVP

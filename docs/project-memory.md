@@ -1,10 +1,10 @@
 # Universal PUDO SaaS - Project Memory
 
-Version: 1.2.0
+Version: 1.3.0
 
 Status: Active
 
-Last Updated: 2026-08-02
+Last Updated: 2026-08-03
 
 ---
 
@@ -493,6 +493,83 @@ Frontend MVP execution phases:
 
 18.22 Frontend Closure
 
+### D019
+
+Frontend User Personas And User Journeys Strategy
+
+Decision:
+Phase 18.2 defines business personas separately from technical roles.
+
+Technical roles:
+
+- Viewer
+- Owner
+- SaaS Administrator
+
+Business personas:
+
+- Operations User
+- Transport Configuration Manager
+- Platform Administrator
+
+Role mapping:
+
+- Viewer maps primarily to Operations User
+- Owner maps primarily to Transport Configuration Manager
+- SaaS Administrator maps to Platform Administrator
+
+Frontend MVP user journey remains:
+Login
+↓
+Search
+↓
+Results
+↓
+Map
+↓
+Pickup Point Details
+↓
+Select Pickup Point
+
+Search is independent from any order, OMS workflow, WMS workflow or shipment workflow.
+
+Address is required.
+
+Carrier is optional.
+
+Default carrier value:
+All available carriers.
+
+Pickup point selection is the final MVP action.
+
+Selection does not trigger:
+
+- reservation
+- shipment creation
+- parcel creation
+- label creation
+- carrier workflow
+- persistence
+
+Selection remains active until a new SearchResult is generated.
+
+A new SearchResult resets the current selection.
+
+Address search nature remains unresolved and must be handled in later frontend phases.
+
+Unresolved decision:
+UX-D001 - Address Search Strategy
+
+Impacted future phases:
+
+- Phase 18.3 Information Architecture
+- Phase 18.4 UX Strategy
+- Phase 18.9 Frontend Architecture Design
+- Phase 18.10 Data Fetching And State Strategy
+
+Reason:
+Personas and journeys must be frozen before Information Architecture starts.
+
 ---
 
 # VALIDATED TECHNOLOGY STACK
@@ -616,6 +693,14 @@ Authentication Columns
 ---
 
 # IMPLEMENTED FOUNDATIONS
+
+✅ Frontend MVP Vision
+
+✅ docs/frontend-mvp-vision.md
+
+✅ User Personas And User Journeys
+
+✅ docs/user-personas-and-user-journeys.md
 
 ✅ Map Experience Validation
 
@@ -1189,7 +1274,7 @@ Not Implemented
 ❌ Search Persistence
 ❌ Exports
 ❌ Administration
-❌ Frontend
+⏳ Frontend MVP Planning
 ❌ Public API
 
 ---
@@ -1460,8 +1545,8 @@ Completed
 
 Current Focus
 
-Phase 18.1
-Frontend Product Vision
+Phase 18.3
+Information Architecture
 
 Status:
 Ready To Start
@@ -1470,20 +1555,32 @@ Ready To Start
 
 # NEXT MILESTONE
 
-Phase 18
-Frontend MVP
+Phase 18.3
+Information Architecture
 
 Objectives:
 
-- create frontend application foundation
-- create authentication-aware frontend shell
-- prepare pickup point search UI
-- consume MapProjectionResult
-- render map data from existing Map Experience foundation
-- preserve SearchResult boundary
-- preserve MapService boundary
-- avoid backend persistence changes
-- avoid Universal PUDO Engine modifications
+- define page inventory
+- define navigation hierarchy
+- define route structure
+- define Search page composition
+- define Carrier Accounts access relationship
+- define Search and Map relationship
+- define pickup point detail drawer placement
+- document information architecture decisions
+- preserve personas and journeys defined in Phase 18.2
+
+Out Of Scope:
+
+- frontend implementation
+- final UI design
+- design system
+- frontend state management
+- frontend data fetching
+- address search implementation decision
+- backend redesign
+- database changes
+- Universal PUDO Engine modifications
 
 ---
 
@@ -2187,3 +2284,31 @@ Phase 17 closed.
 Next milestone:
 
 Phase 18 Frontend MVP
+
+---
+
+2026-08-03  
+Phase 18.2 User Personas And User Journeys completed.  
+Implemented:
+
+- docs/user-personas-and-user-journeys.md
+
+Validated:
+
+- technical roles
+- business personas
+- role-to-persona mapping
+- Operations User journey
+- Transport Configuration Manager journey
+- Platform Administrator MVP relevance
+- search independence from orders
+- required address input
+- optional carrier filter
+- default carrier value as All available carriers
+- pickup point selection as final MVP action
+- non-persistent selection
+- no reservation, shipment, label or carrier workflow attached to selection
+- address search nature documented as unresolved future decision
+
+Next milestone:
+Phase 18.3 Information Architecture

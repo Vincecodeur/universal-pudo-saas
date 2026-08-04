@@ -1,10 +1,8 @@
 # Universal PUDO SaaS - Product Vision
 
-Version: 1.0.0
-
-Status: Approved
-
-Last Updated: 2026-08-02
+Version: 1.1.0
+Status: Frontend MVP Vision Approved
+Last Updated: 2026-08-03
 
 ---
 
@@ -674,23 +672,78 @@ Universal PUDO SaaS V1 is successful when an organisation can:
 - manage carrier accounts
 - search pickup points
 - visualize pickup points
-- export pickup point data
 - administer the platform
 
 without custom carrier development.
+
+## FRONTEND MVP USER PERSONAS
+
+The Frontend MVP distinguishes technical roles from business personas.
+
+Technical roles:
+
+- Viewer
+- Owner
+- SaaS Administrator
+
+Business personas:
+
+- Operations User
+- Transport Configuration Manager
+- Platform Administrator
+
+The Operations User is the main MVP user.
+
+The Transport Configuration Manager supports carrier account readiness and may also use the search experience.
+
+The Platform Administrator is acknowledged but is not the primary user of the Frontend MVP.
+
+The primary MVP workflow remains:
+Login
+↓
+Search
+↓
+Results
+↓
+Map
+↓
+Pickup Point Details
+↓
+Select Pickup Point
+
+Search is independent from orders.
+
+Address is required.
+
+Carrier is optional.
+
+Default carrier value:
+All available carriers.
+
+Pickup point selection is the final MVP action.
+
+Selection does not trigger:
+
+- reservation
+- shipment creation
+- label generation
+- carrier workflow
+- persistence
+
+The exact nature of address search remains a future decision.
 
 ---
 
 # CURRENT STATUS
 
 Current Phase:
-Phase 18
+Phase 18.3
 
 Status:
-Frontend MVP Ready To Start
+Information Architecture Ready To Start
 
 Current Focus:
-Phase 18 Frontend MVP
+Information Architecture
 
 ---
 
@@ -977,3 +1030,23 @@ Reason:
 
 Next milestone:
 Phase 18 Frontend MVP
+
+---
+
+2026-08-03  
+Frontend MVP user personas and journeys completed.  
+Validated:
+
+- Operations User
+- Transport Configuration Manager
+- Platform Administrator
+- Viewer to Operations User mapping
+- Owner to Transport Configuration Manager mapping
+- SaaS Administrator to Platform Administrator mapping
+- search independence from orders
+- optional carrier filtering
+- All available carriers default
+- non-persistent pickup point selection
+- no carrier workflow attached to selection  
+  Next milestone:
+  Phase 18.3 Information Architecture

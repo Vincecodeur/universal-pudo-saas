@@ -6,6 +6,32 @@ The format follows a milestone-based approach.
 
 ---
 
+## [2.9.0] - 2026-08-03
+
+### Added
+
+- Added docs/user-personas-and-user-journeys.md for Phase 18.2 User Personas And User Journeys.
+
+### Changed
+
+- Updated roadmap.md to mark Phase 18.2 as completed and Phase 18.3 Information Architecture as next milestone.
+- Updated project-memory.md with Frontend User Personas And User Journeys strategy.
+- Updated project-status.md to reflect Phase 18.3 Information Architecture Ready To Start.
+- Updated architecture.md with Phase 18.2 persona and journey architecture implications.
+- Updated product-vision.md with Frontend MVP user personas and journey decisions.
+
+### Documented
+
+- Viewer maps to Operations User.
+- Owner maps to Transport Configuration Manager.
+- SaaS Administrator maps to Platform Administrator.
+- Search is independent from orders.
+- Address is required.
+- Carrier is optional.
+- Default carrier value is All available carriers.
+- Pickup point selection is the final non-persistent MVP action.
+- Address search nature remains unresolved for future phases.
+
 ### [2.8.0] - 2026-08-02
 
 #### Roadmap Reprioritization - Frontend Before Export Platform
