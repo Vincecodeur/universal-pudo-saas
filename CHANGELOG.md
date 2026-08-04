@@ -6,6 +6,40 @@ The format follows a milestone-based approach.
 
 ---
 
+### [3.0.0] - 2026-08-04
+
+#### Added
+
+- Added docs/information-architecture.md for Phase 18.3 Information Architecture.
+
+#### Changed
+
+- Updated roadmap.md to mark Phase 18.3 as completed and Phase 18.4 UX Strategy as next milestone.
+- Updated project-memory.md with Information Architecture Strategy (D020).
+- Updated project-status.md to reflect Phase 18.4 UX Strategy Ready To Start.
+- Updated product-vision.md with Information Architecture decisions and updated Frontend MVP workflow.
+
+#### Documented
+
+- Search designated as homepage after login.
+- Search, Results and Map unified into a single Search Page.
+- Results designated as the authoritative operational view.
+- Map designated as a visual support layer.
+- Left sidebar navigation strategy.
+- Right drawer Pickup Point Details strategy.
+- Multiple carrier accounts per carrier support.
+- Non-persistent search strategy.
+- Non-persistent pickup point selection strategy.
+- Responsive-ready Information Architecture.
+
+#### Completed
+
+- Phase 18.3 Information Architecture.
+
+#### Next Milestone
+
+- Phase 18.4 UX Strategy.
+
 ## [2.9.0] - 2026-08-03
 
 ### Added

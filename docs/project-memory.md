@@ -1,10 +1,10 @@
 # Universal PUDO SaaS - Project Memory
 
-Version: 1.3.0
+Version: 1.4.0
 
 Status: Active
 
-Last Updated: 2026-08-03
+Last Updated: 2026-08-04
 
 ---
 
@@ -570,6 +570,37 @@ Impacted future phases:
 Reason:
 Personas and journeys must be frozen before Information Architecture starts.
 
+### D020
+
+Information Architecture Strategy
+
+Decision:
+
+Phase 18.3 freezes:
+
+- page inventory
+- navigation hierarchy
+- route structure
+- application layout
+- Search page architecture
+- Carrier Accounts architecture
+- Search / Results / Map relationship
+
+Key Decisions:
+
+- Search is homepage
+- Results are authoritative
+- Map reflects results
+- Left sidebar navigation
+- Right drawer pickup point details
+- Multiple carrier accounts per carrier
+- Non-persistent selection
+- Non-persistent searches
+
+Reason:
+
+Freeze information structure before UX and UI decisions.
+
 ---
 
 # VALIDATED TECHNOLOGY STACK
@@ -695,6 +726,10 @@ Authentication Columns
 # IMPLEMENTED FOUNDATIONS
 
 ✅ Frontend MVP Vision
+
+✅ Information Architecture
+
+✅ docs/information-architecture.md
 
 ✅ docs/frontend-mvp-vision.md
 
@@ -1545,8 +1580,8 @@ Completed
 
 Current Focus
 
-Phase 18.3
-Information Architecture
+Phase 18.4
+UX Strategy
 
 Status:
 Ready To Start
@@ -1555,8 +1590,8 @@ Ready To Start
 
 # NEXT MILESTONE
 
-Phase 18.3
-Information Architecture
+Phase 18.4
+UX Strategy
 
 Objectives:
 
@@ -2312,3 +2347,30 @@ Validated:
 
 Next milestone:
 Phase 18.3 Information Architecture
+
+---
+
+2026-08-04
+
+Phase 18.3 Information Architecture completed.
+
+Implemented:
+
+- docs/information-architecture.md
+
+Validated:
+
+- navigation hierarchy
+- route structure
+- page inventory
+- Search page architecture
+- Carrier Accounts architecture
+- Search / Results / Map relationship
+- Pickup Point Detail drawer strategy
+- left sidebar navigation strategy
+- Search homepage strategy
+- non-persistent selection strategy
+- responsive-ready architecture
+
+Next milestone:
+Phase 18.4 UX Strategy
